@@ -1,6 +1,6 @@
-package it.mat.unical.webPizza.domain;
+package it.unical.mat.webPizza.domain;
 
-public class Deliveryman {
+public class Client {
 	
 	private Long id;
 	
@@ -14,8 +14,7 @@ public class Deliveryman {
 	
 	private String hashPasswd;
 	
-
-	public Deliveryman() {
+	public Client() {
 	}
 
 	public Long getId() {
@@ -49,7 +48,7 @@ public class Deliveryman {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}

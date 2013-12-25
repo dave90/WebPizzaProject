@@ -1,20 +1,33 @@
-package it.mat.unical.webPizza.domain;
+package it.unical.mat.webPizza.domain;
 
-public class Client {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="ADMIN")
+public class Administrator {
 	
+	@Id
+	@GeneratedValue
+	@Column(name="ADMIN_ID")
 	private Long id;
 	
+	@Column(name="ADMIN_NAME")
 	private String name;
 	
+	@Column(name="ADMIN_SURNAME")
 	private String surname;
 	
-	private String phoneNumber;
-	
+	@Column(name="ADMIN_USER")
 	private String username;
 	
+	@Column(name="ADMIN_HPWD")
 	private String hashPasswd;
 	
-	public Client() {
+	public Administrator() {
 	}
 
 	public Long getId() {
@@ -41,14 +54,6 @@ public class Client {
 		this.surname = surname;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
 	public String getUsername() {
 		return username;
 	}
@@ -65,4 +70,5 @@ public class Client {
 		this.hashPasswd = hashPasswd;
 	}
 
+	
 }

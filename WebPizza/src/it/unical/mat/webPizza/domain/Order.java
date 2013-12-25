@@ -1,4 +1,4 @@
-package it.mat.unical.webPizza.domain;
+package it.unical.mat.webPizza.domain;
 
 import java.util.ArrayList;
 import java.util.List;
