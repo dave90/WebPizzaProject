@@ -12,19 +12,19 @@ public class Administrator {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="ADMIN_ID")
+	@Column(name="ID")
 	private Long id;
 	
-	@Column(name="ADMIN_NAME")
+	@Column(name="NAME")
 	private String name;
 	
-	@Column(name="ADMIN_SURNAME")
+	@Column(name="SURNAME")
 	private String surname;
 	
-	@Column(name="ADMIN_USER")
+	@Column(name="USER")
 	private String username;
 	
-	@Column(name="ADMIN_HPWD")
+	@Column(name="HPWD")
 	private String hashPasswd;
 	
 	public Administrator() {

@@ -1,11 +1,24 @@
 package it.unical.mat.webPizza.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="PIZZA_INGREDIENTS")
 public class PizzaIngredients {
 	
+	@Id
+	@GeneratedValue
+	@Column(name="ID")
 	private Long id;
 	
+	@Column(name="NAME")
 	private String name;
 	
+	@Column(name="COST")
 	private double cost;
 	
 	public PizzaIngredients() {

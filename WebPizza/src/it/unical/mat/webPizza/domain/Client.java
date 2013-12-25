@@ -1,17 +1,33 @@
 package it.unical.mat.webPizza.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="CLIENT")
 public class Client {
 	
+	@Id
+	@GeneratedValue
+	@Column(name="ID")
 	private Long id;
 	
+	@Column(name="NAME")
 	private String name;
 	
+	@Column(name="SURNAME")
 	private String surname;
 	
+	@Column(name="PHONE")
 	private String phoneNumber;
 	
+	@Column(name="USER")
 	private String username;
 	
+	@Column(name="HPWD")
 	private String hashPasswd;
 	
 	public Client() {

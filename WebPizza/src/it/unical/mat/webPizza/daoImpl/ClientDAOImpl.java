@@ -1,32 +1,37 @@
 package it.unical.mat.webPizza.daoImpl;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import it.unical.mat.webPizza.dao.AdminDAO;
+
+import it.unical.mat.webPizza.dao.ClientDAO;
 import it.unical.mat.webPizza.domain.Administrator;
+import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.util.HibernateUtil;
 
-public class AdminDAOImpl implements AdminDAO {
-	
+public class ClientDAOImpl implements ClientDAO {
 
 	@Override
-	public Long insertAdmin(String name,String surname,String user, String hpwd) {
+	public Long insertClient(String name, String surname, String user,
+			String phone, String hpwd) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
 		Long id = null;
 		try {
 			transaction = session.beginTransaction();
 			
-			Administrator admin=new Administrator();
+			Client client=new Client();
 			
-			admin.setName(name);
-			admin.setSurname(surname);
-			admin.setUsername(user);
-			admin.setHashPasswd(hpwd);
+			client.setName(name);
+			client.setSurname(surname);
+			client.setPhoneNumber(phone);
+			client.setUsername(user);
+			client.setHashPasswd(hpwd);
 			
-			id = (Long) session.save(admin);
+			id = (Long) session.save(client);
 			transaction.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -39,15 +44,15 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public int removeAllAdmin() {
+	public Client getClient(Long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
-		int result = 0 ;
+		Client client = null;
 		try {
 			transaction = session.beginTransaction();
 			
-			result=session.createQuery("DELETE FROM Administrator").executeUpdate();
-			
+			client= (Client) session.load(Client.class, id);
+
 			transaction.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -55,8 +60,7 @@ public class AdminDAOImpl implements AdminDAO {
 		} finally {
 			session.close();
 		}
-		
-		return result;
+		return client;
 	}
 
 }
