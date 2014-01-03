@@ -15,6 +15,8 @@ public class OnlineOrder extends Order {
 	
 	private int deliveryStatus;
 	
+	private String address;
+	
 	
 	public Deliveryman getDeliveryman() {
 		return deliveryman;
@@ -30,6 +32,14 @@ public class OnlineOrder extends Order {
 
 	public void setDeliveryStatus(int deliveryStatus) {
 		this.deliveryStatus = deliveryStatus;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

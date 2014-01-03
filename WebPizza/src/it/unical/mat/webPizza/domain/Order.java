@@ -32,6 +32,9 @@ public class Order {
 
 	@Column(name="STATUS")
 	private String status;
+	
+	@Column(name="PAID")
+	private boolean paid;
 
 	
 	@OneToMany(cascade = { CascadeType.ALL })
@@ -93,6 +96,14 @@ public class Order {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public boolean isPaid() {
+		return paid;
+	}
+
+	public void setPaid(boolean paid) {
+		this.paid = paid;
 	}
 
 

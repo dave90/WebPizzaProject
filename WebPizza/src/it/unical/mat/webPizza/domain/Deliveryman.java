@@ -30,6 +30,12 @@ public class Deliveryman {
 	@Column(name="HPWD")
 	private String hashPasswd;
 	
+	@Column(name="LONGITUDE")
+	private Long longitude;
+	
+	@Column(name="LATITUDE")
+	private Long latitude;
+	
 
 	public Deliveryman() {
 	}
@@ -80,6 +86,22 @@ public class Deliveryman {
 
 	public void setHashPasswd(String hashPasswd) {
 		this.hashPasswd = hashPasswd;
+	}
+
+	public Long getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Long longitude) {
+		this.longitude = longitude;
+	}
+
+	public Long getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Long latitude) {
+		this.latitude = latitude;
 	}
 
 }
