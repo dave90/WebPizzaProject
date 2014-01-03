@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface OrderDAO {
 
-	public Long insertOrder(String status,List<Pizza> pizzas,Client client,PizzaChef chef);
+	public Long insertOrder(String status,List<Pizza> pizzas,boolean paid,Client client,PizzaChef chef);
+	public Long insertOrder(String status,List<Pizza> pizzas,boolean paid,Client client);
+	public int updateStatus(Long id,String status);
+	public int updateChef(Long id,PizzaChef chef);
 	
 }

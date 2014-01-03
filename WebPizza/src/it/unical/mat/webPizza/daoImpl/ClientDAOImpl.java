@@ -1,16 +1,12 @@
 package it.unical.mat.webPizza.daoImpl;
 
-import java.util.List;
+import it.unical.mat.webPizza.dao.ClientDAO;
+import it.unical.mat.webPizza.domain.Client;
+import it.unical.mat.webPizza.util.HibernateUtil;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-
-import it.unical.mat.webPizza.dao.ClientDAO;
-import it.unical.mat.webPizza.domain.Administrator;
-import it.unical.mat.webPizza.domain.Client;
-import it.unical.mat.webPizza.util.HibernateUtil;
 
 public class ClientDAOImpl implements ClientDAO {
 

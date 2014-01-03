@@ -9,6 +9,5 @@ public interface PizzaDAO {
 	
 	Long insertPizza(String name, List<PizzaIngredients> ingredients, double discount);
 	int deletePizza(Long id);
-	int updatePizza(Long id,String name, List<PizzaIngredients> ingredients, double discount);
 	List<Pizza> getAllPizzas();
 }

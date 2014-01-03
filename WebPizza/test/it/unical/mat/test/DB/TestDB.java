@@ -32,11 +32,7 @@ public class TestDB {
 	
 	@org.junit.Test
 	public void insertOrder(){
-		OrderDAO orderDAO=new OrderDAOImpl();
-		insertClient();
-		Client c=new ClientDAOImpl().getClient((long)1);
-		Long id1=orderDAO.insertOrder(Order.S_NOT_ASSIGNED, null, c, null);
-		assertFalse(id1==null);
+
 	}
 
 }

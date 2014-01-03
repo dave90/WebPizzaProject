@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 
 import it.unical.mat.webPizza.dao.AdminDAO;
 import it.unical.mat.webPizza.domain.Administrator;
+import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.util.HibernateUtil;
 
 public class AdminDAOImpl implements AdminDAO {
@@ -57,6 +58,26 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public Administrator getClient(Long id) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		Administrator amdin = null;
+		try {
+			transaction = session.beginTransaction();
+			
+			amdin= (Administrator) session.load(Administrator.class, id);
+
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+		return amdin;
 	}
 
 }
