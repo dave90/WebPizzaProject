@@ -58,4 +58,39 @@ public class OnlineOrder extends Order {
 		this.address = address;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + deliveryStatus;
+		result = prime * result
+				+ ((deliveryman == null) ? 0 : deliveryman.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OnlineOrder other = (OnlineOrder) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (deliveryStatus != other.deliveryStatus)
+			return false;
+		if (deliveryman == null) {
+			if (other.deliveryman != null)
+				return false;
+		} else if (!deliveryman.equals(other.deliveryman))
+			return false;
+		return true;
+	}
+
 }

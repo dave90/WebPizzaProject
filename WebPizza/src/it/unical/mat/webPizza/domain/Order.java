@@ -46,8 +46,19 @@ public class Order {
 	
 	@Column(name="PAID")
 	private boolean paid;
+	
+	@Column(name="DATE")
+	private String date;
 
 	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	@OneToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "ORDER_PIZZA", 
 	joinColumns = { @JoinColumn(name = "ORDER_ID") }, 
@@ -115,6 +126,65 @@ public class Order {
 
 	public void setPaid(boolean paid) {
 		this.paid = paid;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((client == null) ? 0 : client.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (paid ? 1231 : 1237);
+		result = prime * result
+				+ ((pizzaiolo == null) ? 0 : pizzaiolo.hashCode());
+		result = prime * result + ((pizzas == null) ? 0 : pizzas.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		if (client == null) {
+			if (other.client != null)
+				return false;
+		} else if (!client.equals(other.client))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (paid != other.paid)
+			return false;
+		if (pizzaiolo == null) {
+			if (other.pizzaiolo != null)
+				return false;
+		} else if (!pizzaiolo.equals(other.pizzaiolo))
+			return false;
+		if (pizzas == null) {
+			if (other.pizzas != null)
+				return false;
+		} else if (!pizzas.equals(other.pizzas))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		return true;
 	}
 
 

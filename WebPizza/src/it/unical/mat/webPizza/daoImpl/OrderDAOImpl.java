@@ -1,8 +1,10 @@
 package it.unical.mat.webPizza.daoImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -16,7 +18,7 @@ import it.unical.mat.webPizza.util.HibernateUtil;
 public class OrderDAOImpl implements OrderDAO {
 
 	@Override
-	public Long insertOrder(String status, List<Pizza> pizzas,boolean paid, Client client,
+	public Long insertOrder(String date,String status, List<Pizza> pizzas,boolean paid, Client client,
 			PizzaChef chef) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -30,6 +32,7 @@ public class OrderDAOImpl implements OrderDAO {
 			order.setStatus(status);
 			order.setClient(client);
 			order.setPizzaiolo(chef);
+			order.setDate(date);
 			
 			id = (Long) session.save(order);
 			transaction.commit();
@@ -44,7 +47,7 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public Long insertOrder(String status, List<Pizza> pizzas, boolean paid,
+	public Long insertOrder(String date,String status, List<Pizza> pizzas, boolean paid,
 			Client client) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -57,6 +60,7 @@ public class OrderDAOImpl implements OrderDAO {
 			order.setPaid(paid);
 			order.setStatus(status);
 			order.setClient(client);
+			order.setDate(date);
 			
 			id = (Long) session.save(order);
 			transaction.commit();
@@ -81,6 +85,8 @@ public class OrderDAOImpl implements OrderDAO {
 			Order order=(Order) session.get(Order.class, id);
 			order.setStatus(status);
 			
+			session.update(order);
+			result=1;
 			transaction.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -102,6 +108,75 @@ public class OrderDAOImpl implements OrderDAO {
 			
 			Order order=(Order) session.get(Order.class, id);
 			order.setPizzaiolo(chef);
+			session.update(order);
+			result=1;
+			
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public String getOrderStatus(Long id) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		String result = null;
+		try {
+			transaction = session.beginTransaction();
+			
+			Order order=(Order) session.get(Order.class, id);
+			result=order.getStatus();
+			
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<Order> getNotChefAssignedOrder() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		List<Order> result = new ArrayList<Order>();
+		try {
+			transaction = session.beginTransaction();
+			
+			result=session.createQuery("FROM Order WHERE Order.pizzaiolo is not null").list();
+			
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<Order> getAllOrderOfCLient(Long idCLient) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		List<Order> result = new ArrayList<Order>();
+		try {
+			transaction = session.beginTransaction();
+			
+			Query query=session.createQuery("FROM Order WHERE Order.client.id=:idCLient");
+			query.setParameter("idCLient", idCLient);
+			
+			result=query.list();
 			
 			transaction.commit();
 		} catch (HibernateException e) {

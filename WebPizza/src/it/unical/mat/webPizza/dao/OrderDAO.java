@@ -1,6 +1,7 @@
 package it.unical.mat.webPizza.dao;
 
 import it.unical.mat.webPizza.domain.Client;
+import it.unical.mat.webPizza.domain.Order;
 import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.domain.PizzaChef;
 
@@ -8,9 +9,12 @@ import java.util.List;
 
 public interface OrderDAO {
 
-	public Long insertOrder(String status,List<Pizza> pizzas,boolean paid,Client client,PizzaChef chef);
-	public Long insertOrder(String status,List<Pizza> pizzas,boolean paid,Client client);
+	public Long insertOrder(String date,String status,List<Pizza> pizzas,boolean paid,Client client,PizzaChef chef);
+	public Long insertOrder(String date,String status,List<Pizza> pizzas,boolean paid,Client client);
 	public int updateStatus(Long id,String status);
 	public int updateChef(Long id,PizzaChef chef);
+	public String getOrderStatus(Long id);
+	public List<Order> getNotChefAssignedOrder();
+	public List<Order> getAllOrderOfCLient(Long idCLient);
 	
 }

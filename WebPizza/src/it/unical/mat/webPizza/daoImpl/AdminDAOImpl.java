@@ -1,6 +1,10 @@
 package it.unical.mat.webPizza.daoImpl;
 
+import java.util.List;
+
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -61,7 +65,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public Administrator getClient(Long id) {
+	public Administrator getAdmin(Long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
 		Administrator amdin = null;
@@ -69,6 +73,7 @@ public class AdminDAOImpl implements AdminDAO {
 			transaction = session.beginTransaction();
 			
 			amdin= (Administrator) session.load(Administrator.class, id);
+			Hibernate.initialize(amdin);
 
 			transaction.commit();
 		} catch (HibernateException e) {
@@ -78,6 +83,31 @@ public class AdminDAOImpl implements AdminDAO {
 			session.close();
 		}
 		return amdin;
+	}
+
+	@Override
+	public Administrator getAdmin(String usr, String hpwd) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		Administrator admin = null;
+		try {
+			transaction = session.beginTransaction();
+			
+			Query query=session.createQuery("FROM Administrator WHERE username=:usr AND hashPasswd=:hpwd");
+			query.setParameter("usr", usr);
+			query.setParameter("hpwd", hpwd);
+			List<Administrator> list=query.list();
+			if(list.size()==1)
+				admin=list.get(0);
+
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+		return admin;
 	}
 
 }
