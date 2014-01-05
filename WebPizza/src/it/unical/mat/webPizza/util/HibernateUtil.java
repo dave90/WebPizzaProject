@@ -3,6 +3,7 @@ package it.unical.mat.webPizza.util;
 import it.unical.mat.webPizza.domain.Administrator;
 import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.domain.Deliveryman;
+import it.unical.mat.webPizza.domain.OnlineOrder;
 import it.unical.mat.webPizza.domain.Order;
 import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.domain.PizzaChef;
@@ -27,6 +28,7 @@ public class HibernateUtil {
 								.addAnnotatedClass(Deliveryman.class)
 								.addAnnotatedClass(Pizza.class)
 								.addAnnotatedClass(PizzaIngredients.class)
+								.addAnnotatedClass(OnlineOrder.class)
 //								.addAnnotatedClass(PUT CLASS)
 								.buildSessionFactory();
 

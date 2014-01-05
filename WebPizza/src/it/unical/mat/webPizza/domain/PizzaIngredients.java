@@ -85,4 +85,10 @@ public class PizzaIngredients {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "PizzaIngredients [id=" + id + ", name=" + name + ", cost="
+				+ cost + "]";
+	}
+
 }

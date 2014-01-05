@@ -15,6 +15,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,7 +25,7 @@ import javax.persistence.Table;
 @Table(name="`Order`")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
-    name="discriminator",
+    name="DISCRIMINATOR",
     discriminatorType=DiscriminatorType.STRING
 )
 @DiscriminatorValue(value="A")
@@ -59,7 +60,7 @@ public class Order {
 		this.date = date;
 	}
 
-	@OneToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "ORDER_PIZZA", 
 	joinColumns = { @JoinColumn(name = "ORDER_ID") }, 
 	inverseJoinColumns = { @JoinColumn(name = "PIZZA_ID")})

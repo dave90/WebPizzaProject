@@ -152,7 +152,7 @@ public class OrderDAOImpl implements OrderDAO {
 		try {
 			transaction = session.beginTransaction();
 			
-			result=session.createQuery("FROM Order WHERE Order.pizzaiolo is not null").list();
+			result=session.createQuery("FROM Order WHERE pizzaiolo is null").list();
 			
 			transaction.commit();
 		} catch (HibernateException e) {
@@ -173,7 +173,7 @@ public class OrderDAOImpl implements OrderDAO {
 		try {
 			transaction = session.beginTransaction();
 			
-			Query query=session.createQuery("FROM Order WHERE Order.client.id=:idCLient");
+			Query query=session.createQuery("FROM Order WHERE client.id=:idCLient");
 			query.setParameter("idCLient", idCLient);
 			
 			result=query.list();
