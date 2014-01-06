@@ -15,18 +15,18 @@
 		
 		<!-- Styles -->
 		<!-- Bootstrap CSS -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="resource/css/bootstrap.min.css" rel="stylesheet">
       <!-- Animate css -->
-      <link href="css/animate.min.css" rel="stylesheet">
+      <link href="resource/css/animate.min.css" rel="stylesheet">
       <!-- Dropdown menu -->
-      <link href="css/ddlevelsmenu-base.css" rel="stylesheet">
-      <link href="css/ddlevelsmenu-topbar.css" rel="stylesheet">
+      <link href="resource/css/ddlevelsmenu-base.css" rel="stylesheet">
+      <link href="resource/css/ddlevelsmenu-topbar.css" rel="stylesheet">
       <!-- Countdown -->
-      <link href="css/jquery.countdown.css" rel="stylesheet">     
+      <link href="resource/css/jquery.countdown.css" rel="stylesheet">     
 		<!-- Font awesome CSS -->
-		<link href="css/font-awesome.min.css" rel="stylesheet">		
+		<link href="resource/css/font-awesome.min.css" rel="stylesheet">		
 		<!-- Custom CSS -->
-		<link href="css/style.css" rel="stylesheet">
+		<link href="resource/css/style.css" rel="stylesheet">
 		
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="#">
@@ -801,24 +801,24 @@
       
 		<!-- Javascript files -->
 		<!-- jQuery -->
-		<script src="js/jquery.js"></script>
+		<script src="resource/js/jquery.js"></script>
 		<!-- Bootstrap JS -->
-		<script src="js/bootstrap.min.js"></script>
+		<script src="resource/js/bootstrap.min.js"></script>
 		<!-- Dropdown menu -->
-		<script src="js/ddlevelsmenu.js"></script>      
+		<script src="resource/js/ddlevelsmenu.js"></script>      
       <!-- CaroFredSel -->
-      <script src="js/jquery.carouFredSel-6.2.1-packed.js"></script> 
+      <script src="resource/js/jquery.carouFredSel-6.2.1-packed.js"></script> 
       <!-- Countdown -->
-      <script src="js/jquery.countdown.min.js"></script>    
+      <script src="resource/js/jquery.countdown.min.js"></script>    
       <!-- jQuery Navco -->
-      <script src="js/jquery.navgoco.min.js"></script>
+      <script src="resource/js/jquery.navgoco.min.js"></script>
       <!-- Filter for support page -->
-      <script src="js/filter.js"></script>         
+      <script src="resource/js/filter.js"></script>         
 		<!-- Respond JS for IE8 -->
-		<script src="js/respond.min.js"></script>
+		<script src="resource/js/respond.min.js"></script>
 		<!-- HTML5 Support for IE -->
-		<script src="js/html5shiv.js"></script>
+		<script src="resource/js/html5shiv.js"></script>
 		<!-- Custom JS -->
-		<script src="js/custom.js"></script>
+		<script src="resource/js/custom.js"></script>
 	</body>	
 </html>
