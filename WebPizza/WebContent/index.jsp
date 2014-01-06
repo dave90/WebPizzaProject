@@ -46,35 +46,7 @@
            
             <!-- Items table -->
             <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><a href="single-item.html">HTC One</a></td>
-                  <td>2</td>
-                  <td>$250</td>
-                </tr>
-                <tr>
-                  <td><a href="single-item.html">Apple iPhone</a></td>
-                  <td>1</td>
-                  <td>$502</td>
-                </tr>
-                <tr>
-                  <td><a href="single-item.html">Galaxy Note</a></td>
-                  <td>4</td>
-                  <td>$1303</td>
-                </tr>
-                <tr>
-                  <th></th>
-                  <th>Total</th>
-                  <th>$2405</th>
-                </tr>
-              </tbody>
+              <!-- PUT CART OBJECT -->
             </table>
             
            </div>
@@ -94,7 +66,7 @@
                <div class="col-md-2 col-sm-2">
                   <!-- Logo -->
                   <div class="logo">
-                     <h1><a href="index.html">OlsonKart</a></h1>
+                     <h1><a href="index.html">Web Pizza</a></h1>
                   </div>
                </div>
                <div class="col-md-6 col-sm-5">
@@ -111,27 +83,17 @@
                                  <li><a href="wishlist.html">Wish List</a></li>
                                  <li><a href="orderhistory.html">Order History</a></li>
                                  <li><a href="editprofile.html">Edit Profile</a></li>
-											<li><a href="confirmation.html">Confirmation</a></li>
+	
 										</ul>
 									</li>
-									<li><a href="#" rel="ddsubmenu1">Pages</a>
-										<ul id="ddsubmenu1" class="ddsubmenustyle">
-											<li><a href="404.html">404</a></li>
-                                 <li><a href="faq.html">FAQ</a></li>
-                                 <li><a href="blog.html">Blog</a></li>
-											<li><a href="careers.html">Careers</a>
-                                 <li><a href="support.html">Support</a></li>
-                                 <li><a href="aboutus.html">About</a></li>
-										</ul>
-									</li>
-									<li><a href="#" rel="ddsubmenu1">Computers</a>
-										<ul id="ddsubmenu1" class="ddsubmenustyle">
-											<li><a href="items.html">Desktop</a></li>
-                                 <li><a href="items.html">Laptop</a></li>
-                                 <li><a href="items.html">NetBook</a></li>
-											<li><a href="items.html">All-In-One PC</a>
-                                 <li><a href="items.html">Alienware</a></li>
-										</ul>
+									
+									<li><a href="#">Pizza</a>
+									<li><a href="#" rel="ddsubmenu2">Employee</a>
+									 <ul id="ddsubmenu2" class="ddsubmenustyle">
+									 	<li><a hfer="#">Administrator</a></li>
+									 	<li><a hfer="#">Pizza-Chef</a></li>
+									 	<li><a hfer="#">Deliveryman</a></li></ul>
+										
 									</li>                       
 									<li><a href="contactus.html">Contact</a></li>
 								</ul>
@@ -147,7 +109,7 @@
                   <div class="kart-links">
                      <a href="login.html">Login</a> 
                      <a href="register.html">Signup</a>
-                     <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> 3 Items - $300</a>
+                     <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> Items<!-- Add Prize Cart --></a>
                   </div>
                </div>
             </div>
@@ -172,7 +134,7 @@
            <div class="carousel-inner">
              <!-- Item -->
              <div class="item active animated fadeInRight">
-               <img src="img/back1.jpg" alt="" class="img-responsive" />
+               <img src="resource/img/back1.jpg" alt="" class="img-responsive" />
                <div class="carousel-caption">
                  <h2 class="animated fadeInLeftBig">Lorem ipsum dolor sit amet</h2>
                  <p class="animated fadeInRightBig">Lorem ipsum dolor sit amet, <strong>consectetur adipiscing</strong> elit. Donec tristique est sit amet diam interdum semper. </p>
@@ -181,7 +143,7 @@
              </div>
              
              <div class="item animated fadeInRight">
-               <img src="img/back2.jpg" alt="" class="img-responsive" />
+               <img src="resource/img/back2.jpg" alt="" class="img-responsive" />
                <div class="carousel-caption">
                  <h2 class="animated fadeInLeftBig">Mauris semper tincidunt suscipit</h2>
                  <p class="animated fadeInRightBig">Donec tristique est sit amet diam interdum semper. Vestibulum <strong>condimentum ante urna</strong>, vel interdum odio accumsan id.</p>
@@ -190,7 +152,7 @@
              </div>
 
              <div class="item animated fadeInRight">
-               <img src="img/back3.jpg" alt="" class="img-responsive" />
+               <img src="resource/img/back3.jpg" alt="" class="img-responsive" />
                <div class="carousel-caption">
                  <h2 class="animated fadeInLeftBig">Phasellus et nisi tincidunt</h2>
                  <p class="animated fadeInRightBig">Lorem <strong>ipsum dolor sit amet</strong>, consectetur adipiscing elit. Vestibulum condimentum ante urna, vel interdum odio accumsan id.</p>
@@ -240,7 +202,7 @@
                 <div class="item-icon"><span>HOT</span></div>
                 <!-- Item image -->
                 <div class="item-image">
-                  <a href="single-item.html"><img src="img/items/2.png" alt="" class="img-responsive"/></a>
+                  <a href="single-item.html"><img src="resource/img/items/2.png" alt="" class="img-responsive"/></a>
                 </div>
                 <!-- Item details -->
                 <div class="item-details">
@@ -264,7 +226,7 @@
               <div class="item">
                 <!-- Item image -->
                 <div class="item-image">
-                  <a href="single-item.html"><img src="img/items/3.png" alt=""  class="img-responsive"/></a>
+                  <a href="single-item.html"><img src="resource/img/items/3.png" alt=""  class="img-responsive"/></a>
                 </div>
                 <!-- Item details -->
                 <div class="item-details">
@@ -286,7 +248,7 @@
               <div class="item">
                 <!-- Item image -->
                 <div class="item-image">
-                  <a href="single-item.html"><img src="img/items/4.png" alt="" class="img-responsive" /></a>
+                  <a href="single-item.html"><img src="resource/img/items/4.png" alt="" class="img-responsive" /></a>
                 </div>
                 <!-- Item details -->
                 <div class="item-details">
@@ -308,7 +270,7 @@
               <div class="item">
                 <!-- Item image -->
                 <div class="item-image">
-                  <a href="single-item.html"><img src="img/items/5.png" alt=""  class="img-responsive"/></a>
+                  <a href="single-item.html"><img src="resource/img/items/5.png" alt=""  class="img-responsive"/></a>
                 </div>
                 <!-- Item details -->
                 <div class="item-details">
@@ -332,7 +294,7 @@
 
                 <!-- Item image -->
                 <div class="item-image">
-                  <a href="single-item.html"><img src="img/items/6.png" alt=""  class="img-responsive"/></a>
+                  <a href="single-item.html"><img src="resource/img/items/6.png" alt=""  class="img-responsive"/></a>
                 </div>
                 <!-- Item details -->
                 <div class="item-details">
@@ -355,7 +317,7 @@
                <div class="item-icon"><span>HOT</span></div>
                 <!-- Item image -->
                 <div class="item-image">
-                  <a href="single-item.html"><img src="img/items/7.png" alt=""  class="img-responsive"/></a>
+                  <a href="single-item.html"><img src="resource/img/items/7.png" alt=""  class="img-responsive"/></a>
                 </div>
                 <!-- Item details -->
                 <div class="item-details">
@@ -377,7 +339,7 @@
               <div class="item">
                 <!-- Item image -->
                 <div class="item-image">
-                  <a href="single-item.html"><img src="img/items/8.png" alt=""  class="img-responsive"/></a>
+                  <a href="single-item.html"><img src="resource/img/items/8.png" alt=""  class="img-responsive"/></a>
                 </div>
                 <!-- Item details -->
                 <div class="item-details">
@@ -399,7 +361,7 @@
               <div class="item">
                 <!-- Item image -->
                 <div class="item-image">
-                  <a href="single-item.html"><img src="img/items/9.png" alt=""  class="img-responsive"/></a>
+                  <a href="single-item.html"><img src="resource/img/items/9.png" alt=""  class="img-responsive"/></a>
                 </div>
                 <!-- Item details -->
                 <div class="item-details">
@@ -605,7 +567,7 @@
                            <ul id="carousel_container">
                               <!-- Carousel item -->
                               <li>
-                                 <a href="#"><img src="img/items/2.png" alt="" class="img-responsive"/></a>
+                                 <a href="#"><img src="resource/img/items/2.png" alt="" class="img-responsive"/></a>
                                  <div class="carousel_caption">
                                     <h5><a href="#">Duis estsum placerat</a></h5>
                                     <p>Something about the product goes here. Not More than 2 lines.</p>
@@ -613,7 +575,7 @@
                                  </div>
                               </li>
                               <li>
-                                 <a href="#"><img src="img/items/3.png" alt="" class="img-responsive"/></a>
+                                 <a href="#"><img src="resource/img/items/3.png" alt="" class="img-responsive"/></a>
                                  <div class="carousel_caption">
                                      <h5><a href="#">Maecenas estsum odio</a></h5>
                                      <p>Something about the product goes here. Not More than 2 lines.</p>
@@ -621,7 +583,7 @@
                                  </div>
                               </li>
                               <li>
-                                 <a href="#"><img src="img/items/4.png" alt="" class="img-responsive"/></a>
+                                 <a href="#"><img src="resource/img/items/4.png" alt="" class="img-responsive"/></a>
                                  <div class="carousel_caption">
                                      <h5><a href="#">Proin estsum accumsan</a></h5>
                                      <p>Something about the product goes here. Not More than 2 lines.</p>
@@ -629,7 +591,7 @@
                                  </div>
                               </li>
                               <li>
-                                 <a href="#"><img src="img/items/5.png" alt="" class="img-responsive"/></a>
+                                 <a href="#"><img src="resource/img/items/5.png" alt="" class="img-responsive"/></a>
                                  <div class="carousel_caption">
                                      <h5><a href="#">Lorem estsum ipsum</a></h5>
                                      <p>Something about the product goes here. Not More than 2 lines.</p>
@@ -637,7 +599,7 @@
                                  </div>
                               </li>
                               <li>
-                                 <a href="#"><img src="img/items/6.png" alt="" class="img-responsive"/></a>
+                                 <a href="#"><img src="resource/img/items/6.png" alt="" class="img-responsive"/></a>
                                  <div class="carousel_caption">
                                      <h5><a href="#">Praesent estsum massa</a></h5>
                                      <p>Something about the product goes here. Not More than 2 lines.</p>
@@ -645,7 +607,7 @@
                                  </div>
                               </li>
                               <li>
-                                 <a href="#"><img src="img/items/7.png" alt="" class="img-responsive"/></a>
+                                 <a href="#"><img src="resource/img/items/7.png" alt="" class="img-responsive"/></a>
                                  <div class="carousel_caption">
                                      <h5><a href="#">Praesent estsum etium</a></h5>
                                      <p>Something about the product goes here. Not More than 2 lines.</p>
@@ -695,32 +657,32 @@
             <div class="row">
                <div class="col-md-2 col-sm-4 col-xs-6">
                   <div class="client">
-                    <img src="img/clients/amazon-f.png" alt="" class="img-responsive" />
+                    <img src="resource/img/clients/amazon-f.png" alt="" class="img-responsive" />
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6">
                   <div class="client">
-                    <img src="img/clients/google-f.png" alt="" class="img-responsive" />
+                    <img src="resource/img/clients/google-f.png" alt="" class="img-responsive" />
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6">
                   <div class="client">
-                    <img src="img/clients/facebook-f.png" alt="" class="img-responsive" />
+                    <img src="resource/img/clients/facebook-f.png" alt="" class="img-responsive" />
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6">
                   <div class="client">
-                    <img src="img/clients/twitter-f.png" alt="" class="img-responsive" />
+                    <img src="resource/img/clients/twitter-f.png" alt="" class="img-responsive" />
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6">
                   <div class="client">
-                    <img src="img/clients/skype-f.png" alt="" class="img-responsive" />
+                    <img src="resource/img/clients/skype-f.png" alt="" class="img-responsive" />
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6">
                   <div class="client">
-                    <img src="img/clients/youtube-f.png" alt="" class="img-responsive" />
+                    <img src="resource/img/clients/youtube-f.png" alt="" class="img-responsive" />
                   </div>
                 </div>
             </div>
