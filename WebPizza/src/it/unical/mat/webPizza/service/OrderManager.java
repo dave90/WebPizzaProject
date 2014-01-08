@@ -2,6 +2,9 @@ package it.unical.mat.webPizza.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import it.unical.mat.webPizza.dao.OnlineOrderDAO;
 import it.unical.mat.webPizza.dao.OrderDAO;
 import it.unical.mat.webPizza.dao.PizzaDAO;
@@ -18,11 +21,16 @@ import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.domain.PizzaChef;
 import it.unical.mat.webPizza.domain.PizzaIngredients;
 
+@Service
 public class OrderManager {
 	
+	@Autowired
 	private OnlineOrderDAO onlineOrderDAO;
+	@Autowired
 	private OrderDAO orderDAO;
+	@Autowired
 	private PizzaDAO pizzaDAO;
+	@Autowired
 	private PizzaIngredientsDAO ingredientsDAO;
 	
 	public OrderManager() {

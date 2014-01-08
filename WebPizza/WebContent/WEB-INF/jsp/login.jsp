@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<!-- Title here -->
-		<title>Login - Olson Kart</title>
+		<title>Login</title>
 		<!-- Description, Keywords and Author -->
 		<meta name="description" content="Your description">
 		<meta name="keywords" content="Your,Keywords">
@@ -147,6 +147,7 @@
                                <label for="inputPassword" class="col-lg-2 control-label">Password</label>
                                <div class="col-lg-10">
                                  <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="Password">
+ 	                              <p style="color: red;"><strong>${notifyLog}</strong></p>
                                </div>
                              </div>
                              <div class="form-group">

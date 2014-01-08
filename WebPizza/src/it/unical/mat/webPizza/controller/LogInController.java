@@ -56,14 +56,17 @@ public class LogInController {
 										@RequestParam(value="Password") String pwd,
 										Model model) {
 		
-		String hpwd=pwd;//MD5Java.md5Java(pwd);
+		String hpwd=MD5Java.md5Java(pwd);
 		
 		Client client=accessManager.getClient(usr, hpwd);
 		
 		if(client==null){
-			System.out.println("NO");
+			model.addAttribute("notifyLog", "Error : User or password wrong");
+			model.addAttribute("img", "resource/img/clients/woman-eating-pizza.jpg");
+			model.addAttribute("actionUrl","logIn.html");
+			return "login";
 		}else{
-			System.out.println("YES");
+			model.addAttribute("client", client);
 		}
 		
 		return "login";
