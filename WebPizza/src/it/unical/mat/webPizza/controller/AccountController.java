@@ -14,13 +14,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("client")
-public class LogInController {
+public class AccountController {
 	@Autowired
 	private AccessManager accessManager;
 	
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String clientLogIn( Model model) {
+		if(model.containsAttribute("client"))
+			return "redirect:account.html";
+		
 		model.addAttribute("img", "resource/img/clients/woman-eating-pizza.jpg");
 		model.addAttribute("actionUrl","logIn.html");
 		
@@ -56,7 +59,7 @@ public class LogInController {
 										@RequestParam(value="Password") String pwd,
 										Model model) {
 		
-		String hpwd=MD5Java.md5Java(pwd);
+		String hpwd=pwd;//MD5Java.md5Java(pwd);
 		
 		Client client=accessManager.getClient(usr, hpwd);
 		
@@ -69,7 +72,15 @@ public class LogInController {
 			model.addAttribute("client", client);
 		}
 		
-		return "login";
+		return "redirect:account.html";
+	}
+	
+	@RequestMapping(value = "/account", method = RequestMethod.GET)
+	public String clientAccount( Model model) {
+		if(model.containsAttribute("client")){			
+			return "account";
+		}
+		return "redirect:login.html";
 	}
 
 }

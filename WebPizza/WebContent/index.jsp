@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -107,8 +108,19 @@
                
                <div class="col-md-4 col-sm-5">
                   <div class="kart-links">
-                     <a href="login.html">Login</a> 
-                     <a href="register.html">Signup</a>
+                    <a href="login.html">
+					<c:choose>
+  						<c:when test="${client.name != null}"><c:out value="${client.name}"/></c:when>
+					    <c:otherwise><c:out value="login"/></c:otherwise>
+					</c:choose>                  	
+                    </a> 
+                    <a href="register.html">
+					<c:choose>
+  						<c:when test="${client.name != null}"><c:out value="logout"/></c:when>
+					    <c:otherwise><c:out value="signup"/></c:otherwise>
+					</c:choose>  
+                    </a>
+
                      <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> Items<!-- Add Prize Cart --></a>
                   </div>
                </div>
