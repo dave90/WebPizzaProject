@@ -15,7 +15,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class OnlineOrderDAOImpl extends OrderDAOImpl implements OnlineOrderDAO{
+public class OnlineOrderDAOImpl implements OnlineOrderDAO{
 
 	@Override
 	public Long insertOrder(String date,String status, List<Pizza> pizzas, boolean paid,

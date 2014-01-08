@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="PIZZA")
 public class Pizza {
-	
+	// aggiungere descrizione pizza e immagine?
 	@Id
 	@GeneratedValue
 	@Column(name="ID")

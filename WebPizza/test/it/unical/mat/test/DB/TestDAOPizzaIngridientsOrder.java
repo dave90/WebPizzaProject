@@ -118,11 +118,13 @@ public class TestDAOPizzaIngridientsOrder {
 		
 		for(int i=0;i<max;i++){
 			Long id=pizzaDAO.insertPizza(pizzas[i].getName(), pizzas[i].getIngredients(), pizzas[i].getDiscount());
+			System.out.println("pizzasDB id "+id);
 			assertFalse(id==null);
 			pizzas[i].setId(id);
 		}
 		
 		List<Pizza> pizzasDB=pizzaDAO.getAllPizzas();
+		
 		for(int i=0;i<max;i++){
 			boolean find=false;
 			for(Pizza pi:pizzasDB){

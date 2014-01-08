@@ -31,6 +31,8 @@ public class PizzaDAOImpl implements PizzaDAO {
 			pizza.setDiscount(discount);
 			pizza.setIngredients(ingredients);
 			
+			System.out.println(pizza.getIngredients());
+			
 			id = (Long) session.save(pizza);
 						
 			transaction.commit();
