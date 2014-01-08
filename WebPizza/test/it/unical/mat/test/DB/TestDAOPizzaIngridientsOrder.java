@@ -117,8 +117,7 @@ public class TestDAOPizzaIngridientsOrder {
 		}
 		
 		for(int i=0;i<max;i++){
-			Long id=pizzaDAO.insertPizza(pizzas[i].getName(), pizzas[i].getIngredients(), pizzas[i].getDiscount());
-			System.out.println("pizzasDB id "+id);
+			Long id=pizzaDAO.insertPizza(pizzas[i].getName(), pizzas[i].getIngredients(), pizzas[i].getDiscount(),pizzas[i].getClient());
 			assertFalse(id==null);
 			pizzas[i].setId(id);
 		}
@@ -135,9 +134,14 @@ public class TestDAOPizzaIngridientsOrder {
 				}
 			}
 			if(!find){
-				System.out.println(pizzas[i].getId()+" "+pizzas[i].getName()+" "+pizzas[i].getDiscount());
-				for(PizzaIngredients pipi:pizzas[i].getIngredients())
-					System.out.println(pipi.getId());
+				System.out.println("To FIND " +pizzas[i].getId());
+				for(Pizza pipi:pizzasDB){
+					if(pizzas[i].getId()==pipi.getId()){
+						System.out.println(pipi.equals(pizzas[i]));
+						System.out.println(pipi.getName().equals(pizzas[i].getName()));
+						
+					}
+				}
 				System.out.println();
 			}
 			assertFalse(!find);

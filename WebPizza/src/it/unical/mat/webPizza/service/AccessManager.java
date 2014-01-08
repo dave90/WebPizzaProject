@@ -74,5 +74,9 @@ public class AccessManager {
 	public PizzaChef getPizzaChef(String usr,String hpwd){
 		return chefDAO.getPizzaChef(usr, hpwd);
 	}
+	
+	public boolean existClientUsername(String usr){
+		return clientDAO.existUsername(usr);
+	}
 
 }

@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 @SessionAttributes("client")
@@ -59,7 +61,7 @@ public class AccountController {
 										@RequestParam(value="Password") String pwd,
 										Model model) {
 		
-		String hpwd=pwd;//MD5Java.md5Java(pwd);
+		String hpwd=MD5Java.md5Java(pwd);
 		
 		Client client=accessManager.getClient(usr, hpwd);
 		
@@ -82,5 +84,116 @@ public class AccountController {
 		}
 		return "redirect:login.html";
 	}
+	
+	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
+	public String clientCheckout( Model model) {
+		if(model.containsAttribute("client")){			
+			return "checkout";
+		}
+		return "redirect:login.html";
+	}
+	
+	@RequestMapping(value = "/wishlist", method = RequestMethod.GET)
+	public String clientWishlist( Model model) {
+		if(model.containsAttribute("client")){			
+			return "wishlist";
+		}
+		return "redirect:login.html";
+	}
+	
+	@RequestMapping(value = "/orderhistory", method = RequestMethod.GET)
+	public String clientOrderhistory( Model model) {
+		if(model.containsAttribute("client")){			
+			return "orderhistory";
+		}
+		return "redirect:login.html";
+	}
+	
+	@RequestMapping(value = "/editprofile", method = RequestMethod.GET)
+	public String clientEditprofile( Model model) {
+		if(model.containsAttribute("client")){			
+			return "editprofile";
+		}
+		return "redirect:login.html";
+	}
+	
+	
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String clientRegister( Model model, SessionStatus status) {
+		if(model.containsAttribute("client")){			
+			status.setComplete();
+			
+			return "redirect:index.html";
+		}
+		return "register";
+	}
+	
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public String clientRegistration(@RequestParam(value="User") String usr,
+										@RequestParam(value="Password") String pwd,
+										@RequestParam(value="Name") String name,
+										@RequestParam(value="Surname") String surname,
+										@RequestParam(value="Mail") String mail,
+										@RequestParam(value="Phone") String phone,
+										Model model) {
+		
+		if(usr==null || usr.equals("")){
+			model.addAttribute("notifyRegistration", "Insert Username");
+			return "register";
+		}
+		if(pwd==null || pwd.equals("")){
+			model.addAttribute("notifyRegistration", "Insert Password");
+			return "register";
+		}
+		if(name==null || name.equals("")){
+			model.addAttribute("notifyRegistration", "Insert Name");
+			return "register";
+		}
+		if(surname==null || surname.equals("")){
+			model.addAttribute("notifyRegistration", "Insert Surname");
+			return "register";
+		}
+		
+		if(mail==null)
+			mail="";
+		if(phone==null)
+			phone="";
+		
+		if(accessManager.existClientUsername(usr)){
+			model.addAttribute("notifyRegistration", "Exist Username");
+			return "register";
+		}
+		
+		String hpwd=MD5Java.md5Java(pwd);
+		
+		if(accessManager.insertClient(name, surname, usr, phone, mail, hpwd)){
+			
+			Client client=accessManager.getClient(usr, hpwd);
+			model.addAttribute("client", client);
+			
+			return "redirect:account.html";
+		}
+		
+		model.addAttribute("notifyRegistration", "Registration aborted, contact Administrator");
+		
+		return "redirect:register.html";
+		
+	}
+	
+	@RequestMapping(value = "/existClientUser", method = RequestMethod.POST)
+	public @ResponseBody String existClientUsername(@RequestParam(value="user") String usr,
+										Model model) {
+		
+		if(accessManager.existClientUsername(usr)){
+			model.addAttribute("notifyRegistration", "Exist Username");
+			return "User Exist";
+		}
+		
+		return "OK";
+		
+	}
+
+	
 
 }

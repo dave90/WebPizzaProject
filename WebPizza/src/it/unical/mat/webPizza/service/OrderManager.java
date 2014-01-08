@@ -61,7 +61,13 @@ public class OrderManager {
 	}
 	
 	public boolean insertPizza(String name,List<PizzaIngredients> ingredients,double discount){
-		if(pizzaDAO.insertPizza(name, ingredients, discount)>0)
+		if(pizzaDAO.insertPizza(name, ingredients, discount,null)>0)
+			return true;
+		return false;
+	}
+	
+	public boolean insertPizza(String name,List<PizzaIngredients> ingredients,double discount,Client client){
+		if(pizzaDAO.insertPizza(name, ingredients, discount,client)>0)
 			return true;
 		return false;
 	}

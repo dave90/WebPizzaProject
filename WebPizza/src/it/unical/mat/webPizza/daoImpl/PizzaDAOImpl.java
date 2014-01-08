@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import it.unical.mat.webPizza.dao.PizzaDAO;
+import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.domain.PizzaIngredients;
 import it.unical.mat.webPizza.util.HibernateUtil;
@@ -18,7 +19,7 @@ public class PizzaDAOImpl implements PizzaDAO {
 
 	@Override
 	public Long insertPizza(String name, List<PizzaIngredients> ingredients,
-			double discount) {
+			double discount,Client client) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
 		Long id = null;
@@ -30,8 +31,8 @@ public class PizzaDAOImpl implements PizzaDAO {
 			pizza.setName(name);
 			pizza.setDiscount(discount);
 			pizza.setIngredients(ingredients);
+			pizza.setClient(client);
 			
-			System.out.println(pizza.getIngredients());
 			
 			id = (Long) session.save(pizza);
 						

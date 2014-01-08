@@ -1,8 +1,9 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<!-- Title here -->
-		<title>Web Pizza I</title>
+		<title>Web Pizza</title>
 		<!-- Description, Keywords and Author -->
 		<meta name="description" content="Your description">
 		<meta name="keywords" content="Your,Keywords">
@@ -35,88 +36,13 @@
 	<body>
 
       <!-- Shopping cart Modal -->
-     <div class="modal fade" id="shoppingcart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-       <div class="modal-dialog">
-         <div class="modal-content">
-           <div class="modal-header">
-             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-             <h4 class="modal-title">Shopping Cart</h4>
-           </div>
-           <div class="modal-body">
+ 		<jsp:include page="include/shoppingCart.jsp" />
+ 	  <!-- Shopping cart Modal -->	
            
-            <!-- Items table -->
-            <table class="table table-striped">
-              <!-- PUT CART OBJECT -->
-            </table>
-            
-           </div>
-           <div class="modal-footer">
-             <button type="button" class="btn btn-default" data-dismiss="modal">Continue Shopping</button>
-             <button type="button" class="btn btn-info">Checkout</button>
-           </div>
-         </div><!-- /.modal-content -->
-       </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-           
-      <!-- Logo & Navigation starts -->
-      
-      <div class="header">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-2 col-sm-2">
-                  <!-- Logo -->
-                  <div class="logo">
-                     <h1><a href="${pageContext.request.contextPath}">Web Pizza</a></h1>
-                  </div>
-               </div>
-               <div class="col-md-6 col-sm-5">
-                  <!-- Navigation menu -->
-						<div class="navi">
-							<div id="ddtopmenubar" class="mattblackmenu">
-								<ul>
-									<li><a href="${pageContext.request.contextPath}">Home</a></li>
-                           <li><a href="#" rel="ddsubmenu1">Account</a>
-										<ul id="ddsubmenu1" class="ddsubmenustyle">
-                                 <li><a href="account.html">My Account</a></li>
-											<li><a href="viewcart.html">View Cart</a></li>
-                                 <li><a href="checkout.html">Checkout</a></li>
-                                 <li><a href="wishlist.html">Wish List</a></li>
-                                 <li><a href="orderhistory.html">Order History</a></li>
-                                 <li><a href="editprofile.html">Edit Profile</a></li>
-	
-										</ul>
-									</li>
-									
-									<li><a href="#">Pizza</a>
-									<li><a href="#" rel="ddsubmenu2">Employee</a>
-									 <ul id="ddsubmenu2" class="ddsubmenustyle">
-									 	<li><a hfer="#">Administrator</a></li>
-									 	<li><a hfer="#">Pizza-Chef</a></li>
-									 	<li><a hfer="#">Deliveryman</a></li></ul>
-										
-									</li>                       
-									<li><a href="contactus.html">Contact</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- Dropdown NavBar -->
-                  <div class="navis"></div>                  
-                  
-               </div>
-               
-               <div class="col-md-4 col-sm-5">
-                  <div class="kart-links">
-                     <a href="login.html">Login</a> 
-                     <a href="register.html">Signup</a>
-                     <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> Items<!-- Add Prize Cart --></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      
-      <!-- Logo & Navigation ends -->
+      <!-- Logo & Navigation starts -->            
+ 		<jsp:include page="include/header.jsp" />
+ 	  <!-- Logo & Navigation end -->
+ 		
       
       <div class="clearfix"></div>
       
@@ -345,66 +271,7 @@
   
       
       <!-- Footer starts -->
-      <footer>
-         <div class="container">
-         
-               <div class="row">
-
-                        <div class="col-md-4 col-sm-4">
-                           <div class="fwidget">
-                           
-                              <h4>Oslon de<span class="color">'</span> Techno</h4>
-                              <hr />
-                              <p>Follow us on facebook, twitter, google+, linkedin & pinterest</p>
-                              
-                              <div class="social">
-                                 <a href="#" class="facebook"><i class="icon-facebook"></i></a>
-                                 <a href="#" class="twitter"><i class="icon-twitter"></i></a>
-                                 <a href="#" class="google-plus"><i class="icon-google-plus"></i></a>
-                                 <a href="#" class="linkedin"><i class="icon-linkedin"></i></a>
-                                 <a href="#" class="pinterest"><i class="icon-pinterest"></i></a>
-                              </div>
-                           </div>
-                       </div>
-
-                       <div class="col-md-4 col-sm-4">
-                         <div class="fwidget">
-                           <h4>Feature</h4>
-                           <hr />
-                           <ul>
-                             <li><a>Possibility to build your own pizza</a></li>
-                             <li><a >Instant location for your pizza</a></li>
-                             <li><a >Tracking the status of your pizza</a></li>
-                             <li><a >Possibility to pay online</a></li>
-                           </ul>
-                         </div>
-                       </div>        
-
-                       
-
-                       <div class="col-md-4 col-sm-4">
-                         <div class="fwidget">
-                           
-                           <h4>Get In Touch</h4>
-                           <hr />
-                           <div class="address">
-                              <p><i class="icon-home color contact-icon"></i> Cosenza Rende, </p>
-                              <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; via fasulla 123</p>
-                              <p><i class="icon-phone color contact-icon"></i> +39-323-55322</p>
-                              <p><i class="icon-envelope color contact-icon"></i> <a href="mailto:webPizza@gmail.com">webPizza@gmail.com</a></p>
-                           </div>
-                           
-                         </div>
-                       </div>
-
-                     </div>
-
-         
-         
-            <hr />
-
-         </div>
-      </footer>
+		<jsp:include page="include/footer.jsp" />
       <!-- Footer ends -->
       
       <!-- Scroll to top -->
