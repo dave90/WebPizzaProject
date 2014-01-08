@@ -7,7 +7,7 @@
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-		<context:component-scan base-package="it.unical.mat.webPizza.controller" />
+		<context:component-scan base-package="it.unical.mat.webPizza" />
 		<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 			<property name="viewClass"
@@ -15,5 +15,11 @@
 			<property name="prefix" value="/WEB-INF/jsp/" />
 			<property name="suffix" value=".jsp" />
 		</bean>
+		
+		<bean id="ClientDAO" class="it.unical.mat.webPizza.daoImpl.ClientDAOImpl" />
+		<bean id="AdminDAO" class="it.unical.mat.webPizza.daoImpl.AdminDAOImpl" />
+		<bean id="PizzaChefDAO" class="it.unical.mat.webPizza.daoImpl.PizzaChefDAOImpl" />
+		<bean id="DeliverymanDAO" class="it.unical.mat.webPizza.daoImpl.DeliverymanDAOImpl" />
+		
 	</beans>
 	

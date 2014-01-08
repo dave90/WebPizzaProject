@@ -26,6 +26,9 @@ public class Client {
 	@Column(name="PHONE")
 	private String phoneNumber;
 	
+	@Column(name="EMAIL")
+	private String mail;
+	
 	@Column(name="USER")
 	private String username;
 	
@@ -81,6 +84,14 @@ public class Client {
 
 	public void setHashPasswd(String hashPasswd) {
 		this.hashPasswd = hashPasswd;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	@Override

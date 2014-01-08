@@ -72,10 +72,11 @@ public class TestDAOClientAdminChefDelivery {
 			clients[i].setPhoneNumber(RandomGen.getRandomString());
 			clients[i].setUsername(RandomGen.getRandomString());
 			clients[i].setHashPasswd(RandomGen.getRandomString());
+			clients[i].setMail(RandomGen.getRandomString());
 		}
 		
 		for(int i=0;i<numberInsertion;i++){
-			Long id=clientDAO.insertClient(clients[i].getName(), clients[i].getSurname(), clients[i].getUsername(), clients[i].getPhoneNumber(), clients[i].getHashPasswd());
+			Long id=clientDAO.insertClient(clients[i].getName(), clients[i].getSurname(), clients[i].getUsername(), clients[i].getPhoneNumber(),clients[i].getMail(), clients[i].getHashPasswd());
 			assertFalse(id==null);
 			clients[i].setId(id);
 		}

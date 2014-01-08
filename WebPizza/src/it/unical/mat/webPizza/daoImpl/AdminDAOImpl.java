@@ -14,6 +14,7 @@ import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.util.HibernateUtil;
 
 public class AdminDAOImpl implements AdminDAO {
+
 	
 
 	@Override

@@ -75,7 +75,7 @@
 							<div id="ddtopmenubar" class="mattblackmenu">
 								<ul>
 									<li><a href="${pageContext.request.contextPath}">Home</a></li>
-                           <li><a href="#" rel="ddsubmenu1">Account</a>
+                           <li><a href="login.html" rel="ddsubmenu1">Account</a>
 										<ul id="ddsubmenu1" class="ddsubmenustyle">
                                  <li><a href="account.html">My Account</a></li>
 											<li><a href="viewcart.html">View Cart</a></li>
@@ -90,9 +90,9 @@
 									<li><a href="testHome">Pizza</a>
 									<li><a href="#" rel="ddsubmenu2">Employee</a>
 									 <ul id="ddsubmenu2" class="ddsubmenustyle">
-									 	<li><a hfer="#">Administrator</a></li>
-									 	<li><a hfer="#">Pizza-Chef</a></li>
-									 	<li><a hfer="#">Deliveryman</a></li></ul>
+									 	<li><a href="adminLogin.html">Administrator</a></li>
+									 	<li><a href="chefLogin.html">Pizza-Chef</a></li>
+									 	<li><a href="deliverymanLogin.html">Deliveryman</a></li></ul>
 										
 									</li>                       
 									<li><a href="contactus.html">Contact</a></li>

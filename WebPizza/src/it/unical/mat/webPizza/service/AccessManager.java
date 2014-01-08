@@ -1,5 +1,8 @@
 package it.unical.mat.webPizza.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import it.unical.mat.webPizza.dao.AdminDAO;
 import it.unical.mat.webPizza.dao.ClientDAO;
 import it.unical.mat.webPizza.dao.DeliverymanDAO;
@@ -13,11 +16,15 @@ import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.domain.Deliveryman;
 import it.unical.mat.webPizza.domain.PizzaChef;
 
+@Service
 public class AccessManager {
-	
+	@Autowired
 	private ClientDAO clientDAO;
+	@Autowired
 	private AdminDAO adminDAO;
+	@Autowired
 	private PizzaChefDAO chefDAO;
+	@Autowired
 	private DeliverymanDAO deliverymanDAO;
 	
 	public AccessManager() {
@@ -27,8 +34,8 @@ public class AccessManager {
 		deliverymanDAO=new DeliverymanDAOImpl();
 	}
 	
-	public boolean insertClient(String name,String surname,String user,String phone,String hpwd){
-		if(clientDAO.insertClient(name, surname, user, phone, hpwd)>0)
+	public boolean insertClient(String name,String surname,String user,String phone,String mail,String hpwd){
+		if(clientDAO.insertClient(name, surname, user, phone,mail, hpwd)>0)
 			return true;
 		return false;
 	}

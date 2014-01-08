@@ -11,13 +11,16 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ClientDAOImpl implements ClientDAO {
 
 	@Override
 	public Long insertClient(String name, String surname, String user,
-			String phone, String hpwd) {
+			String phone,String mail, String hpwd) {
+	
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
 		Long id = null;
@@ -29,6 +32,7 @@ public class ClientDAOImpl implements ClientDAO {
 			client.setName(name);
 			client.setSurname(surname);
 			client.setPhoneNumber(phone);
+			client.setMail(mail);
 			client.setUsername(user);
 			client.setHashPasswd(hpwd);
 			

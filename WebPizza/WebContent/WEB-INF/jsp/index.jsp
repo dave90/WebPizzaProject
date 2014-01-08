@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<!-- Title here -->
-		<title>Web Pizza</title>
+		<title>Web Pizza I</title>
 		<!-- Description, Keywords and Author -->
 		<meta name="description" content="Your description">
 		<meta name="keywords" content="Your,Keywords">
