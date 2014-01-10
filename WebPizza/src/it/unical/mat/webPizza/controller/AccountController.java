@@ -270,63 +270,24 @@ public class AccountController {
 		
 	}
 
-	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
-	public String checkout( Model model) {
-		
-		return "checkout";
-	}
+//	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
+//	public String checkout( Model model) {
+//		
+//		return "checkout";
+//	}
 	
 	@RequestMapping(value = "/addToCart", method = RequestMethod.POST)
 	public @ResponseBody String addToCart(@RequestParam(value="idPizza") Long id,@RequestParam(value="quantity") int quantity,Model model,HttpSession session) {
-		List<Pizza> cartPizzas;
+		ShoppingCart cartPizzas;
 		if(!model.containsAttribute("cart")){
-			cartPizzas=new ArrayList<Pizza>();
+			cartPizzas=new ShoppingCart();
 			model.addAttribute("cart", cartPizzas);
 		}else{
-			cartPizzas=(List<Pizza>) model.asMap().get("cart");
+			cartPizzas=(ShoppingCart) model.asMap().get("cart");
 		}
 		
-		Pizza pizza=null;
-		for(Pizza p:cartPizzas)
-			if(p.getId()==id){
-				pizza=p;
-				break;
-			}
+		cartPizzas.insertPizza(id, orderManager.getPizza(id), quantity);
 		
-		if(pizza==null)
-			pizza=orderManager.getPizza(id);
-		
-		
-		if(pizza==null)
-			return "Error Pizza not found";
-		
-		if(cartPizzas==null)
-			return "Error cart not found";
-		
-		for(int i=0;i<quantity;i++)
-			cartPizzas.add(pizza);
-		
-		double totalPrize=0;
-		
-		HashMap<Pizza, Integer> pizzaQuantity= new HashMap<Pizza, Integer>();
-		
-		for(Pizza p:cartPizzas){
-			totalPrize+=p.getPrize();
-			quantity=0;
-			if(pizzaQuantity.get(p)!=null)
-				quantity=pizzaQuantity.get(p);
-			pizzaQuantity.put(p, quantity+1);
-		}
-		
-		String tableToAppend="";
-		for(Pizza p:pizzaQuantity.keySet()){
-			tableToAppend+="<tr>"+"<td>"+p.getName()+"</td>"+"<td>"+pizzaQuantity.get(p)+"</td>"+"<td>"+p.getPrize()*pizzaQuantity.get(p)+"</td>"+"</tr>";
-		}
-		tableToAppend+="<tr>"+"<th></th><th>Total</th>"+"<th>"+totalPrize+"</th></tr>";
-		
-		
-		System.out.println(tableToAppend);
-		
-		return tableToAppend;
+		return cartPizzas.getTableBody();
 	}
 }

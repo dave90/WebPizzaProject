@@ -61,7 +61,7 @@
 					</c:choose>  
                     </a>
 
-                     <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> Items<!-- Add Prize Cart --></a>
+                     <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> Items - ${cart.totalprice} &euro;<!-- Add Prize Cart --></a>
                   </div>
                </div>
             </div>

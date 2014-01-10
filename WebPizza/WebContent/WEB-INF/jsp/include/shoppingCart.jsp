@@ -20,13 +20,20 @@
                 </tr>
               </thead>
               <tbody id="cartBody">
-             <c:if test="${cart != null }"> <c:forEach items="${cart}" var="pizza">
+             <c:if test="${cart != null }">
+              <c:forEach var="pizza" items="${cart.pizzaQuantity}" >
               <tr>
-              	<td>${pizza.name}</td>
-              	<td>1</td>
-              	<td>${pizza.prize}</td>
+              	<td>${pizza.key.name}</td>
+              	<td>${pizza.value}</td>
+              	<td><c:out value="${pizza.key.prize * pizza.value}" /></td>
               </tr>
-              </c:forEach></c:if>
+              </c:forEach>
+              <tr>
+              <th></th>
+              <th>Total</th>
+              <th>${cart.totalprice}</th>
+              </tr>
+              </c:if>
               </tbody>
             </table>
             
