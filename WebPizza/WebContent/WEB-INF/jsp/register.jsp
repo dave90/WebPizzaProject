@@ -1,12 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
-    
 <!DOCTYPE html>
 <html>
 	<head>
 		<!-- Title here -->
-		<title>Login</title>
+		<title>Register - Olson Kart</title>
 		<!-- Description, Keywords and Author -->
 		<meta name="description" content="Your description">
 		<meta name="keywords" content="Your,Keywords">
@@ -31,9 +27,11 @@
 		<link href="resource/css/font-awesome.min.css" rel="stylesheet">		
 		<!-- Custom CSS -->
 		<link href="resource/css/style.css" rel="stylesheet">
+	
 		
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="#">
+		
 	</head>
 	
 	<body>
@@ -42,10 +40,11 @@
  		<jsp:include page="include/shoppingCart.jsp" />
  	  <!-- Shopping cart Modal -->	
            
-      <!-- Logo & Navigation starts -->
-            
+      <!-- Logo & Navigation starts -->            
  		<jsp:include page="include/header.jsp" />
-     
+ 	  <!-- Logo & Navigation end -->
+ 
+      
       <!-- Page content -->
       
       <div class="blocky">
@@ -54,8 +53,8 @@
                <div class="col-md-6">
                   <div class="reg-login-info">
                      <h2>Login to Access Amazing Benefits <span class="color">!!!</span></h2>
-                     <img src="${img}" width="400px" alt="" class="img-responsive img-thumbnail" />
-                     <p></p>
+                     <img src="resource/img/clients/woman-pizza2.jpg" alt="" class="img-responsive img-thumbnail" />
+                     <p>Join with us bla bla bla bla</p>
                   </div>
                </div>
                <div class="col-md-6">
@@ -63,24 +62,49 @@
                      <div class="cool-block">
                         <div class="cool-block-bor">
                         
-                           <h3>Login</h3>
-                           <form class="form-horizontal" role="form" action="${actionUrl}" method="post">
+                           <h3>Register</h3>
+                           <form class="form-horizontal" role="form" action="registration.html" method="post">
                              <div class="form-group">
-                               <label for="inputUser" class="col-lg-2 control-label">User</label>
+                               <label for="inputName" class="col-lg-2 control-label">Name</label>
                                <div class="col-lg-10">
-                                 <input type="text" class="form-control" id="inputUser" name="User" placeholder="User">
+                                 <input type="text" class="form-control" id="inputName" name="Name" placeholder="Name">
                                </div>
                              </div>
                              <div class="form-group">
-                               <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                               <label for="inputSurname" class="col-lg-2 control-label">Surname</label>
                                <div class="col-lg-10">
-                                 <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="Password">
- 	                              <p style="color: red;"><strong>${notifyLog}</strong></p>
+                                 <input type="text" class="form-control" id="inputSurname" name="Surname" placeholder="Surname">
+                               </div>
+                             </div>                            
+                             <div class="form-group">
+                               <label for="inputEmail1" class="col-lg-2 control-label">Email</label>
+                               <div class="col-lg-10">
+                                 <input type="email" class="form-control" id="inputEmail1" name="Mail" placeholder="Email">
                                </div>
                              </div>
+                             <div class="form-group">
+                               <label for="inputPhone" class="col-lg-2 control-label">Phone</label>
+                               <div class="col-lg-10">
+                                 <input type="text" class="form-control" id="inputPhone" name="Phone" placeholder="Phone Number">
+                               </div>
+                             </div>
+                             <div class="form-group">
+                               <label for="inputUser" class="col-lg-2 control-label">Username</label>
+                               <div class="col-lg-10">
+                                 <input type="text" class="form-control" id="inputUser" name="User" placeholder="Username"><span id="existUser"></span>
+                               </div>
+                             </div>
+                             <div class="form-group">
+                               <label for="inputPassword1" class="col-lg-2 control-label">Password</label>
+                               <div class="col-lg-10">
+                                 <input type="password" class="form-control" id="inputPassword1" name="Password" placeholder="Password">
+                                 <p id="notifyRegistration" style="color: red;"><strong>${notifyRegistration}</strong></p>
+                               </div>
+                             </div>                                
+
                              <div class="form-group">
                                <div class="col-lg-offset-2 col-lg-10">
-                                 <button type="submit" class="btn btn-info">Sign in</button>
+                                 <button type="submit" class="btn btn-info">Register</button>
                                  <button type="reset" class="btn btn-default">Reset</button>
                                </div>
                              </div>
@@ -95,8 +119,14 @@
          </div>
       </div>
      
-          
-       <!-- Footer starts -->
+      
+
+      
+      
+      
+
+      
+      <!-- Footer starts -->
 		<jsp:include page="include/footer.jsp" />
       <!-- Footer ends -->
       
@@ -124,5 +154,9 @@
 		<script src="resource/js/html5shiv.js"></script>
 		<!-- Custom JS -->
 		<script src="resource/js/custom.js"></script>
+		
+	  <!-- Javascript for ajax username -->	
+		 <script type="text/javascript" src="resource/js/registration.js"></script>
+		
 	</body>	
 </html>

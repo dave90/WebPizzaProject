@@ -1,9 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<!-- Title here -->
-		<title>My Account</title>
+		<title>Edit Profile </title>
 		<!-- Description, Keywords and Author -->
 		<meta name="description" content="Your description">
 		<meta name="keywords" content="Your,Keywords">
@@ -18,7 +17,7 @@
 		<!-- Bootstrap CSS -->
 		<link href="resource/css/bootstrap.min.css" rel="stylesheet">
       <!-- Animate css -->
-      <link href="resource/account.jspcss/animate.min.css" rel="stylesheet">
+      <link href="resource/css/animate.min.css" rel="stylesheet">
       <!-- Dropdown menu -->
       <link href="resource/css/ddlevelsmenu-base.css" rel="stylesheet">
       <link href="resource/css/ddlevelsmenu-topbar.css" rel="stylesheet">
@@ -36,17 +35,17 @@
 	<body>
 
       <!-- Shopping cart Modal -->
-
  		<jsp:include page="include/shoppingCart.jsp" />
+ 	  <!-- Shopping cart Modal -->	
            
-      <!-- Logo & Navigation starts -->
-       		<jsp:include page="include/header.jsp" />
-      <!-- Logo & Navigation ends -->
+      <!-- Logo & Navigation starts -->            
+ 		<jsp:include page="include/header.jsp" />
+ 	  <!-- Logo & Navigation end -->
      
       <!-- Page title -->
       <div class="page-title">
          <div class="container">
-            <h2><i class="icon-desktop color"></i> My Account </h2>
+            <h2><i class="icon-desktop color"></i> My Account <small>Subtext for header</small></h2>
             <hr />
          </div>
       </div>
@@ -69,67 +68,55 @@
                   </div>
                </div>
                <div class="col-md-9">
-                  <h3><i class="icon-user color"></i> &nbsp;My Account</h3>
+                  <h3><i class="icon-user color"></i> &nbsp;Edit Profile</h3>
                   <!-- Your details -->
-                   <div class="address">
-                     
-                       <!-- Your name -->
-                       <table>
-                       <tr>
-                       <td style="padding: 10px;">Name</td> <td><strong>${client.name}</strong></td> 
-                       </tr>
-                       <tr>
-                       <td style="padding: 10px;">Surname</td> <td><strong>${client.surname}</strong></td>
-					   </tr>
-
-                       <!-- Phone number -->
-                       <tr>
-                        <td style="padding: 10px;">Phone</td><td>${client.phoneNumber} </td>
-                       </tr>
-                       <tr>
-                       <td style="padding: 10px;">Mail</td> <td><a href="mailto:#">${client.mail}</a></td>
-                       </tr>
-					  </table>
-                     
-                   </div>
-
-                   <hr />
-                                      <h4>My Recent Purchases</h4>
-
-                     <table class="table table-striped tcart">
-                       <thead>
-                         <tr>
-                           <th>Date</th>
-                           <th>ID</th>
-                           <th>Name</th>
-                           <th>Price</th>
-                           <th>Status</th>
-                         </tr>
-                       </thead>
-                       <tbody>
-                         <tr>
-                           <td>25-08-12</td>
-                           <td>4423</td>
-                           <td>HTC One</td>
-                           <td>$530</td>
-                           <td>Completed</td>
-                         </tr>
-                         <tr>
-                           <td>15-02-12</td>
-                           <td>6643</td>
-                           <td>Sony Xperia</td>
-                           <td>$330</td>
-                           <td>Shipped</td>
-                         </tr>
-                         <tr>
-                           <td>14-08-12</td>
-                           <td>1283</td>
-                           <td>Nokia Asha</td>
-                           <td>$230</td>
-                           <td>Processing</td>
-                         </tr>                                               
-                       </tbody>
-                     </table>
+                  <form class="form-horizontal" role="form" action="editProfile.html" method="post">
+                    <div class="form-group">
+                      <label for="inputName" class="col-md-2 control-label">Name</label>
+                      <div class="col-md-4">
+                        <input type="text" class="form-control" id="inputName" name="Name" placeholder="Name" value="${client.name}">
+                      </div>
+                    </div>       
+                    <div class="form-group">
+                      <label for="inputSurname" class="col-md-2 control-label">Surname</label>
+                      <div class="col-md-4">
+                        <input type="text" class="form-control" id="inputSurname" name="Surname" placeholder="Surname" value="${client.surname}">
+                      </div>
+                    </div>       
+                    <div class="form-group">
+                      <label for="inputEmail1" class="col-md-2 control-label">Email</label>
+                      <div class="col-md-4">
+                        <input type="email" class="form-control" id="inputEmail1" name="Mail" placeholder="Email" value="${client.mail}">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPhone" class="col-md-2 control-label">Phone Number</label>
+                      <div class="col-md-4">
+                        <input type="text" class="form-control" id="inputPhone" name="Phone" placeholder="Phone" value="${client.phoneNumber}">
+                      </div>
+                    </div>
+                   <div class="form-group">
+                      <label for="inputUsername" class="col-md-2 control-label">Username</label>
+                      <div class="col-md-4">
+                        <input type="text" class="form-control" id="inputUsername" name="User" placeholder="Username" value="${client.username}">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword" class="col-md-2 control-label">Password</label>
+                      <div class="col-md-4">
+                        <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="Password">
+                        <p id="notifyRegistration" style="color: red;"><strong>${notifyRegistration}</strong></p>
+                        
+                      </div>
+                    </div>                    
+                    <hr />
+                    <div class="form-group">
+                      <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-danger">Save Changes</button>
+                        <button type="reset" class="btn btn-default">Reset</button>
+                      </div>
+                    </div>
+                  </form> 
                    
                </div>
             </div>
@@ -138,7 +125,6 @@
          </div>
       </div>
      
-
       
       <!-- Footer starts -->
 		<jsp:include page="include/footer.jsp" />

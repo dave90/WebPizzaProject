@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +31,12 @@ public class Pizza {
 	joinColumns = { @JoinColumn(name = "PIZZA_ID") }, 
 	inverseJoinColumns = { @JoinColumn(name = "INGREDIENTS_ID")})
 	private List<PizzaIngredients> ingredients=new ArrayList<PizzaIngredients>();
+	
+	@ManyToOne(cascade = { CascadeType.ALL })
+	@JoinTable(name = "PIZZA_CLIENT", 
+	joinColumns = { @JoinColumn(name = "PIZZA_ID") }, 
+	inverseJoinColumns = { @JoinColumn(name = "CLIENT_ID")})
+	private Client client;
 	
 	@Column(name="DISCOUNT")
 	private double discount;
@@ -81,10 +88,19 @@ public class Pizza {
 		this.discount = discount;
 	}
 
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((client == null) ? 0 : client.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(discount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -104,6 +120,11 @@ public class Pizza {
 		if (getClass() != obj.getClass())
 			return false;
 		Pizza other = (Pizza) obj;
+		if (client == null) {
+			if (other.client != null)
+				return false;
+		} else if (!client.equals(other.client))
+			return false;
 		if (Double.doubleToLongBits(discount) != Double
 				.doubleToLongBits(other.discount))
 			return false;

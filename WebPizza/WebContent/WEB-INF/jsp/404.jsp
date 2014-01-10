@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<!-- Title here -->
-		<title>Login</title>
+		<title>404 - Olson Kart</title>
 		<!-- Description, Keywords and Author -->
 		<meta name="description" content="Your description">
 		<meta name="keywords" content="Your,Keywords">
@@ -21,7 +18,7 @@
 		<!-- Bootstrap CSS -->
 		<link href="resource/css/bootstrap.min.css" rel="stylesheet">
       <!-- Animate css -->
-      <link href="resource/css/animate.min.css" rel="stylesheet">
+      <link href="css/animate.min.css" rel="stylesheet">
       <!-- Dropdown menu -->
       <link href="resource/css/ddlevelsmenu-base.css" rel="stylesheet">
       <link href="resource/css/ddlevelsmenu-topbar.css" rel="stylesheet">
@@ -38,66 +35,33 @@
 	
 	<body>
 
+
       <!-- Shopping cart Modal -->
  		<jsp:include page="include/shoppingCart.jsp" />
  	  <!-- Shopping cart Modal -->	
            
-      <!-- Logo & Navigation starts -->
-            
+      <!-- Logo & Navigation starts -->            
  		<jsp:include page="include/header.jsp" />
+ 	  <!-- Logo & Navigation end -->
      
       <!-- Page content -->
       
-      <div class="blocky">
+      <div class="error-block blocky text-center">
          <div class="container">
-            <div class="row">
-               <div class="col-md-6">
-                  <div class="reg-login-info">
-                     <h2>Login to Access Amazing Benefits <span class="color">!!!</span></h2>
-                     <img src="${img}" width="400px" alt="" class="img-responsive img-thumbnail" />
-                     <p></p>
-                  </div>
-               </div>
-               <div class="col-md-6">
-                  <div class="register-login">
-                     <div class="cool-block">
-                        <div class="cool-block-bor">
-                        
-                           <h3>Login</h3>
-                           <form class="form-horizontal" role="form" action="${actionUrl}" method="post">
-                             <div class="form-group">
-                               <label for="inputUser" class="col-lg-2 control-label">User</label>
-                               <div class="col-lg-10">
-                                 <input type="text" class="form-control" id="inputUser" name="User" placeholder="User">
-                               </div>
-                             </div>
-                             <div class="form-group">
-                               <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-                               <div class="col-lg-10">
-                                 <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="Password">
- 	                              <p style="color: red;"><strong>${notifyLog}</strong></p>
-                               </div>
-                             </div>
-                             <div class="form-group">
-                               <div class="col-lg-offset-2 col-lg-10">
-                                 <button type="submit" class="btn btn-info">Sign in</button>
-                                 <button type="reset" class="btn btn-default">Reset</button>
-                               </div>
-                             </div>
-                           </form>
-                           
-                        </div>
-                     </div>   
-                  </div>
-               </div>
-            </div>
+            <h2>Oops<span class="color">!!!</span> It<span class="color">'</span>s 404<span class="color">!!!</span></h2>
+            <p class="error-para">We are sorry, the page you requested cannot be found. </p>
+            <div class="sep-bor"></div>
+             
+ 
             <div class="sep-bor"></div>
          </div>
       </div>
      
-          
-       <!-- Footer starts -->
+
+      
+      <!-- Footer starts -->
 		<jsp:include page="include/footer.jsp" />
+
       <!-- Footer ends -->
       
       <!-- Scroll to top -->

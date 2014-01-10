@@ -1,8 +1,9 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<!-- Title here -->
-		<title>Web Pizza I</title>
+		<title>Web Pizza</title>
 		<!-- Description, Keywords and Author -->
 		<meta name="description" content="Your description">
 		<meta name="keywords" content="Your,Keywords">
@@ -35,88 +36,13 @@
 	<body>
 
       <!-- Shopping cart Modal -->
-     <div class="modal fade" id="shoppingcart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-       <div class="modal-dialog">
-         <div class="modal-content">
-           <div class="modal-header">
-             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-             <h4 class="modal-title">Shopping Cart</h4>
-           </div>
-           <div class="modal-body">
+ 		<jsp:include page="include/shoppingCart.jsp" />
+ 	  <!-- Shopping cart Modal -->	
            
-            <!-- Items table -->
-            <table class="table table-striped">
-              <!-- PUT CART OBJECT -->
-            </table>
-            
-           </div>
-           <div class="modal-footer">
-             <button type="button" class="btn btn-default" data-dismiss="modal">Continue Shopping</button>
-             <button type="button" class="btn btn-info">Checkout</button>
-           </div>
-         </div><!-- /.modal-content -->
-       </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-           
-      <!-- Logo & Navigation starts -->
-      
-      <div class="header">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-2 col-sm-2">
-                  <!-- Logo -->
-                  <div class="logo">
-                     <h1><a href="${pageContext.request.contextPath}">Web Pizza</a></h1>
-                  </div>
-               </div>
-               <div class="col-md-6 col-sm-5">
-                  <!-- Navigation menu -->
-						<div class="navi">
-							<div id="ddtopmenubar" class="mattblackmenu">
-								<ul>
-									<li><a href="${pageContext.request.contextPath}">Home</a></li>
-                           <li><a href="#" rel="ddsubmenu1">Account</a>
-										<ul id="ddsubmenu1" class="ddsubmenustyle">
-                                 <li><a href="account.html">My Account</a></li>
-											<li><a href="viewcart.html">View Cart</a></li>
-                                 <li><a href="checkout.html">Checkout</a></li>
-                                 <li><a href="wishlist.html">Wish List</a></li>
-                                 <li><a href="orderhistory.html">Order History</a></li>
-                                 <li><a href="editprofile.html">Edit Profile</a></li>
-	
-										</ul>
-									</li>
-									
-									<li><a href="#">Pizza</a>
-									<li><a href="#" rel="ddsubmenu2">Employee</a>
-									 <ul id="ddsubmenu2" class="ddsubmenustyle">
-									 	<li><a hfer="#">Administrator</a></li>
-									 	<li><a hfer="#">Pizza-Chef</a></li>
-									 	<li><a hfer="#">Deliveryman</a></li></ul>
-										
-									</li>                       
-									<li><a href="contactus.html">Contact</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- Dropdown NavBar -->
-                  <div class="navis"></div>                  
-                  
-               </div>
-               
-               <div class="col-md-4 col-sm-5">
-                  <div class="kart-links">
-                     <a href="login.html">Login</a> 
-                     <a href="register.html">Signup</a>
-                     <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> Items<!-- Add Prize Cart --></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      
-      <!-- Logo & Navigation ends -->
+      <!-- Logo & Navigation starts -->            
+ 		<jsp:include page="include/header.jsp" />
+ 	  <!-- Logo & Navigation end -->
+ 		
       
       <div class="clearfix"></div>
       
@@ -188,98 +114,38 @@
         <div class="container">
           
          <div class="row">
-            <!-- Item #1 -->
+           <c:forEach items="${listPizza}" var="pizza">
             <div class="col-md-3 col-sm-4 col-xs-6">
               <div class="item">
                 <!-- Use the below link to put HOT icon -->
-                <div class="item-icon"><span>HOT</span></div>
+                <div class="item-icon"><span><c:if test="${pizza.discount > 0}"><c:out value="HOT" /></c:if></span></div>
                 <!-- Item image -->
                 <div class="item-image">
-                  <a href="single-item.html"><img src="resource/img/pizza/pizza-cartoon.png" alt="" class="img-responsive"/></a>
+                  <img src="resource/img/pizza/pizza-cartoon.png" alt="" class="img-responsive"/>
                 </div>
                 <!-- Item details -->
                 <div class="item-details">
                   <!-- Name -->
-                  <h5><a href="single-item.html">Pizza Margherita</a></h5>
+                  <h5>${pizza.name}</h5>
                   <div class="clearfix"></div>
                   <!-- Para. Note more than 2 lines. -->
-                  <p>Ingredienti: Pomodoro, Mozzarella-RICORDA HOT QUANDO DISCOUNT!=0</p>
+				  <p style="font-size: 80%">
+					<c:forEach items="${pizza.ingredients}" var="ingredient">
+						<c:out value="${ingredient.name} " />
+					</c:forEach>
+				  </p>
                   <hr />
                   <!-- Price -->
-                  <div class="item-price pull-left">&euro;5</div>
+                  <div class="item-price pull-left">&euro; ${pizza.prize}</div>
                   <!-- Add to cart -->
                   <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Add to Cart</a></div>
                   <div class="clearfix"></div>
                 </div>
               </div>
             </div>
+            </c:forEach>
 
-            <!-- Item #2 -->
-            <div class="col-md-3 col-sm-4 col-xs-6">
-              <div class="item">
-                <!-- Item image -->
-                <div class="item-image">
-                  <a href="single-item.html"><img src="resource/img/pizza/pizza-cartoon.png" alt=""  class="img-responsive"/></a>
-                </div>
-                <!-- Item details -->
-                <div class="item-details">
-                  <!-- Name -->
-                  <h5><a href="single-item.html">Pizza Marinara</a></h5>
-                  <!-- Para. Note more than 2 lines. -->
-                  <p>Ingredienti: Pomodoro</p>
-                  <hr />
-                  <!-- Price -->
-                  <div class="item-price pull-left">&euro;3</div>
-                  <!-- Add to cart -->
-                  <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Add to Cart</a></div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </div>  
 
-            <div class="col-md-3 col-sm-4 col-xs-6">
-              <div class="item">
-                <!-- Item image -->
-                <div class="item-image">
-                  <a href="single-item.html"><img src="resource/img/pizza/pizza-cartoon.png" alt="" class="img-responsive" /></a>
-                </div>
-                <!-- Item details -->
-                <div class="item-details">
-                  <!-- Name -->
-                  <h5><a href="single-item.html">Pizza Viennese</a></h5>
-                  <!-- Para. Note more than 2 lines. -->
-                  <p>Ingredienti: Pomodoro, Mozzarella, Prosciutto Cotto</p>
-                  <hr />
-                  <!-- Price -->
-                  <div class="item-price pull-left">&euro;6</div>
-                  <!-- Add to cart -->
-                  <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Add to Cart</a></div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-4 col-xs-6">
-              <div class="item">
-                <!-- Item image -->
-                <div class="item-image">
-                  <a href="single-item.html"><img src="resource/img/pizza/pizza-cartoon.png" alt=""  class="img-responsive"/></a>
-                </div>
-                <!-- Item details -->
-                <div class="item-details">
-                  <!-- Name -->
-                  <h5><a href="single-item.html">Pizza Capricciosa</a></h5>
-                  <!-- Para. Note more than 2 lines. -->
-                  <p>Ingredienti: Pomodoro, Funghi, Olive,Carciofi, Mozzarella</p>
-                  <hr />
-                  <!-- Price -->
-                  <div class="item-price pull-left">&euro;100</div>
-                  <!-- Add to cart -->
-                  <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Add to Cart</a></div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </div>
          </div>
          
           
@@ -312,22 +178,20 @@
                           
                            <ul id="carousel_container">
                               <!-- Carousel item -->
-                              <li>
+                              <c:forEach items="${userPizza}" var="userP">
+                               <li>
                                  <a href="#"><img src="resource/img/pizza/pizza-cartoon.png" alt="" class="img-responsive"/></a>
                                  <div class="carousel_caption">
-                                    <h5><a href="#">Pizza niente</a></h5>
-                                    <p>Ingredienti: Niente</p>
-                                    <a href="#" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for $199</a>
+                                    <h5>${userP.name}</h5>
+ 									  <p style="font-size: 80%">
+										<c:forEach items="${userP.ingredients}" var="ingredient">
+											<c:out value="${ingredient.name} " />
+										</c:forEach>
+									  </p>                                   
+                                    <a href="#" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i>&euro; ${userP.prize}</a>
                                  </div>
                               </li>
-                              <li>
-                                 <a href="#"><img src="resource/img/pizza/pizza-cartoon.png" alt="" class="img-responsive"/></a>
-                                 <div class="carousel_caption">
-                                     <h5><a href="#">Pizza Tutto</a></h5>
-                                     <p>Ingredienti: Pomodoro, Mozzarella, Prosciutto Cotto, Funghi, Salsiccia, Carciofi</p>
-                                     <a href="#" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for $199</a>
-                                 </div>
-                              </li>
+                              </c:forEach>
 
                            </ul>
                            <div class="clearfix"></div>
@@ -345,66 +209,7 @@
   
       
       <!-- Footer starts -->
-      <footer>
-         <div class="container">
-         
-               <div class="row">
-
-                        <div class="col-md-4 col-sm-4">
-                           <div class="fwidget">
-                           
-                              <h4>Oslon de<span class="color">'</span> Techno</h4>
-                              <hr />
-                              <p>Follow us on facebook, twitter, google+, linkedin & pinterest</p>
-                              
-                              <div class="social">
-                                 <a href="#" class="facebook"><i class="icon-facebook"></i></a>
-                                 <a href="#" class="twitter"><i class="icon-twitter"></i></a>
-                                 <a href="#" class="google-plus"><i class="icon-google-plus"></i></a>
-                                 <a href="#" class="linkedin"><i class="icon-linkedin"></i></a>
-                                 <a href="#" class="pinterest"><i class="icon-pinterest"></i></a>
-                              </div>
-                           </div>
-                       </div>
-
-                       <div class="col-md-4 col-sm-4">
-                         <div class="fwidget">
-                           <h4>Feature</h4>
-                           <hr />
-                           <ul>
-                             <li><a>Possibility to build your own pizza</a></li>
-                             <li><a >Instant location for your pizza</a></li>
-                             <li><a >Tracking the status of your pizza</a></li>
-                             <li><a >Possibility to pay online</a></li>
-                           </ul>
-                         </div>
-                       </div>        
-
-                       
-
-                       <div class="col-md-4 col-sm-4">
-                         <div class="fwidget">
-                           
-                           <h4>Get In Touch</h4>
-                           <hr />
-                           <div class="address">
-                              <p><i class="icon-home color contact-icon"></i> Cosenza Rende, </p>
-                              <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; via fasulla 123</p>
-                              <p><i class="icon-phone color contact-icon"></i> +39-323-55322</p>
-                              <p><i class="icon-envelope color contact-icon"></i> <a href="mailto:webPizza@gmail.com">webPizza@gmail.com</a></p>
-                           </div>
-                           
-                         </div>
-                       </div>
-
-                     </div>
-
-         
-         
-            <hr />
-
-         </div>
-      </footer>
+		<jsp:include page="include/footer.jsp" />
       <!-- Footer ends -->
       
       <!-- Scroll to top -->
