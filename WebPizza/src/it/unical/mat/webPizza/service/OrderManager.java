@@ -133,5 +133,9 @@ public class OrderManager {
 	public String getOrderStatus(Long idOrder){
 		return orderDAO.getOrderStatus(idOrder);
 	}
+	
+	public Pizza getPizza(Long id){
+		return pizzaDAO.getPizza(id);
+	}
 
 }

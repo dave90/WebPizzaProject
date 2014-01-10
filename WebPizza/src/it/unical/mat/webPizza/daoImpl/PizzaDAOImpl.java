@@ -96,4 +96,25 @@ public class PizzaDAOImpl implements PizzaDAO {
 		return result;
 	}
 
+	@Override
+	public Pizza getPizza(Long id) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		Pizza pizza = null;
+		try {
+			transaction = session.beginTransaction();
+			
+			pizza= (Pizza) session.load(Pizza.class, id);
+			Hibernate.initialize(pizza.getIngredients());
+
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+		return pizza;
+	}
+
 }

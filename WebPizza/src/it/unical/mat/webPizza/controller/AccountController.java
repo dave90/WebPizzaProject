@@ -1,9 +1,19 @@
 package it.unical.mat.webPizza.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import it.unical.mat.webPizza.domain.Client;
+import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.service.AccessManager;
+import it.unical.mat.webPizza.service.OrderManager;
 import it.unical.mat.webPizza.util.MD5Java;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +24,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.sun.org.apache.xalan.internal.xsltc.runtime.Hashtable;
+
 @Controller
-@SessionAttributes("client")
+@SessionAttributes({"client","cart"})
 public class AccountController {
 	@Autowired
 	private AccessManager accessManager;
+	
+	@Autowired
+	private OrderManager orderManager;
 	
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -255,11 +270,63 @@ public class AccountController {
 		
 	}
 
-	
-
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
 	public String checkout( Model model) {
 		
 		return "checkout";
+	}
+	
+	@RequestMapping(value = "/addToCart", method = RequestMethod.POST)
+	public @ResponseBody String addToCart(@RequestParam(value="idPizza") Long id,@RequestParam(value="quantity") int quantity,Model model,HttpSession session) {
+		List<Pizza> cartPizzas;
+		if(!model.containsAttribute("cart")){
+			cartPizzas=new ArrayList<Pizza>();
+			model.addAttribute("cart", cartPizzas);
+		}else{
+			cartPizzas=(List<Pizza>) model.asMap().get("cart");
+		}
+		
+		Pizza pizza=null;
+		for(Pizza p:cartPizzas)
+			if(p.getId()==id){
+				pizza=p;
+				break;
+			}
+		
+		if(pizza==null)
+			pizza=orderManager.getPizza(id);
+		
+		
+		if(pizza==null)
+			return "Error Pizza not found";
+		
+		if(cartPizzas==null)
+			return "Error cart not found";
+		
+		for(int i=0;i<quantity;i++)
+			cartPizzas.add(pizza);
+		
+		double totalPrize=0;
+		
+		HashMap<Pizza, Integer> pizzaQuantity= new HashMap<Pizza, Integer>();
+		
+		for(Pizza p:cartPizzas){
+			totalPrize+=p.getPrize();
+			quantity=0;
+			if(pizzaQuantity.get(p)!=null)
+				quantity=pizzaQuantity.get(p);
+			pizzaQuantity.put(p, quantity+1);
+		}
+		
+		String tableToAppend="";
+		for(Pizza p:pizzaQuantity.keySet()){
+			tableToAppend+="<tr>"+"<td>"+p.getName()+"</td>"+"<td>"+pizzaQuantity.get(p)+"</td>"+"<td>"+p.getPrize()*pizzaQuantity.get(p)+"</td>"+"</tr>";
+		}
+		tableToAppend+="<tr>"+"<th></th><th>Total</th>"+"<th>"+totalPrize+"</th></tr>";
+		
+		
+		System.out.println(tableToAppend);
+		
+		return tableToAppend;
 	}
 }

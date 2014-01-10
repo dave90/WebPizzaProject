@@ -12,19 +12,21 @@
             <!-- Items table -->
             <table class="table table-striped">
               <!-- PUT CART OBJECT -->
-                           <thead>
+               <thead>
                 <tr>
                   <th>Name</th>
                   <th>Quantity</th>
                   <th>Price</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td><a href="single-item.html">HTC One</a></td>
-                  <td>2</td>
-                  <td>$250</td>
-                </tr>
+              <tbody id="cartBody">
+             <c:if test="${cart != null }"> <c:forEach items="${cart}" var="pizza">
+              <tr>
+              	<td>${pizza.name}</td>
+              	<td>1</td>
+              	<td>${pizza.prize}</td>
+              </tr>
+              </c:forEach></c:if>
               </tbody>
             </table>
             
