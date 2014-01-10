@@ -14,8 +14,11 @@
 				     url : "addToCart.html",   
 				     data : "idPizza="  + idPizza+"&quantity="+currentVal,  
 				     success : function(response) {  
+				    	 	var tmp = response.split("*");
 				    		 $('#cartBody').empty();
-				    		 $('#cartBody').append(response);
+				    		 $('#cartBody').append(tmp[0]);
+				    		 $('#shoppingCart').empty();
+				    		 $('#shoppingCart').append(tmp[1]);
 				     },  
 				     error : function(e) {  
 				      alert('Error: ' + e);   

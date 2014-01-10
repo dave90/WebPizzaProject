@@ -50,6 +50,9 @@ public class ShoppingCart {
 			tableToAppend+="<tr>"+"<td>"+p.getName()+"</td>"+"<td>"+pizzaQuantity.get(p)+"</td>"+"<td>"+p.getPrize()*pizzaQuantity.get(p)+"</td>"+"</tr>";
 		}
 		tableToAppend+="<tr>"+"<th></th><th>Total</th>"+"<th>"+totalprice+"</th></tr>";
+		
+		// aggiungo questa parte per modificare in modo dinamico con jquery anche nell'header il carrello
+		tableToAppend+="*<i class='icon-shopping-cart'></i> Items - "+totalprice+"&euro;";
 		return tableToAppend;
 	}
 
