@@ -1,10 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="count" value="0" scope="page" />
 <!DOCTYPE html>
 <html>
 <head>
 <!-- Title here -->
-<title>Items - Olson Kart</title>
+<title>Checkout - Olson Kart</title>
 <!-- Description, Keywords and Author -->
 <meta name="description" content="Your description">
 <meta name="keywords" content="Your,Keywords">
@@ -158,7 +156,7 @@
 					<div class="kart-links">
 						<a href="login.html">Login</a> <a href="register.html">Signup</a>
 						<a data-toggle="modal" href="#shoppingcart"><i
-							class="icon-shopping-cart"></i> 0 Items - 0 &euro;</a>
+							class="icon-shopping-cart"></i> 3 Items - $300</a>
 					</div>
 				</div>
 			</div>
@@ -171,7 +169,8 @@
 	<div class="page-title">
 		<div class="container">
 			<h2>
-				<i class="icon-pizza"></i> Pizza List
+				<i class="icon-desktop color"></i> Checkout <small>Subtext
+					for header</small>
 			</h2>
 			<hr />
 		</div>
@@ -180,177 +179,128 @@
 
 	<!-- Page content -->
 
-	<div class="shop-items">
+	<div class="checkout">
 		<div class="container">
-
-			<div class="row" style="width: 1150px">
-
-				<div class="col-md-9 col-md-push-3">
-
-
-
-					<!-- Items List starts -->
-
-					<div class="row">
-						<!-- Item #1 -->
-						<c:forEach items="${listPizza}" var="pizza">
-							<div class="col-md-4 col-sm-8 col-xs-6">
-
-
-								<div class="item">
-									<!-- Use the below link to put HOT icon -->
-									<c:if test="${pizza.discount > 0} ">
-										<div class="item-icon">
-											<span>HOT</span>
-										</div>
-									</c:if>
-									<!-- Item image -->
-									<div class="item-image">
-										<a href="single-item.html"><img
-											src="resource/img/pizza/${pizza.name}.png" alt=""
-											class="img-responsive" /></a>
-									</div>
-									<!-- Item details -->
-									<div class="item-details">
-										<!-- Name -->
-										<h5>
-											<a href="single-item.html"><c:out value="${pizza.name}" />
-											</a>
-										</h5>
-										<div class="clearfix"></div>
-										<p style="font-size: 80%">
-											<c:forEach items="${pizza.ingredients}" var="ingredient">
-												<!-- Para. Note more than 2 lines. -->
-												<c:out value="${ingredient.name}" />
-											</c:forEach>
-										</p>
-										<hr />
-										<!-- Price -->
-										<div class="item-price pull-left">${pizza.prize}&euro;</div>
-										<!-- Add to cart -->
-										<button class="incrdecr" id="add${count}" >+</button>
-										<input type="text" id="qty${count}" maxlength="2" size="1" value="0" style="width:auto">
-										<button class="incrdecr" id="minus${count}">-</button>
-										<div class="pull-right">
-											<a href="#" class="btn btn-danger btn-sm">Add to Cart</a>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-							<c:set var="count" value="${count + 1}" scope="page"/>
-						</c:forEach>
-						<div id="${count}" class="count"></div>
-
-
+			<h4>Shipping & Billing Details</h4>
+			<br />
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+					<label for="inputName" class="col-md-5">Is
+						your order for delivery or carryout?</label>
+				</div>
+				<div class="form-group">
+					<div id="delivery" class="col-md-4 deliveryActive control-label">
 					</div>
-
-
-
-
-					<!-- Items List ends -->
-
-
-					<div class="row">
-						<div class="col-md-12">
-							<!-- Pagination -->
-							<ul class="pagination">
-								<li><a href="#">&laquo;</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">&raquo;</a></li>
-							</ul>
-						</div>
-					</div>
+					<div id="carryout" class="col-md-4 carryout control-label"></div>
 
 				</div>
+				
+				<div class="form-group">
+					<label for="inputName" class="col-md-5 ">We just need to know where you are so we can deliver to you.</label>
 
-
-				<div class="col-md-3 col-md-pull-9">
-					<div class="sidey">
-						<ul class="nav">
-							<li><a href="index.html"><i class="icon-home"></i>
-									&nbsp;Home</a>
-							<li><a href="#"><i class="icon-mobile-phone"></i>
-									&nbsp;Our menu</a></li>
-							<li><a href="#"><i class="icon-lightbulb"></i>
-									&nbsp;Build your pizza</a></li>
-							<li><a href="#"><i class="icon-briefcase"></i>
-									&nbsp;Created by you</a></li>
-						</ul>
+				</div>
+				
+				<div class="form-group">
+					<div id="house" class="col-md-4 houseActive background control-label">
 					</div>
+	 				<div id="apartment" class="col-md-4 apartment background control-label"></div>
+<!-- 					<div id="business" class="col-md-4 business background control-label"></div>
+					<div id="campus-base" class="col-md-4 campus-base background  control-label"></div>
+					<div id="hotel" class="col-md-4 hotel background control-label"></div>
+					<div id="dormitory" class="col-md-4 dormitory background control-label"></div>
+ -->					<div id="other" class="col-md-4 other background control-label"></div>
 
-					<!-- Sidebar items (featured items)-->
-
-					<div class="sidebar-items">
-
-						<h5>Featured Items</h5>
-
-						<!-- Item #1 -->
-						<div class="sitem">
-							<div class="onethree-left">
-								<!-- Image -->
-								<a href="single-item.html"><img src="img/items/2.png" alt=""
-									class="img-responsive" /></a>
-							</div>
-							<div class="onethree-right">
-								<!-- Title -->
-								<a href="single-item.html">HTC One V</a>
-								<!-- Para -->
-								<p>Aenean ullamcorper justo tincidunt justo aliquet.</p>
-								<!-- Price -->
-								<p class="bold">$199</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-
-						<div class="sitem">
-							<div class="onethree-left">
-								<a href="single-item.html"><img src="img/items/3.png" alt=""
-									class="img-responsive" /></a>
-							</div>
-							<div class="onethree-right">
-								<a href="single-item.html">Sony One V</a>
-								<p>Aenean ullamcorper justo tincidunt justo aliquet.</p>
-								<p class="bold">$399</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-
-						<div class="sitem">
-							<div class="onethree-left">
-								<a href="single-item.html"><img src="img/items/4.png" alt=""
-									class="img-responsive" /></a>
-							</div>
-							<div class="onethree-right">
-								<a href="single-item.html">Nokia One V</a>
-								<p>Aenean ullamcorper justo tincidunt justo aliquet.</p>
-								<p class="bold">$159</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-
-						<div class="sitem">
-							<div class="onethree-left">
-								<a href="single-item.html"><img src="img/items/5.png" alt=""
-									class="img-responsive" /></a>
-							</div>
-							<div class="onethree-right">
-								<a href="single-item.html">Samsung One V</a>
-								<p>Aenean ullamcorper justo tincidunt justo aliquet.</p>
-								<p class="bold">$299</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-
+				</div>
+				
+				
+				<div class="form-group">
+					<label for="inputName" class="col-md-2 control-label">Name</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control" id="inputName"
+							placeholder="Name">
 					</div>
 				</div>
-			</div>
+				<div class="form-group">
+					<label for="inputEmail1" class="col-md-2 control-label">Email</label>
+					<div class="col-md-4">
+						<input type="email" class="form-control" id="inputEmail1"
+							placeholder="Email">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPhone" class="col-md-2 control-label">Phone
+						Number</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control" id="inputPhone"
+							placeholder="Phone">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputCountry" class="col-md-2 control-label">Country</label>
+					<div class="col-md-4">
+						<select class="form-control">
+							<option>Select Country</option>
+							<option>USA</option>
+							<option>India</option>
+							<option>Canada</option>
+							<option>UK</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputAddress" class="col-md-2 control-label">Address</label>
+					<div class="col-md-4">
+						<textarea class="form-control" rows="3" placeholder="Address"></textarea>
+					</div> 
+				</div>
+				<div id="inputLevel" class="form-group">
+					
+				</div>
+				<div class="form-group">
+					<label for="inputZip" class="col-md-2 control-label">Zip
+						Code</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control" id="inputZip"
+							placeholder="Zip Code">
+					</div>
+				</div>
 
-			<div class="sep-bor"></div>
+				<hr />
+				<h4>Payment Details</h4>
+
+				<div class="form-group">
+					<label for="inputPayment" class="col-md-2 control-label">Payment
+						Method</label>
+					<div class="col-md-4">
+						<select class="form-control">
+							<option>Payment Method</option>
+							<option>Credit Card</option>
+							<option>Debit Card</option>
+							<option>Internet Banking</option>
+							<option>Check</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-4">
+						<div class="checkbox">
+							<label> <input type="checkbox"> Accept Terms &
+								Conditions
+							</label>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-10">
+						<button type="submit" class="btn btn-danger">Confirm
+							Order</button>
+						<button type="reset" class="btn btn-default">Reset</button>
+					</div>
+				</div>
+			</form>
+
 		</div>
 	</div>
 

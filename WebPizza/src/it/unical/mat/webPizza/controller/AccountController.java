@@ -83,4 +83,9 @@ public class AccountController {
 		return "redirect:login.html";
 	}
 
+	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
+	public String checkout( Model model) {
+		
+		return "checkout";
+	}
 }
