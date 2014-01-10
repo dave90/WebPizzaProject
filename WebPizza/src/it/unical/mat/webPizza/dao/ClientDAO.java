@@ -9,5 +9,6 @@ public interface ClientDAO {
 	public Client getClient(Long id);
 	public Client getClient(String usr,String hpwd);
 	public boolean existUsername(String usr);
+	public boolean updateClient(Long id,String name,String surname,String user,String phone,String mail,String hpwd);
 
 }

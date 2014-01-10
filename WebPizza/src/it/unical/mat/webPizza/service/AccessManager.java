@@ -79,4 +79,7 @@ public class AccessManager {
 		return clientDAO.existUsername(usr);
 	}
 
+	public boolean updateClient(Long id,String name,String surname,String user,String phone,String mail,String hpwd){
+		return clientDAO.updateClient(id, name, surname, user, phone, mail, hpwd);
+	}
 }

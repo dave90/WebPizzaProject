@@ -114,98 +114,38 @@
         <div class="container">
           
          <div class="row">
-            <!-- Item #1 -->
+           <c:forEach items="${listPizza}" var="pizza">
             <div class="col-md-3 col-sm-4 col-xs-6">
               <div class="item">
                 <!-- Use the below link to put HOT icon -->
-                <div class="item-icon"><span>HOT</span></div>
+                <div class="item-icon"><span><c:if test="${pizza.discount > 0}"><c:out value="HOT" /></c:if></span></div>
                 <!-- Item image -->
                 <div class="item-image">
-                  <a href="single-item.html"><img src="resource/img/pizza/pizza-cartoon.png" alt="" class="img-responsive"/></a>
+                  <img src="resource/img/pizza/pizza-cartoon.png" alt="" class="img-responsive"/>
                 </div>
                 <!-- Item details -->
                 <div class="item-details">
                   <!-- Name -->
-                  <h5><a href="single-item.html">Pizza Margherita</a></h5>
+                  <h5>${pizza.name}</h5>
                   <div class="clearfix"></div>
                   <!-- Para. Note more than 2 lines. -->
-                  <p>Ingredienti: Pomodoro, Mozzarella-RICORDA HOT QUANDO DISCOUNT!=0</p>
+				  <p style="font-size: 80%">
+					<c:forEach items="${pizza.ingredients}" var="ingredient">
+						<c:out value="${ingredient.name} " />
+					</c:forEach>
+				  </p>
                   <hr />
                   <!-- Price -->
-                  <div class="item-price pull-left">&euro;5</div>
+                  <div class="item-price pull-left">&euro; ${pizza.prize}</div>
                   <!-- Add to cart -->
                   <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Add to Cart</a></div>
                   <div class="clearfix"></div>
                 </div>
               </div>
             </div>
+            </c:forEach>
 
-            <!-- Item #2 -->
-            <div class="col-md-3 col-sm-4 col-xs-6">
-              <div class="item">
-                <!-- Item image -->
-                <div class="item-image">
-                  <a href="single-item.html"><img src="resource/img/pizza/pizza-cartoon.png" alt=""  class="img-responsive"/></a>
-                </div>
-                <!-- Item details -->
-                <div class="item-details">
-                  <!-- Name -->
-                  <h5><a href="single-item.html">Pizza Marinara</a></h5>
-                  <!-- Para. Note more than 2 lines. -->
-                  <p>Ingredienti: Pomodoro</p>
-                  <hr />
-                  <!-- Price -->
-                  <div class="item-price pull-left">&euro;3</div>
-                  <!-- Add to cart -->
-                  <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Add to Cart</a></div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </div>  
 
-            <div class="col-md-3 col-sm-4 col-xs-6">
-              <div class="item">
-                <!-- Item image -->
-                <div class="item-image">
-                  <a href="single-item.html"><img src="resource/img/pizza/pizza-cartoon.png" alt="" class="img-responsive" /></a>
-                </div>
-                <!-- Item details -->
-                <div class="item-details">
-                  <!-- Name -->
-                  <h5><a href="single-item.html">Pizza Viennese</a></h5>
-                  <!-- Para. Note more than 2 lines. -->
-                  <p>Ingredienti: Pomodoro, Mozzarella, Prosciutto Cotto</p>
-                  <hr />
-                  <!-- Price -->
-                  <div class="item-price pull-left">&euro;6</div>
-                  <!-- Add to cart -->
-                  <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Add to Cart</a></div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-4 col-xs-6">
-              <div class="item">
-                <!-- Item image -->
-                <div class="item-image">
-                  <a href="single-item.html"><img src="resource/img/pizza/pizza-cartoon.png" alt=""  class="img-responsive"/></a>
-                </div>
-                <!-- Item details -->
-                <div class="item-details">
-                  <!-- Name -->
-                  <h5><a href="single-item.html">Pizza Capricciosa</a></h5>
-                  <!-- Para. Note more than 2 lines. -->
-                  <p>Ingredienti: Pomodoro, Funghi, Olive,Carciofi, Mozzarella</p>
-                  <hr />
-                  <!-- Price -->
-                  <div class="item-price pull-left">&euro;100</div>
-                  <!-- Add to cart -->
-                  <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Add to Cart</a></div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </div>
          </div>
          
           
@@ -238,22 +178,20 @@
                           
                            <ul id="carousel_container">
                               <!-- Carousel item -->
-                              <li>
+                              <c:forEach items="${userPizza}" var="userP">
+                               <li>
                                  <a href="#"><img src="resource/img/pizza/pizza-cartoon.png" alt="" class="img-responsive"/></a>
                                  <div class="carousel_caption">
-                                    <h5><a href="#">Pizza niente</a></h5>
-                                    <p>Ingredienti: Niente</p>
-                                    <a href="#" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for $199</a>
+                                    <h5>${userP.name}</h5>
+ 									  <p style="font-size: 80%">
+										<c:forEach items="${userP.ingredients}" var="ingredient">
+											<c:out value="${ingredient.name} " />
+										</c:forEach>
+									  </p>                                   
+                                    <a href="#" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i>&euro; ${userP.prize}</a>
                                  </div>
                               </li>
-                              <li>
-                                 <a href="#"><img src="resource/img/pizza/pizza-cartoon.png" alt="" class="img-responsive"/></a>
-                                 <div class="carousel_caption">
-                                     <h5><a href="#">Pizza Tutto</a></h5>
-                                     <p>Ingredienti: Pomodoro, Mozzarella, Prosciutto Cotto, Funghi, Salsiccia, Carciofi</p>
-                                     <a href="#" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for $199</a>
-                                 </div>
-                              </li>
+                              </c:forEach>
 
                            </ul>
                            <div class="clearfix"></div>

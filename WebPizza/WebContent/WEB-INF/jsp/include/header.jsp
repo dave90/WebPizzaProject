@@ -50,13 +50,13 @@
                   <div class="kart-links">
                     <a href="login.html">
 					<c:choose>
-  						<c:when test="${client.name != null}"><c:out value="${client.username}"/></c:when>
+  						<c:when test="${client.username != null}"><c:out value="${client.username}"/></c:when>
 					    <c:otherwise><c:out value="login"/></c:otherwise>
 					</c:choose>                  	
                     </a> 
                     <a href="register.html">
 					<c:choose>
-  						<c:when test="${client.name != null}"><c:out value="logout"/></c:when>
+  						<c:when test="${client.username != null}"><c:out value="logout"/></c:when>
 					    <c:otherwise><c:out value="signup"/></c:otherwise>
 					</c:choose>  
                     </a>

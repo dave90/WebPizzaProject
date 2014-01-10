@@ -193,6 +193,67 @@ public class AccountController {
 		return "OK";
 		
 	}
+	
+	@RequestMapping(value = "/editProfile", method = RequestMethod.POST)
+	public String clientEditprofile(@RequestParam(value="User") String usr,
+										@RequestParam(value="Password") String pwd,
+										@RequestParam(value="Name") String name,
+										@RequestParam(value="Surname") String surname,
+										@RequestParam(value="Mail") String mail,
+										@RequestParam(value="Phone") String phone,
+										Model model) {
+		
+		if(!model.containsAttribute("client")){			
+			return "redirect:login.html";
+		}
+		
+		Long id=((Client)model.asMap().get("client")).getId();
+		
+		if(usr==null || usr.equals("")){
+			model.addAttribute("notifyRegistration", "Insert Username");
+			return "editprofile";
+		}
+		if(pwd==null || pwd.equals("")){
+			model.addAttribute("notifyRegistration", "Insert Password");
+			return "editprofile";
+		}
+		if(name==null || name.equals("")){
+			model.addAttribute("notifyRegistration", "Insert Name");
+			return "editprofile";
+		}
+		if(surname==null || surname.equals("")){
+			model.addAttribute("notifyRegistration", "Insert Surname");
+			return "editprofile";
+		}
+		
+		String userName=((Client)model.asMap().get("client")).getUsername();
+		
+		if(!userName.equals(usr) && accessManager.existClientUsername(usr)){
+			model.addAttribute("notifyRegistration", "Username exist");
+			return "editprofile";
+		}
+		
+		if(mail==null)
+			mail="";
+		if(phone==null)
+			phone="";
+		
+		
+		String hpwd=MD5Java.md5Java(pwd);
+		
+		if(accessManager.updateClient(id, name, surname, usr, phone, mail, hpwd)){
+			
+			Client client=accessManager.getClient(usr, hpwd);
+			model.addAttribute("client", client);
+			
+			return "redirect:account.html";
+		}
+		
+		model.addAttribute("notifyRegistration", "Registration aborted, contact Administrator");
+		
+		return "redirect:account.html";
+		
+	}
 
 	
 

@@ -118,4 +118,37 @@ public class ClientDAOImpl implements ClientDAO {
 		return exist;
 	}
 
+	@Override
+	public boolean updateClient(Long id, String name, String surname, String user,
+			String phone, String mail, String hpwd) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		boolean result = false;
+		try {
+			transaction = session.beginTransaction();
+			
+			Client client= (Client) session.load(Client.class, id);
+			if(client != null){
+				Hibernate.initialize(client);
+				client.setName(name);
+				client.setSurname(surname);
+				client.setUsername(user);
+				client.setPhoneNumber(phone);
+				client.setMail(mail);
+				client.setHashPasswd(hpwd);
+				
+				session.update(client);
+				result = true;
+			}
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+			result=false;
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+
 }
