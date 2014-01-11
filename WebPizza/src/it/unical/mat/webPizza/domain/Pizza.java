@@ -14,6 +14,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name="PIZZA")
 public class Pizza {
@@ -25,6 +28,7 @@ public class Pizza {
 	
 	@Column(name="NAME")
 	private String name;
+	
 	
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "PIZZA_INGREDIENTS", 

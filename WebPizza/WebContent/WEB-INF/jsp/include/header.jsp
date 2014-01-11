@@ -48,18 +48,17 @@
                
                <div class="col-md-4 col-sm-5">
                   <div class="kart-links">
-                    <a href="login.html">
 					<c:choose>
-  						<c:when test="${client.username != null}"><c:out value="${client.username}"/></c:when>
-					    <c:otherwise><c:out value="login"/></c:otherwise>
+  						<c:when test="${client.username != null}"><a href='login.html'><c:out value="${client.username}"/></a></c:when>
+  						<c:when test="${admin.username != null}"><a href="accountAdmin.html"><c:out value="${admin.username}"/></a></c:when>
+  						
+					    <c:otherwise><a href='login.html'><c:out value="login"/></a></c:otherwise>
 					</c:choose>                  	
-                    </a> 
-                    <a href="register.html">
 					<c:choose>
-  						<c:when test="${client.username != null}"><c:out value="logout"/></c:when>
-					    <c:otherwise><c:out value="signup"/></c:otherwise>
+  						<c:when test="${client.username != null}"><a href="register.html"><c:out value="logout"/></a></c:when>
+  						<c:when test="${admin.username != null}"><a href="adminLogout.html"><c:out value="logout"/></a></c:when>
+					    <c:otherwise><a href="register.html"><c:out value="signup"/></a></c:otherwise>
 					</c:choose>  
-                    </a>
 
                      <a data-toggle="modal" href="#shoppingcart" id="shoppingCart"><i class="icon-shopping-cart"></i> Items - ${cart.totalprice} &euro;<!-- Add Prize Cart --></a>
                   </div>

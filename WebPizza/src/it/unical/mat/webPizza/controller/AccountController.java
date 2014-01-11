@@ -55,13 +55,6 @@ public class AccountController {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/adminLogin", method = RequestMethod.GET)
-	public String adminLogIn( Model model) {
-		model.addAttribute("img", "resource/img/clients/admin.jpg");
-		model.addAttribute("actionUrl","adminLogIn.html");
-		
-		return "login";
-	}
 	
 	@RequestMapping(value = "/deliverymanLogin", method = RequestMethod.GET)
 	public String deliverymanLogIn( Model model) {

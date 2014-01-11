@@ -137,5 +137,13 @@ public class OrderManager {
 	public Pizza getPizza(Long id){
 		return pizzaDAO.getPizza(id);
 	}
+	
+	public boolean updatePizzaIngredients(Long id,String name,double cost){
+		return ingredientsDAO.updateIngredients(id, name, cost);
+	}
+	
+	public boolean deletePizzaIngredients(Long id){
+		return ingredientsDAO.deleteIngredient(id)>0;
+	}
 
 }

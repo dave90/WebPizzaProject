@@ -1,12 +1,14 @@
 package it.unical.mat.webPizza.daoImpl;
 
 import it.unical.mat.webPizza.dao.PizzaIngredientsDAO;
+import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.domain.PizzaIngredients;
 import it.unical.mat.webPizza.util.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -49,10 +51,23 @@ public class PizzaIngredientsDAOImpl implements PizzaIngredientsDAO {
 		try {
 			transaction = session.beginTransaction();
 			
-			Query query=session.createQuery("DELETE FROM PizzaIngredients WHERE id=:id");
+//			Query query=session.createQuery("DELETE FROM PizzaIngredients WHERE id=:id");
+//			query.setParameter("id", id);
+//			
+//			result=query.executeUpdate();
+			Query query=session.createSQLQuery("DELETE FROM PIZZA_INGREDIENTS WHERE INGREDIENTS_ID=:id");
 			query.setParameter("id", id);
 			
 			result=query.executeUpdate();
+			
+			PizzaIngredients ingredient= (PizzaIngredients) session.load(PizzaIngredients.class, id);
+			System.out.println("ENTERED");
+			if(ingredient!=null){
+				System.out.println("OK");
+				session.delete(ingredient);
+				session.flush();
+				result=1;
+			}
 			
 			transaction.commit();
 		} catch (HibernateException e) {
@@ -83,6 +98,34 @@ public class PizzaIngredientsDAOImpl implements PizzaIngredientsDAO {
 			session.close();
 		}
 		
+		return result;
+	}
+
+	@Override
+	public boolean updateIngredients(Long id, String name, double cost) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		boolean result = false;
+		try {
+			transaction = session.beginTransaction();
+			
+			PizzaIngredients ingredient= (PizzaIngredients) session.load(PizzaIngredients.class, id);
+			if(ingredient != null){
+				Hibernate.initialize(ingredient);
+				ingredient.setCost(cost);
+				ingredient.setName(name);
+				
+				session.update(ingredient);
+				result = true;
+			}
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+			result=false;
+		} finally {
+			session.close();
+		}
 		return result;
 	}
 

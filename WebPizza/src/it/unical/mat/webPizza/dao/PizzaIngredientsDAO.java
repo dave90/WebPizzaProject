@@ -8,4 +8,5 @@ public interface PizzaIngredientsDAO {
 	Long insertIngredient(String name,double cost);
 	int deleteIngredient(Long id);
 	List<PizzaIngredients> getAllIngredients();
+	boolean updateIngredients(Long id,String name,double cost);
 }

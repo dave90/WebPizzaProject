@@ -113,40 +113,60 @@
       <div class="shop-items blocky">
         <div class="container">
           
-         <div class="row">
-           <c:forEach items="${listPizza}" var="pizza">
-            <div class="col-md-3 col-sm-4 col-xs-6">
-              <div class="item">
-                <!-- Use the below link to put HOT icon -->
-                <div class="item-icon"><span><c:if test="${pizza.discount > 0}"><c:out value="HOT" /></c:if></span></div>
-                <!-- Item image -->
-                <div class="item-image">
-                  <img src="resource/img/pizza/pizza-cartoon.png" alt="" class="img-responsive"/>
-                </div>
-                <!-- Item details -->
-                <div class="item-details">
-                  <!-- Name -->
-                  <h5>${pizza.name}</h5>
-                  <div class="clearfix"></div>
-                  <!-- Para. Note more than 2 lines. -->
-				  <p style="font-size: 80%">
-					<c:forEach items="${pizza.ingredients}" var="ingredient">
-						<c:out value="${ingredient.name} " />
-					</c:forEach>
-				  </p>
-                  <hr />
-                  <!-- Price -->
-                  <div class="item-price pull-left">&euro; ${pizza.prize}</div>
-                  <!-- Add to cart -->
-                  <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Add to Cart</a></div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </div>
-            </c:forEach>
+ 					<div class="row">
+						<!-- Item #1 -->
+						<c:forEach items="${listPizza}" var="pizza">
+							<div class="col-md-4 col-sm-8 col-xs-6">
 
 
-         </div>
+								<div class="item">
+									<!-- Use the below link to put HOT icon -->
+									<c:if test="${pizza.discount > 0} ">
+										<div class="item-icon">
+											<span>HOT</span>
+										</div>
+									</c:if>
+									<!-- Item image -->
+									<div class="item-image">
+										<a href="single-item.html"><img
+											src="resource/img/pizza/${pizza.name}.png" alt=""
+											class="img-responsive" /></a>
+									</div>
+									<!-- Item details -->
+									<div class="item-details">
+										<!-- Name -->
+										<h5>
+											<a href="single-item.html"><c:out value="${pizza.name}" />
+											<input hidden="true" id="idPizza${count}" value="${pizza.id}" />
+											</a>
+										</h5>
+										<div class="clearfix"></div>
+										<p style="font-size: 80%">
+											<c:forEach items="${pizza.ingredients}" var="ingredient">
+												<!-- Para. Note more than 2 lines. -->
+												<c:out value="${ingredient.name}" />
+											</c:forEach>
+										</p>
+										<hr />
+										<!-- Price -->
+										<div class="item-price pull-left">${pizza.prize}&euro;</div>
+										<!-- Add to cart -->
+										<button class="incrdecr" id="add${count}" >+</button>
+										<input type="text" id="qty${count}" maxlength="2" size="1" value="0" style="width:auto">
+										<button class="incrdecr" id="minus${count}">-</button>
+										<div class="pull-right">
+											<a href="#" class="btn btn-danger btn-sm" id="addCart${count}">Add to Cart</a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+							<c:set var="count" value="${count + 1}" scope="page"/>
+						</c:forEach>
+						<div id="${count}" class="count"></div>
+
+
+					</div>
          
           
         </div>
@@ -236,5 +256,8 @@
 		<script src="resource/js/html5shiv.js"></script>
 		<!-- Custom JS -->
 		<script src="resource/js/custom.js"></script>
+		
+		<script src="resource/js/cartManager.js"></script>
+		
 	</body>	
 </html>
