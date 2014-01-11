@@ -62,7 +62,7 @@
                   <div class="sidey">
                      <ul class="nav">
                          <li><a href="account.html">My Account</a></li>
-                         <li><a href="wishlist.html">Wish List</a></li>
+                         <li><a href="checkout.html">Chechout</a></li>
                          <li><a href="orderhistory.html">Order History</a></li>                         
                          <li><a href="editprofile.html">Edit Profile</a></li>
                      </ul>

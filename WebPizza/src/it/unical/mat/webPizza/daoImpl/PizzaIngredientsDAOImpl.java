@@ -61,9 +61,7 @@ public class PizzaIngredientsDAOImpl implements PizzaIngredientsDAO {
 			result=query.executeUpdate();
 			
 			PizzaIngredients ingredient= (PizzaIngredients) session.load(PizzaIngredients.class, id);
-			System.out.println("ENTERED");
 			if(ingredient!=null){
-				System.out.println("OK");
 				session.delete(ingredient);
 				session.flush();
 				result=1;

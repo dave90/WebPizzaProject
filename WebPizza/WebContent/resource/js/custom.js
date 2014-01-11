@@ -151,9 +151,22 @@ $(function() {
 	$("#delivery").click(function() {
 		if ($(this).hasClass("deliveryActive")) {
 			$(this).removeClass("deliveryActive").addClass("delivery");
-		} else
+			$("#inputAddress").empty();
+			$("#deliveryType").empty();
+		} else{
+			$("#inputAddress").empty();
+			$("#deliveryType").empty();
+			$("#inputAddress").html("<label  class='col-md-2 control-label'>Address</label>" +
+					"<div class='col-md-4'>" +
+					"<input type='text' class='form-control' rows='1' placeholder='Address' name='Address'/>" +
+			"</div>");
+			$("#deliveryType").html("<div id='house' class='col-md-4 houseActive background control-label' onClick=''>	</div>"+
+									"<div id='apartment' class='col-md-4 apartment background control-label'></div>"+
+									"<div id='other' class='col-md-4 other background control-label'></div>");
+			bindClickDeliveryType();
 			$(this).removeClass("delivery").addClass("deliveryActive");
-
+		}
+		
 		if ($("#carryout").hasClass("carryoutActive")) {
 			$("#carryout").removeClass("carryoutActive").addClass("carryout");
 		} else
@@ -163,10 +176,22 @@ $(function() {
 
 	$("#carryout").click(function() {
 		if ($(this).hasClass("carryoutActive")) {
+			$("#inputAddress").empty();
+			$("#deliveryType").empty();
+			$("#inputAddress").html("<label  class='col-md-2 control-label'>Address</label>" +
+					"<div class='col-md-4'>" +
+					"<input type='text' class='form-control' rows='1' placeholder='Address' name='Address' />" +
+			"</div>");
+			$("#deliveryType").html("<div id='house' class='col-md-4 houseActive background control-label'>	</div>"+
+					"<div id='apartment' class='col-md-4 apartment background control-label'></div>"+
+					"<div id='other' class='col-md-4 other background control-label'></div>");
+			bindClickDeliveryType();
 			$(this).removeClass("carryoutActive").addClass("carryout");
-		} else
+		} else{
 			$(this).removeClass("carryout").addClass("carryoutActive");
-
+			$("#inputAddress").empty();
+			$("#deliveryType").empty();
+		}
 		if ($("#delivery").hasClass("deliveryActive")) {
 			$("#delivery").removeClass("deliveryActive").addClass("delivery");
 		} else
@@ -174,90 +199,7 @@ $(function() {
 
 	});
 	
-	$("#house").click(function() {
-		if ($(this).hasClass("house")) {
-			$("#inputLevel").empty();
-			$(this).removeClass("house").addClass("houseActive");
-		}
-
-		if ($("#apartment").hasClass("apartmentActive")) {
-			$("#apartment").removeClass("apartmentActive").addClass("apartment");
-		}
-		if ($("#business").hasClass("businessActive")) {
-			$("#business").removeClass("businessActive").addClass("business");
-		}
-		if ($("#campus-base").hasClass("campus-baseActive")) {
-			$("#campus-base").removeClass("campus-baseActive").addClass("campus-base");
-		}
-		if ($("#hotel").hasClass("hotelActive")) {
-			$("#hotel").removeClass("hotelActive").addClass("hotel");
-		}
-		if ($("#dormitory").hasClass("dormitoryActive")) {
-			$("#dormitory").removeClass("dormitoryActive").addClass("dormitory");
-		}
-		if ($("#other").hasClass("otherActive")) {
-			$("#other").removeClass("otherActive").addClass("other");
-		}
-
-	});
-	
-	$("#apartment").click(function() {
-		if ($(this).hasClass("apartment")) {
-			$("#inputLevel").html("<label  class='col-md-2 control-label'>Level</label>" +
-					"<div class='col-md-4'>" +
-					"<textarea class='form-control' rows='1' placeholder='Level' >" +
-					"</textarea>" +
-					"</div>");
-			$(this).removeClass("apartment").addClass("apartmentActive");
-		} 
-		
-		if ($("#house").hasClass("houseActive")) {
-			$("#house").removeClass("houseActive").addClass("house");
-		}
-		if ($("#business").hasClass("businessActive")) {
-			$("#business").removeClass("businessActive").addClass("business");
-		}
-		if ($("#campus-base").hasClass("campus-baseActive")) {
-			$("#campus-base").removeClass("campus-baseActive").addClass("campus-base");
-		}
-		if ($("#hotel").hasClass("hotelActive")) {
-			$("#hotel").removeClass("hotelActive").addClass("hotel");
-		}
-		if ($("#dormitory").hasClass("dormitoryActive")) {
-			$("#dormitory").removeClass("dormitoryActive").addClass("dormitory");
-		}
-		if ($("#other").hasClass("otherActive")) {
-			$("#other").removeClass("otherActive").addClass("other");
-		}
-		
-		
-	});
-	$("#other").click(function() {
-		if ($(this).hasClass("other")) {
-			$("#inputLevel").empty();
-			$(this).removeClass("other").addClass("otherActive");
-		} 
-		
-		if ($("#house").hasClass("houseActive")) {
-			$("#house").removeClass("houseActive").addClass("house");
-		}
-		if ($("#business").hasClass("businessActive")) {
-			$("#business").removeClass("businessActive").addClass("business");
-		}
-		if ($("#campus-base").hasClass("campus-baseActive")) {
-			$("#campus-base").removeClass("campus-baseActive").addClass("campus-base");
-		}
-		if ($("#hotel").hasClass("hotelActive")) {
-			$("#hotel").removeClass("hotelActive").addClass("hotel");
-		}
-		if ($("#dormitory").hasClass("dormitoryActive")) {
-			$("#dormitory").removeClass("dormitoryActive").addClass("dormitory");
-		}
-		if ($("#apartment").hasClass("apartmentActive")) {
-			$("#apartment").removeClass("apartmentActive").addClass("apartment");
-		}
-		
-	});
+	bindClickDeliveryType();
 	
 //	$("#business").click(function() {
 //		if ($(this).hasClass("business")) {
@@ -310,6 +252,93 @@ $(function() {
 //		
 //	});
 });
+
+function bindClickDeliveryType(){
+	
+	$("#house").click(function() {
+		if ($(this).hasClass("house")) {
+			$("#inputLevel").empty();
+			$(this).removeClass("house").addClass("houseActive");
+		}
+
+		if ($("#apartment").hasClass("apartmentActive")) {
+			$("#apartment").removeClass("apartmentActive").addClass("apartment");
+		}
+		if ($("#business").hasClass("businessActive")) {
+			$("#business").removeClass("businessActive").addClass("business");
+		}
+		if ($("#campus-base").hasClass("campus-baseActive")) {
+			$("#campus-base").removeClass("campus-baseActive").addClass("campus-base");
+		}
+		if ($("#hotel").hasClass("hotelActive")) {
+			$("#hotel").removeClass("hotelActive").addClass("hotel");
+		}
+		if ($("#dormitory").hasClass("dormitoryActive")) {
+			$("#dormitory").removeClass("dormitoryActive").addClass("dormitory");
+		}
+		if ($("#other").hasClass("otherActive")) {
+			$("#other").removeClass("otherActive").addClass("other");
+		}
+
+	});
+	
+	$("#apartment").click(function() {
+		if ($(this).hasClass("apartment")) {
+			$("#inputLevel").html("<label  class='col-md-2 control-label'>Floor</label>" +
+					"<div class='col-md-4'>" +
+					"<input type='text' class='form-control' rows='1' placeholder='Floor' name='Floor' />" +
+					"</div>");
+			$(this).removeClass("apartment").addClass("apartmentActive");
+		} 
+		
+		if ($("#house").hasClass("houseActive")) {
+			$("#house").removeClass("houseActive").addClass("house");
+		}
+		if ($("#business").hasClass("businessActive")) {
+			$("#business").removeClass("businessActive").addClass("business");
+		}
+		if ($("#campus-base").hasClass("campus-baseActive")) {
+			$("#campus-base").removeClass("campus-baseActive").addClass("campus-base");
+		}
+		if ($("#hotel").hasClass("hotelActive")) {
+			$("#hotel").removeClass("hotelActive").addClass("hotel");
+		}
+		if ($("#dormitory").hasClass("dormitoryActive")) {
+			$("#dormitory").removeClass("dormitoryActive").addClass("dormitory");
+		}
+		if ($("#other").hasClass("otherActive")) {
+			$("#other").removeClass("otherActive").addClass("other");
+		}
+		
+		
+	});
+	$("#other").click(function() {
+		if ($(this).hasClass("other")) {
+			$("#inputLevel").empty();
+			$(this).removeClass("other").addClass("otherActive");
+		} 
+		
+		if ($("#house").hasClass("houseActive")) {
+			$("#house").removeClass("houseActive").addClass("house");
+		}
+		if ($("#business").hasClass("businessActive")) {
+			$("#business").removeClass("businessActive").addClass("business");
+		}
+		if ($("#campus-base").hasClass("campus-baseActive")) {
+			$("#campus-base").removeClass("campus-baseActive").addClass("campus-base");
+		}
+		if ($("#hotel").hasClass("hotelActive")) {
+			$("#hotel").removeClass("hotelActive").addClass("hotel");
+		}
+		if ($("#dormitory").hasClass("dormitoryActive")) {
+			$("#dormitory").removeClass("dormitoryActive").addClass("dormitory");
+		}
+		if ($("#apartment").hasClass("apartmentActive")) {
+			$("#apartment").removeClass("apartmentActive").addClass("apartment");
+		}
+		
+	});
+}
 
 /* Ecommerce sidebar */
 

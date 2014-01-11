@@ -2,7 +2,9 @@ package it.unical.mat.webPizza.controller;
 
 import it.unical.mat.webPizza.domain.Pizza;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ShoppingCart {
@@ -62,6 +64,15 @@ public class ShoppingCart {
 
 	public void setTotalprice(int totalprice) {
 		this.totalprice = totalprice;
+	}
+	
+	public List<Pizza> getPizzaList(){
+		ArrayList<Pizza> pizza=new ArrayList<Pizza>();
+		for(Pizza p:pizzaQuantity.keySet())
+			for(int i=0;i<pizzaQuantity.get(p);i++)
+				pizza.add(p);
+		
+		return pizza;
 	}
 	
 

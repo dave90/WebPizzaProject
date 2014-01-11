@@ -95,8 +95,12 @@ public class AccountController {
 	
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
 	public String clientCheckout( Model model) {
-		if(model.containsAttribute("client")){			
-			return "checkout";
+		if(model.containsAttribute("client")){	
+			if(model.containsAttribute("cart") && ((ShoppingCart)model.asMap().get("cart")).getTotalprice()!=0)
+				return "checkout";
+			else
+				return "redirect:pizzaList.html";
+				
 		}
 		return "redirect:login.html";
 	}
@@ -283,4 +287,69 @@ public class AccountController {
 		
 		return cartPizzas.getTableBody();
 	}
+	
+	@RequestMapping(value = "/checkOut", method = RequestMethod.POST)
+	public String checkOut(@RequestParam(value="Name") String name,
+						   @RequestParam(value="Surname") String surname,
+						   @RequestParam(value="Mail") String mail,
+						   @RequestParam(value="Phone") String phone,
+						   @RequestParam(value="Address") String address,
+						   @RequestParam(required=false, value="Floor") String floor,
+						   @RequestParam(value="PaymentMethod") String paymentMethod,
+						   @RequestParam(required=false, value="Accept") Boolean accept
+						   ,Model model) {
+		ShoppingCart cartPizzas;
+		Client client;
+		if(!model.containsAttribute("cart")){
+			model.addAttribute("errorMessage", "Empty Shopping Cart");
+			return "checkout";
+		}
+		if(!model.containsAttribute("client")){
+			model.addAttribute("errorMessage", "First LogIn");
+			return "checkout";
+		}
+		cartPizzas=(ShoppingCart) model.asMap().get("cart");
+		client=(Client) model.asMap().get("client");
+		
+		String errorMessage="";
+		if(name==null || !name.equals(client.getName())){
+			errorMessage="Name not equal";
+		}
+		if(surname==null || !surname.equals(client.getSurname())){
+			errorMessage="Surname not equal";
+		}
+		if(mail==null || mail.equals(""))
+			errorMessage="Mail is empty";
+		if(phone==null || phone.equals(""))
+			errorMessage="Phone is empty";
+		if(address==null || address.equals(""))
+			errorMessage="Address is empty";
+		if( floor !=null && floor.equals(""))
+			address+=" Floor "+floor;
+		
+		if(accept==null || !accept)
+			errorMessage="Acept the term to continue";
+		
+		if(paymentMethod==null || !(paymentMethod.equals("Credit Card") || paymentMethod.equals("Cash on Delivery")))
+			errorMessage="Payment type is not correct";
+		
+		
+		
+		Long id=orderManager.insertOrder("",cartPizzas.getPizzaList(), paymentMethod.equals("Credit Card"), client, address);
+		if(id==null)	
+			errorMessage="Order not accomplished, contact administrator";
+		
+		if(!errorMessage.equals("")){
+			model.addAttribute("errorMessage", errorMessage);
+			return "checkout";
+		}
+		
+		model.addAttribute("idOrder", id);
+		cartPizzas.getPizzaQuantity().clear();
+		cartPizzas.setTotalprice(0);
+		
+		return "confirmation";
+	}
+	
+	
 }

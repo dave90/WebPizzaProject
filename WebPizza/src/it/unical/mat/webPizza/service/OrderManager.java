@@ -78,16 +78,12 @@ public class OrderManager {
 		return false;
 	}
 	
-	public boolean insertOrder(String date,List<Pizza> pizzas,boolean paid,Client client){
-		if(orderDAO.insertOrder(date,Order.S_NOT_ASSIGNED, pizzas, paid, client)>0)
-			return true;
-		return false;
+	public Long insertOrder(String date,List<Pizza> pizzas,boolean paid,Client client){
+		return orderDAO.insertOrder(date,Order.S_NOT_ASSIGNED, pizzas, paid, client);
 	}
 	
-	public boolean insertOrder(String date,List<Pizza> pizzas,boolean paid,Client client,String address){
-		if(onlineOrderDAO.insertOrder(date,Order.S_NOT_ASSIGNED, pizzas, paid, client, OnlineOrder.D_NOT_DELIVERY, address)>0)
-			return true;
-		return false;
+	public Long insertOrder(String date,List<Pizza> pizzas,boolean paid,Client client,String address){
+		return onlineOrderDAO.insertOrder(date,Order.S_NOT_ASSIGNED, pizzas, paid, client, OnlineOrder.D_NOT_DELIVERY, address);
 	}
 	
 	public boolean assignChefToOrder(PizzaChef chef,Long idOrder){
