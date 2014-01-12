@@ -68,10 +68,10 @@ public class Order {
 	}
 
 	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "ORDER_PIZZA", 
+	@JoinTable(name = "ORDER_PIZZA_QUANTITY", 
 	joinColumns = { @JoinColumn(name = "ORDER_ID") }, 
-	inverseJoinColumns = { @JoinColumn(name = "PIZZA_ID")})
-	private List<Pizza> pizzas=new ArrayList<Pizza>();
+	inverseJoinColumns = { @JoinColumn(name = "PIZZA_QUANTITY_ID")})
+	private List<PizzaQuantity> pizzas=new ArrayList<PizzaQuantity>();
 	
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinTable(name = "ORDER_CLIENT", 
@@ -96,11 +96,11 @@ public class Order {
 		this.id = id;
 	}
 
-	public List<Pizza> getPizzas() {
+	public List<PizzaQuantity> getPizzas() {
 		return pizzas;
 	}
 
-	public void setPizzas(List<Pizza> pizzas) {
+	public void setPizzas(List<PizzaQuantity> pizzas) {
 		this.pizzas = pizzas;
 	}
 

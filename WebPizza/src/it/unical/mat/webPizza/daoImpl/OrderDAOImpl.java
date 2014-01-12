@@ -14,12 +14,13 @@ import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.domain.Order;
 import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.domain.PizzaChef;
+import it.unical.mat.webPizza.domain.PizzaQuantity;
 import it.unical.mat.webPizza.util.HibernateUtil;
 
 public class OrderDAOImpl implements OrderDAO {
 
 	@Override
-	public Long insertOrder(String date,String status, List<Pizza> pizzas,boolean paid, Client client,
+	public Long insertOrder(String date,String status, List<PizzaQuantity> pizzas,boolean paid, Client client,
 			PizzaChef chef) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -48,7 +49,7 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public Long insertOrder(String date,String status, List<Pizza> pizzas, boolean paid,
+	public Long insertOrder(String date,String status, List<PizzaQuantity> pizzas, boolean paid,
 			Client client) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;

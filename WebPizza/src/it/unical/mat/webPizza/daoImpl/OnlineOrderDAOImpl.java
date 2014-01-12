@@ -6,6 +6,7 @@ import it.unical.mat.webPizza.domain.Deliveryman;
 import it.unical.mat.webPizza.domain.OnlineOrder;
 import it.unical.mat.webPizza.domain.Order;
 import it.unical.mat.webPizza.domain.Pizza;
+import it.unical.mat.webPizza.domain.PizzaQuantity;
 import it.unical.mat.webPizza.util.HibernateUtil;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import org.hibernate.Transaction;
 public class OnlineOrderDAOImpl implements OnlineOrderDAO{
 
 	@Override
-	public Long insertOrder(String date,String status, List<Pizza> pizzas, boolean paid,
+	public Long insertOrder(String date,String status, List<PizzaQuantity> pizzas, boolean paid,
 			Client client, int deliveryStatus, String address) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;

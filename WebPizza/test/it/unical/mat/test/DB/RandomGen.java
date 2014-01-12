@@ -3,6 +3,7 @@ package it.unical.mat.test.DB;
 import it.unical.mat.webPizza.daoImpl.ClientDAOImpl;
 import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.domain.Pizza;
+import it.unical.mat.webPizza.domain.PizzaQuantity;
 import it.unical.mat.webPizza.service.OrderManager;
 
 import java.util.ArrayList;
@@ -17,12 +18,19 @@ public class RandomGen {
 	public static void main(String[] args) {
 		OrderManager manager=new OrderManager();
 		Client c=new ClientDAOImpl().getClient((long)1);
-		List<Pizza> pizza=new ArrayList<Pizza>();
-		Pizza pizza1=manager.getPizza((long)51);
-		Pizza pizza2=manager.getPizza((long)52);
-		pizza.add(pizza1);
-		pizza.add(pizza2);
-		manager.insertOrder("", pizza, true, c);
+		Pizza pizza1=manager.getLazyPizza((long)51);
+		Pizza pizza2=manager.getLazyPizza((long)52);
+		List<PizzaQuantity> pq=new ArrayList<PizzaQuantity>();
+		PizzaQuantity pq1=new PizzaQuantity();
+		pq1.setPizza(pizza1);
+		pq1.setQuantity(2);
+		pq.add(pq1);
+		PizzaQuantity pq2=new PizzaQuantity();
+		pq2.setPizza(pizza2);
+		pq2.setQuantity(2);
+		pq.add(pq2);
+		manager.insertOrder("", pq, false, c);
+		
 	}
 	
 	static Random r =new Random();

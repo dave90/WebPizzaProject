@@ -4,6 +4,7 @@ import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.domain.Deliveryman;
 import it.unical.mat.webPizza.domain.OnlineOrder;
 import it.unical.mat.webPizza.domain.Pizza;
+import it.unical.mat.webPizza.domain.PizzaQuantity;
 
 import java.util.List;
 import java.util.Set;
@@ -11,7 +12,7 @@ import java.util.Set;
 
 public interface OnlineOrderDAO  {
 	
-	public Long insertOrder(String date,String status,List<Pizza> pizzas,boolean paid,Client client,int deliveryStatus,String address);
+	public Long insertOrder(String date,String status,List<PizzaQuantity> pizzas,boolean paid,Client client,int deliveryStatus,String address);
 	public int updateDelivery(Long id, Deliveryman deliveryman);
 	public int updateDeliveryStatus(Long id,int deliveryStatus);
 	public int getOrderDeliveryStatus(Long id);

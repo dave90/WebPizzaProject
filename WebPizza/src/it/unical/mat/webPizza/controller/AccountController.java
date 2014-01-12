@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.domain.Pizza;
+import it.unical.mat.webPizza.domain.PizzaQuantity;
 import it.unical.mat.webPizza.service.AccessManager;
 import it.unical.mat.webPizza.service.OrderManager;
 import it.unical.mat.webPizza.util.MD5Java;
@@ -333,9 +334,11 @@ public class AccountController {
 		if(paymentMethod==null || !(paymentMethod.equals("Credit Card") || paymentMethod.equals("Cash on Delivery")))
 			errorMessage="Payment type is not correct";
 		
-		ArrayList<Pizza> pizza=new ArrayList<Pizza>();
+		ArrayList<PizzaQuantity> pizza=new ArrayList<PizzaQuantity>();
 		for(Pizza a:cartPizzas.getPizzaList()){
-			pizza.add(orderManager.getLazyPizza(a.getId()));
+			PizzaQuantity pq=new PizzaQuantity();
+			pq.setPizza(orderManager.getLazyPizza(a.getId()));
+			pq.setQuantity(cartPizzas.getPizzaQuantity().get(a));
 		}
 		
 		Long id=orderManager.insertOrder("",pizza, paymentMethod.equals("Credit Card"), client, address);

@@ -21,6 +21,7 @@ import it.unical.mat.webPizza.domain.Order;
 import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.domain.PizzaChef;
 import it.unical.mat.webPizza.domain.PizzaIngredients;
+import it.unical.mat.webPizza.domain.PizzaQuantity;
 
 @Service
 public class OrderManager {
@@ -79,11 +80,11 @@ public class OrderManager {
 		return false;
 	}
 	
-	public Long insertOrder(String date,List<Pizza> pizzas,boolean paid,Client client){
+	public Long insertOrder(String date,List<PizzaQuantity> pizzas,boolean paid,Client client){
 		return orderDAO.insertOrder(date,Order.S_NOT_ASSIGNED, pizzas, paid, client);
 	}
 	
-	public Long insertOrder(String date,List<Pizza> pizzas,boolean paid,Client client,String address){
+	public Long insertOrder(String date,List<PizzaQuantity> pizzas,boolean paid,Client client,String address){
 		return onlineOrderDAO.insertOrder(date,Order.S_NOT_ASSIGNED, pizzas, paid, client, OnlineOrder.D_NOT_DELIVERY, address);
 	}
 	
