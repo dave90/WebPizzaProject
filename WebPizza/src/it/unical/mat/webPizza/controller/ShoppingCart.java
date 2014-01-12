@@ -62,7 +62,6 @@ public class ShoppingCart {
 			ingredientsPizza.add(tmp);			
 		}
 		pizza.setIngredients(ingredientsPizza);
-//		pizza.setIngredients(ingridients);
 		for(Pizza p:pizzaQuantity.keySet()){
 			if(p.getName().equals(namePizza)){
 				int qty=pizzaQuantity.get(p);

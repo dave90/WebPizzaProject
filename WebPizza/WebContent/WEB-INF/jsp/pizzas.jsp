@@ -64,7 +64,7 @@
 	<div class="shop-items">
 		<div class="container">
 
-			<div class="row" style="width: 1150px">
+			<div class="row" >
 
 				<div class="col-md-9 col-md-push-3">
 
@@ -75,7 +75,7 @@
 					<div class="row">
 						<!-- Item #1 -->
 						<c:forEach items="${listPizza}" var="pizza">
-							<div class="col-md-4 col-sm-8 col-xs-6">
+							<div class="col-md-5 col-sm-8 col-xs-6">
 
 
 								<div class="item">
