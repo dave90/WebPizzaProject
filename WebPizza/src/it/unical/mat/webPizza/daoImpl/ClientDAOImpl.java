@@ -129,7 +129,6 @@ public class ClientDAOImpl implements ClientDAO {
 			
 			Client client= (Client) session.load(Client.class, id);
 			if(client != null){
-				Hibernate.initialize(client);
 				client.setName(name);
 				client.setSurname(surname);
 				client.setUsername(user);

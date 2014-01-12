@@ -109,7 +109,6 @@ public class PizzaIngredientsDAOImpl implements PizzaIngredientsDAO {
 			
 			PizzaIngredients ingredient= (PizzaIngredients) session.load(PizzaIngredients.class, id);
 			if(ingredient != null){
-				Hibernate.initialize(ingredient);
 				ingredient.setCost(cost);
 				ingredient.setName(name);
 				

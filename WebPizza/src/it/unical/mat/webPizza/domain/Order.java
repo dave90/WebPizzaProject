@@ -1,7 +1,9 @@
 package it.unical.mat.webPizza.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +21,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Type;
 
 @Entity
 //"`Order`" because the simple "Order" cannot be used
@@ -178,7 +185,7 @@ public class Order {
 		if (pizzas == null) {
 			if (other.pizzas != null)
 				return false;
-		} else if (!pizzas.equals(other.pizzas))
+		} else if (!pizzas.containsAll(other.pizzas) || !other.pizzas.containsAll(pizzas))
 			return false;
 		if (status == null) {
 			if (other.status != null)

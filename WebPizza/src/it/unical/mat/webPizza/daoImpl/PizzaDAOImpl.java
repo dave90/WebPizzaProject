@@ -2,6 +2,7 @@ package it.unical.mat.webPizza.daoImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -106,7 +107,27 @@ public class PizzaDAOImpl implements PizzaDAO {
 			
 			pizza= (Pizza) session.load(Pizza.class, id);
 			Hibernate.initialize(pizza.getIngredients());
-
+			
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+		return pizza;
+	}
+	
+	@Override
+	public Pizza getLazyPizza(Long id) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		Pizza pizza = null;
+		try {
+			transaction = session.beginTransaction();
+			
+			pizza= (Pizza) session.load(Pizza.class, id);
+			
 			transaction.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();

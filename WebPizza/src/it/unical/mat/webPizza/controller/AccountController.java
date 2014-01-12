@@ -333,9 +333,12 @@ public class AccountController {
 		if(paymentMethod==null || !(paymentMethod.equals("Credit Card") || paymentMethod.equals("Cash on Delivery")))
 			errorMessage="Payment type is not correct";
 		
+		ArrayList<Pizza> pizza=new ArrayList<Pizza>();
+		for(Pizza a:cartPizzas.getPizzaList()){
+			pizza.add(orderManager.getLazyPizza(a.getId()));
+		}
 		
-		
-		Long id=orderManager.insertOrder("",cartPizzas.getPizzaList(), paymentMethod.equals("Credit Card"), client, address);
+		Long id=orderManager.insertOrder("",pizza, paymentMethod.equals("Credit Card"), client, address);
 		if(id==null)	
 			errorMessage="Order not accomplished, contact administrator";
 		

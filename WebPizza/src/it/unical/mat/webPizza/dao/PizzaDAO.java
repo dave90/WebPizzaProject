@@ -5,6 +5,7 @@ import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.domain.PizzaIngredients;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PizzaDAO {
 	
@@ -12,4 +13,5 @@ public interface PizzaDAO {
 	int deletePizza(Long id);
 	List<Pizza> getAllPizzas();
 	Pizza getPizza(Long id);
+	Pizza getLazyPizza(Long id);
 }

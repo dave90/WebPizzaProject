@@ -1,6 +1,7 @@
 package it.unical.mat.webPizza.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -132,6 +133,10 @@ public class OrderManager {
 	
 	public Pizza getPizza(Long id){
 		return pizzaDAO.getPizza(id);
+	}
+	
+	public Pizza getLazyPizza(Long id){
+		return pizzaDAO.getLazyPizza(id);
 	}
 	
 	public boolean updatePizzaIngredients(Long id,String name,double cost){
