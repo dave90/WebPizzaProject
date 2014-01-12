@@ -122,6 +122,8 @@ $(function() {
 	});
 });
 
+// click per aggiungere al carrello
+
 $(function() {
 	var numButtons = $(".count").attr('id');
 	for (var i = 0; i < numButtons; ++i) {
@@ -146,6 +148,70 @@ $(function() {
 	}
 
 });
+
+//click per aggiungere gli ingredienti alla propria pizza
+$(function() {
+	
+	var numButtons = $(".count").attr('id');
+	for (var i = 0; i < numButtons; ++i) {
+
+		$("#pizzaIngredients" + i).click(function() {
+			var currentVal = $(this).text();
+			var str = $(this).attr('id');
+			var res = str.split("pizzaIngredients");
+				$("#ownPizzaIngrients").append("<a id='ownIngridients"+res[1]+"' class='list-group-item'> "+ currentVal+"</a>");
+				$( "#ownPizzaIngrientsDiv" ).delegate( "#ownIngridients"+res[1], "mouseover", function() {
+					$(this).empty();
+					$(this).append(currentVal);
+					$("#ownIngridients"+res[1]).append("<span class='glyphicon glyphicon-arrow-left' > </span>");
+					});
+				$( "#ownPizzaIngrientsDiv" ).delegate( "#ownIngridients"+res[1], "mouseout", function() {
+					var currentVal = $(this).text();
+					$("#ownIngridients"+res[1]).empty();
+					$("#ownIngridients"+res[1]).append(currentVal);
+				});
+				$( "#ownPizzaIngrientsDiv" ).delegate( "#ownIngridients"+res[1], "click", function() {
+					//$("#pizzaIngredientsDiv").append("<a id='pizzaIngredients"+res[1]+"' class='list-group-item'> "+ $(this).text()+"</a>");
+//					$( "#pizzaIngredientsDiv" ).delegate( "#pizzaIngredients"+res[1], "mouseover", function() {
+//						$(this).append("<span class='glyphicon glyphicon-arrow-right' > </span>");
+//						});
+//					$( "#pizzaIngredientsDiv" ).delegate( "#pizzaIngredients"+res[1], "mouseout", function() {
+//						var currentVal = $(this).text();
+//						$(this).empty();
+//						$(this).append(currentVal);
+//					});
+//					$( "#pizzaIngredientsDiv" ).delegate( "#pizzaIngredients"+res[1], "click", function() {
+//						$("#ownPizzaIngrients").append("<a id='ownIngridients"+res[1]+"' class='list-group-item'> "+ currentVal+"</a>");
+//						$(this).remove();
+//					});
+					$("#pizzaIngredients"+res[1]).show();
+					$("#ownIngridients"+res[1]).remove();
+					
+				});
+				$(this).hide();
+				
+		});
+		
+		$("#pizzaIngredients" + i).mouseover(function() {
+			$(this).append("<span class='glyphicon glyphicon-arrow-right' > </span>");
+				
+		});
+		
+		$("#pizzaIngredients" + i).mouseout(function() {
+			var currentVal = $(this).text();
+			$(this).empty();
+			$(this).append(currentVal);
+				
+		});
+		
+	}
+	
+	
+
+});
+
+
+
 
 $(function() {
 	$("#delivery").click(function() {

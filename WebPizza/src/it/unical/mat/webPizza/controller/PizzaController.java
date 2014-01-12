@@ -4,6 +4,7 @@ import it.unical.mat.webPizza.dao.OnlineOrderDAO;
 import it.unical.mat.webPizza.dao.PizzaDAO;
 import it.unical.mat.webPizza.daoImpl.PizzaDAOImpl;
 import it.unical.mat.webPizza.domain.Pizza;
+import it.unical.mat.webPizza.domain.PizzaIngredients;
 import it.unical.mat.webPizza.service.OrderManager;
 
 import java.text.DateFormat;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Handles requests for the application home page.
  */
 @Controller
-public class ListPizzaController {
+public class PizzaController {
 	
 	@Autowired
 	private OrderManager orderManager;
@@ -33,7 +34,7 @@ public class ListPizzaController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/pizzaList", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String pizzaList(Locale locale, Model model) {
 		
 		List<Pizza> listPizza = orderManager.getAllPizza();
 		
@@ -42,7 +43,15 @@ public class ListPizzaController {
 		return "pizzas";
 	}
 	
-	
+	@RequestMapping(value = "/buildPizza", method = RequestMethod.GET)
+	public String buildPizza(Locale locale, Model model) {
+		
+		List<PizzaIngredients> listPizza = orderManager.getAllIngredients();
+		model.addAttribute("listPizzaIngredients", listPizza);
+		
+		
+		return "buildPizza";
+	}
 	
 	
 	
