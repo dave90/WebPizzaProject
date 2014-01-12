@@ -28,334 +28,372 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.sun.org.apache.xalan.internal.xsltc.runtime.Hashtable;
 
 @Controller
-@SessionAttributes({"client","cart"})
+@SessionAttributes({ "client", "cart" })
 public class AccountController {
 	@Autowired
 	private AccessManager accessManager;
-	
+
 	@Autowired
 	private OrderManager orderManager;
-	
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String clientLogIn( Model model) {
-		if(model.containsAttribute("client"))
+	public String clientLogIn(Model model) {
+		if (model.containsAttribute("client"))
 			return "redirect:account.html";
-		
+
 		model.addAttribute("img", "resource/img/clients/woman-eating-pizza.jpg");
-		model.addAttribute("actionUrl","logIn.html");
-		
+		model.addAttribute("actionUrl", "logIn.html");
+
 		return "login";
 	}
-	
+
 	@RequestMapping(value = "/chefLogin", method = RequestMethod.GET)
-	public String chefLogIn( Model model) {
+	public String chefLogIn(Model model) {
 		model.addAttribute("img", "resource/img/clients/pizzaChef.png");
-		model.addAttribute("actionUrl","chefLogIn.html");
-		
+		model.addAttribute("actionUrl", "chefLogIn.html");
+
 		return "login";
 	}
-	
-	
+
 	@RequestMapping(value = "/deliverymanLogin", method = RequestMethod.GET)
-	public String deliverymanLogIn( Model model) {
+	public String deliverymanLogIn(Model model) {
 		model.addAttribute("img", "resource/img/clients/deliveryman.JPG");
-		model.addAttribute("actionUrl","deliverymanLogIn.html");
-		
+		model.addAttribute("actionUrl", "deliverymanLogIn.html");
+
 		return "login";
 	}
-	
+
 	@RequestMapping(value = "/logIn", method = RequestMethod.POST)
-	public String clientLogInValidation(@RequestParam(value="User") String usr,
-										@RequestParam(value="Password") String pwd,
-										Model model) {
-		
-		String hpwd=MD5Java.md5Java(pwd);
-		
-		Client client=accessManager.getClient(usr, hpwd);
-		
-		if(client==null){
+	public String clientLogInValidation(
+			@RequestParam(value = "User") String usr,
+			@RequestParam(value = "Password") String pwd, Model model) {
+
+		String hpwd = MD5Java.md5Java(pwd);
+
+		Client client = accessManager.getClient(usr, hpwd);
+
+		if (client == null) {
 			model.addAttribute("notifyLog", "Error : User or password wrong");
-			model.addAttribute("img", "resource/img/clients/woman-eating-pizza.jpg");
-			model.addAttribute("actionUrl","logIn.html");
+			model.addAttribute("img",
+					"resource/img/clients/woman-eating-pizza.jpg");
+			model.addAttribute("actionUrl", "logIn.html");
 			return "login";
-		}else{
+		} else {
 			model.addAttribute("client", client);
 		}
-		
+
 		return "redirect:account.html";
 	}
-	
+
 	@RequestMapping(value = "/account", method = RequestMethod.GET)
-	public String clientAccount( Model model) {
-		if(model.containsAttribute("client")){			
+	public String clientAccount(Model model) {
+		if (model.containsAttribute("client")) {
 			return "account";
 		}
 		return "redirect:login.html";
 	}
-	
+
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
-	public String clientCheckout( Model model) {
-		if(model.containsAttribute("client")){	
-			if(model.containsAttribute("cart") && ((ShoppingCart)model.asMap().get("cart")).getTotalprice()!=0)
+	public String clientCheckout(Model model) {
+		if (model.containsAttribute("client")) {
+			if (model.containsAttribute("cart")
+					&& ((ShoppingCart) model.asMap().get("cart"))
+							.getTotalprice() != 0)
 				return "checkout";
 			else
 				return "redirect:pizzaList.html";
-				
+
 		}
 		return "redirect:login.html";
 	}
-	
+
 	@RequestMapping(value = "/wishlist", method = RequestMethod.GET)
-	public String clientWishlist( Model model) {
-		if(model.containsAttribute("client")){			
+	public String clientWishlist(Model model) {
+		if (model.containsAttribute("client")) {
 			return "wishlist";
 		}
 		return "redirect:login.html";
 	}
-	
+
 	@RequestMapping(value = "/orderhistory", method = RequestMethod.GET)
-	public String clientOrderhistory( Model model) {
-		if(model.containsAttribute("client")){			
+	public String clientOrderhistory(Model model) {
+		if (model.containsAttribute("client")) {
 			return "orderhistory";
 		}
 		return "redirect:login.html";
 	}
-	
+
 	@RequestMapping(value = "/editprofile", method = RequestMethod.GET)
-	public String clientEditprofile( Model model) {
-		if(model.containsAttribute("client")){			
+	public String clientEditprofile(Model model) {
+		if (model.containsAttribute("client")) {
 			return "editprofile";
 		}
 		return "redirect:login.html";
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String clientRegister( Model model, SessionStatus status) {
-		if(model.containsAttribute("client")){			
+	public String clientRegister(Model model, SessionStatus status) {
+		if (model.containsAttribute("client")) {
 			status.setComplete();
-			
+
 			return "redirect:index.html";
 		}
 		return "register";
 	}
-	
+
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String clientRegistration(@RequestParam(value="User") String usr,
-										@RequestParam(value="Password") String pwd,
-										@RequestParam(value="Name") String name,
-										@RequestParam(value="Surname") String surname,
-										@RequestParam(value="Mail") String mail,
-										@RequestParam(value="Phone") String phone,
-										Model model) {
-		
-		if(usr==null || usr.equals("")){
+	public String clientRegistration(@RequestParam(value = "User") String usr,
+			@RequestParam(value = "Password") String pwd,
+			@RequestParam(value = "Name") String name,
+			@RequestParam(value = "Surname") String surname,
+			@RequestParam(value = "Mail") String mail,
+			@RequestParam(value = "Phone") String phone, Model model) {
+
+		if (usr == null || usr.equals("")) {
 			model.addAttribute("notifyRegistration", "Insert Username");
 			return "register";
 		}
-		if(pwd==null || pwd.equals("")){
+		if (pwd == null || pwd.equals("")) {
 			model.addAttribute("notifyRegistration", "Insert Password");
 			return "register";
 		}
-		if(name==null || name.equals("")){
+		if (name == null || name.equals("")) {
 			model.addAttribute("notifyRegistration", "Insert Name");
 			return "register";
 		}
-		if(surname==null || surname.equals("")){
+		if (surname == null || surname.equals("")) {
 			model.addAttribute("notifyRegistration", "Insert Surname");
 			return "register";
 		}
-		
-		if(mail==null)
-			mail="";
-		if(phone==null)
-			phone="";
-		
-		if(accessManager.existClientUsername(usr)){
+
+		if (mail == null)
+			mail = "";
+		if (phone == null)
+			phone = "";
+
+		if (accessManager.existClientUsername(usr)) {
 			model.addAttribute("notifyRegistration", "Exist Username");
 			return "register";
 		}
-		
-		String hpwd=MD5Java.md5Java(pwd);
-		
-		if(accessManager.insertClient(name, surname, usr, phone, mail, hpwd)){
-			
-			Client client=accessManager.getClient(usr, hpwd);
+
+		String hpwd = MD5Java.md5Java(pwd);
+
+		if (accessManager.insertClient(name, surname, usr, phone, mail, hpwd)) {
+
+			Client client = accessManager.getClient(usr, hpwd);
 			model.addAttribute("client", client);
-			
+
 			return "redirect:account.html";
 		}
-		
-		model.addAttribute("notifyRegistration", "Registration aborted, contact Administrator");
-		
+
+		model.addAttribute("notifyRegistration",
+				"Registration aborted, contact Administrator");
+
 		return "redirect:register.html";
-		
+
 	}
-	
+
 	@RequestMapping(value = "/existClientUser", method = RequestMethod.POST)
-	public @ResponseBody String existClientUsername(@RequestParam(value="user") String usr,
-										Model model) {
-		
-		if(accessManager.existClientUsername(usr)){
+	public @ResponseBody
+	String existClientUsername(@RequestParam(value = "user") String usr,
+			Model model) {
+
+		if (accessManager.existClientUsername(usr)) {
 			model.addAttribute("notifyRegistration", "Exist Username");
 			return "User Exist";
 		}
-		
+
 		return "OK";
-		
+
 	}
-	
+
 	@RequestMapping(value = "/editProfile", method = RequestMethod.POST)
-	public String clientEditprofile(@RequestParam(value="User") String usr,
-										@RequestParam(value="Password") String pwd,
-										@RequestParam(value="Name") String name,
-										@RequestParam(value="Surname") String surname,
-										@RequestParam(value="Mail") String mail,
-										@RequestParam(value="Phone") String phone,
-										Model model) {
-		
-		if(!model.containsAttribute("client")){			
+	public String clientEditprofile(@RequestParam(value = "User") String usr,
+			@RequestParam(value = "Password") String pwd,
+			@RequestParam(value = "Name") String name,
+			@RequestParam(value = "Surname") String surname,
+			@RequestParam(value = "Mail") String mail,
+			@RequestParam(value = "Phone") String phone, Model model) {
+
+		if (!model.containsAttribute("client")) {
 			return "redirect:login.html";
 		}
-		
-		Long id=((Client)model.asMap().get("client")).getId();
-		
-		if(usr==null || usr.equals("")){
+
+		Long id = ((Client) model.asMap().get("client")).getId();
+
+		if (usr == null || usr.equals("")) {
 			model.addAttribute("notifyRegistration", "Insert Username");
 			return "editprofile";
 		}
-		if(pwd==null || pwd.equals("")){
+		if (pwd == null || pwd.equals("")) {
 			model.addAttribute("notifyRegistration", "Insert Password");
 			return "editprofile";
 		}
-		if(name==null || name.equals("")){
+		if (name == null || name.equals("")) {
 			model.addAttribute("notifyRegistration", "Insert Name");
 			return "editprofile";
 		}
-		if(surname==null || surname.equals("")){
+		if (surname == null || surname.equals("")) {
 			model.addAttribute("notifyRegistration", "Insert Surname");
 			return "editprofile";
 		}
-		
-		String userName=((Client)model.asMap().get("client")).getUsername();
-		
-		if(!userName.equals(usr) && accessManager.existClientUsername(usr)){
+
+		String userName = ((Client) model.asMap().get("client")).getUsername();
+
+		if (!userName.equals(usr) && accessManager.existClientUsername(usr)) {
 			model.addAttribute("notifyRegistration", "Username exist");
 			return "editprofile";
 		}
-		
-		if(mail==null)
-			mail="";
-		if(phone==null)
-			phone="";
-		
-		
-		String hpwd=MD5Java.md5Java(pwd);
-		
-		if(accessManager.updateClient(id, name, surname, usr, phone, mail, hpwd)){
-			
-			Client client=accessManager.getClient(usr, hpwd);
+
+		if (mail == null)
+			mail = "";
+		if (phone == null)
+			phone = "";
+
+		String hpwd = MD5Java.md5Java(pwd);
+
+		if (accessManager.updateClient(id, name, surname, usr, phone, mail,
+				hpwd)) {
+
+			Client client = accessManager.getClient(usr, hpwd);
 			model.addAttribute("client", client);
-			
+
 			return "redirect:account.html";
 		}
-		
-		model.addAttribute("notifyRegistration", "Registration aborted, contact Administrator");
-		
+
+		model.addAttribute("notifyRegistration",
+				"Registration aborted, contact Administrator");
+
 		return "redirect:account.html";
-		
+
 	}
 
-//	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
-//	public String checkout( Model model) {
-//		
-//		return "checkout";
-//	}
-	
+	// @RequestMapping(value = "/checkout", method = RequestMethod.GET)
+	// public String checkout( Model model) {
+	//
+	// return "checkout";
+	// }
+
 	@RequestMapping(value = "/addToCart", method = RequestMethod.POST)
-	public @ResponseBody String addToCart(@RequestParam(value="idPizza") Long id,@RequestParam(value="quantity") int quantity,Model model,HttpSession session) {
+	public @ResponseBody
+	String addToCart(@RequestParam(value = "idPizza") Long id,
+			@RequestParam(value = "quantity") int quantity, Model model,
+			HttpSession session) {
 		ShoppingCart cartPizzas;
-		if(!model.containsAttribute("cart")){
-			cartPizzas=new ShoppingCart();
+		if (!model.containsAttribute("cart")) {
+			cartPizzas = new ShoppingCart();
 			model.addAttribute("cart", cartPizzas);
-		}else{
-			cartPizzas=(ShoppingCart) model.asMap().get("cart");
+		} else {
+			cartPizzas = (ShoppingCart) model.asMap().get("cart");
 		}
-		
+
 		cartPizzas.insertPizza(id, orderManager.getPizza(id), quantity);
-		
+		System.out.println(cartPizzas.getPizzaQuantity().size());
 		return cartPizzas.getTableBody();
 	}
-	
+
+	@RequestMapping(value = "/addToCartBuild", method = RequestMethod.POST)
+	public @ResponseBody
+	String addToCartBuild(@RequestParam(value = "quantity") int quantity,
+			@RequestParam(value = "send") String ingridients, Model model,
+			HttpSession session) {
+		ShoppingCart cartPizzas;
+		if (!model.containsAttribute("cart")) {
+			cartPizzas = new ShoppingCart();
+			model.addAttribute("cart", cartPizzas);
+		} else {
+			cartPizzas = (ShoppingCart) model.asMap().get("cart");
+		}
+
+		cartPizzas.insertPizzaBuild("Build"
+				+ cartPizzas.getPizzaQuantity().size(), quantity, ingridients,
+				orderManager);
+
+		return cartPizzas.getTableBody();
+	}
+
+	@RequestMapping(value = "/removeFromCartBuild", method = RequestMethod.POST)
+	public @ResponseBody
+	String removeFromCartBuild(@RequestParam(value = "name") String name,
+			Model model, HttpSession session) {
+		ShoppingCart cartPizzas;
+		cartPizzas = new ShoppingCart();
+		cartPizzas = (ShoppingCart) model.asMap().get("cart");
+		System.out.println(cartPizzas.getPizzaQuantity().size());
+
+		cartPizzas.deletePizza(name);
+		return Integer.toString(cartPizzas.getTotalprice());
+	}
+
 	@RequestMapping(value = "/checkOut", method = RequestMethod.POST)
-	public String checkOut(@RequestParam(value="Name") String name,
-						   @RequestParam(value="Surname") String surname,
-						   @RequestParam(value="Mail") String mail,
-						   @RequestParam(value="Phone") String phone,
-						   @RequestParam(value="Address") String address,
-						   @RequestParam(required=false, value="Floor") String floor,
-						   @RequestParam(value="PaymentMethod") String paymentMethod,
-						   @RequestParam(required=false, value="Accept") Boolean accept
-						   ,Model model) {
+	public String checkOut(@RequestParam(value = "Name") String name,
+			@RequestParam(value = "Surname") String surname,
+			@RequestParam(value = "Mail") String mail,
+			@RequestParam(value = "Phone") String phone,
+			@RequestParam(value = "Address") String address,
+			@RequestParam(required = false, value = "Floor") String floor,
+			@RequestParam(value = "PaymentMethod") String paymentMethod,
+			@RequestParam(required = false, value = "Accept") Boolean accept,
+			Model model) {
 		ShoppingCart cartPizzas;
 		Client client;
-		if(!model.containsAttribute("cart")){
+		if (!model.containsAttribute("cart")) {
 			model.addAttribute("errorMessage", "Empty Shopping Cart");
 			return "checkout";
 		}
-		if(!model.containsAttribute("client")){
+		if (!model.containsAttribute("client")) {
 			model.addAttribute("errorMessage", "First LogIn");
 			return "checkout";
 		}
-		cartPizzas=(ShoppingCart) model.asMap().get("cart");
-		client=(Client) model.asMap().get("client");
-		
-		String errorMessage="";
-		if(name==null || !name.equals(client.getName())){
-			errorMessage="Name not equal";
+		cartPizzas = (ShoppingCart) model.asMap().get("cart");
+		client = (Client) model.asMap().get("client");
+
+		String errorMessage = "";
+		if (name == null || !name.equals(client.getName())) {
+			errorMessage = "Name not equal";
 		}
-		if(surname==null || !surname.equals(client.getSurname())){
-			errorMessage="Surname not equal";
+		if (surname == null || !surname.equals(client.getSurname())) {
+			errorMessage = "Surname not equal";
 		}
-		if(mail==null || mail.equals(""))
-			errorMessage="Mail is empty";
-		if(phone==null || phone.equals(""))
-			errorMessage="Phone is empty";
-		if(address==null || address.equals(""))
-			errorMessage="Address is empty";
-		if( floor !=null && floor.equals(""))
-			address+=" Floor "+floor;
-		
-		if(accept==null || !accept)
-			errorMessage="Acept the term to continue";
-		
-		if(paymentMethod==null || !(paymentMethod.equals("Credit Card") || paymentMethod.equals("Cash on Delivery")))
-			errorMessage="Payment type is not correct";
-		
-		ArrayList<PizzaQuantity> pizza=new ArrayList<PizzaQuantity>();
-		for(Pizza a:cartPizzas.getPizzaList()){
-			PizzaQuantity pq=new PizzaQuantity();
+		if (mail == null || mail.equals(""))
+			errorMessage = "Mail is empty";
+		if (phone == null || phone.equals(""))
+			errorMessage = "Phone is empty";
+		if (address == null || address.equals(""))
+			errorMessage = "Address is empty";
+		if (floor != null && floor.equals(""))
+			address += " Floor " + floor;
+
+		if (accept == null || !accept)
+			errorMessage = "Acept the term to continue";
+
+		if (paymentMethod == null
+				|| !(paymentMethod.equals("Credit Card") || paymentMethod
+						.equals("Cash on Delivery")))
+			errorMessage = "Payment type is not correct";
+
+		ArrayList<PizzaQuantity> pizza = new ArrayList<PizzaQuantity>();
+		for (Pizza a : cartPizzas.getPizzaList()) {
+			PizzaQuantity pq = new PizzaQuantity();
 			pq.setPizza(orderManager.getLazyPizza(a.getId()));
 			pq.setQuantity(cartPizzas.getPizzaQuantity().get(a));
 		}
-		
-		Long id=orderManager.insertOrder("",pizza, paymentMethod.equals("Credit Card"), client, address);
-		if(id==null)	
-			errorMessage="Order not accomplished, contact administrator";
-		
-		if(!errorMessage.equals("")){
+
+		Long id = orderManager.insertOrder("", pizza,
+				paymentMethod.equals("Credit Card"), client, address);
+		if (id == null)
+			errorMessage = "Order not accomplished, contact administrator";
+
+		if (!errorMessage.equals("")) {
 			model.addAttribute("errorMessage", errorMessage);
 			return "checkout";
 		}
-		
+
 		model.addAttribute("idOrder", id);
 		cartPizzas.getPizzaQuantity().clear();
 		cartPizzas.setTotalprice(0);
-		
+
 		return "confirmation";
 	}
-	
-	
+
 }

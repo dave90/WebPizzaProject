@@ -60,7 +60,7 @@
 					    <c:otherwise><a href="register.html"><c:out value="signup"/></a></c:otherwise>
 					</c:choose>  
 
-                     <a data-toggle="modal" href="#shoppingcart" id="shoppingCart"><i class="icon-shopping-cart"></i> Items - ${cart.totalprice} &euro;<!-- Add Prize Cart --></a>
+                     <a data-toggle="modal" href="#shoppingcart" id="shoppingCartPrice"><i class="icon-shopping-cart"></i> Items - ${cart.totalprice} &euro;<!-- Add Prize Cart --></a>
                   </div>
                </div>
             </div>
