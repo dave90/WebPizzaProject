@@ -25,13 +25,13 @@
               <tr>
               	<td>${pizza.key.name}</td>
               	<td>${pizza.value}</td>
-              	<td><c:out value="${pizza.key.prize * pizza.value}" /></td>
+              	<td>&euro; <c:out value="${pizza.key.prize * pizza.value}" /></td>
               </tr>
               </c:forEach>
               <tr>
               <th></th>
               <th>Total</th>
-              <th>${cart.totalprice}</th>
+              <th>&euro; ${cart.totalprice}</th>
               </tr>
               </c:if>
               </tbody>
@@ -40,7 +40,7 @@
            </div>
            <div class="modal-footer">
              <button type="button" class="btn btn-default" data-dismiss="modal">Continue Shopping</button>
-             <button type="button" class="btn btn-info">Checkout</button>
+             <a href="checkout.html"><button type="button" class="btn btn-info">Checkout</button></a>
            </div>
          </div><!-- /.modal-content -->
        </div><!-- /.modal-dialog -->

@@ -33,6 +33,7 @@
 <!-- Custom CSS -->
 <link href="resource/css/style.css" rel="stylesheet">
 
+
 <!-- Favicon -->
 <link rel="shortcut icon" href="#">
 </head>
@@ -120,6 +121,15 @@
 				</div>
 				<div id="inputLevel" class="form-group">
 					
+				</div>
+				
+				<div class="form-group" id="inputLocalization">
+					<label for="inputAddress" class="col-md-2 control-label">Localization</label>
+					<div class="col-md-4">
+					<input class="btn btn-primary" id="startLocalization" type="button" value="Localize"/>
+						<div id="localization" style="height: 0">
+						</div>
+					</div> 
 				</div>
 
 
@@ -221,5 +231,10 @@
 	<script src="resource/js/html5shiv.js"></script>
 	<!-- Custom JS -->
 	<script src="resource/js/custom.js"></script>
+	<!-- Google maps -->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=it"></script>
+	<script src="resource/js/localization.js"></script>
+	
+
 </body>
 </html>

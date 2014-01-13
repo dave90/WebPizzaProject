@@ -1,5 +1,6 @@
 package it.unical.mat.webPizza.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,7 +19,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="PIZZA")
-public class Pizza {
+public class Pizza implements Serializable{
 	// aggiungere descrizione pizza e immagine?
 	@Id
 	@GeneratedValue
@@ -28,7 +30,7 @@ public class Pizza {
 	private String name;
 	
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(fetch=FetchType.EAGER,cascade = { CascadeType.ALL })
 	@JoinTable(name = "PIZZA_INGREDIENTS", 
 	joinColumns = { @JoinColumn(name = "PIZZA_ID") }, 
 	inverseJoinColumns = { @JoinColumn(name = "INGREDIENTS_ID")})

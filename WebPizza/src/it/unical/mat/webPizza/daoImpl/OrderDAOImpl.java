@@ -1,15 +1,19 @@
 package it.unical.mat.webPizza.daoImpl;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import it.unical.mat.webPizza.dao.OrderDAO;
+import it.unical.mat.webPizza.domain.Administrator;
 import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.domain.Order;
 import it.unical.mat.webPizza.domain.Pizza;
@@ -179,6 +183,13 @@ public class OrderDAOImpl implements OrderDAO {
 			query.setParameter("idCLient", idCLient);
 			
 			result=query.list();
+//			for(Order o:result){
+//				Hibernate.initialize(o.getPizzas());
+//				for(PizzaQuantity p:o.getPizzas()){
+//					Hibernate.initialize(p.getPizza());
+//					Hibernate.initialize(p.getPizza().getIngredients());
+//				}
+//			}
 			
 			transaction.commit();
 		} catch (HibernateException e) {
@@ -188,7 +199,32 @@ public class OrderDAOImpl implements OrderDAO {
 			session.close();
 		}
 		
-		return result;
+		return getOrderedOrder(result);
+	}
+	
+	private List<Order> getOrderedOrder(List<Order> orders){
+		Collections.sort(orders);
+		return orders;
+	}
+
+	@Override
+	public Order getOrder(Long id) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		Order order = null;
+		try {
+			transaction = session.beginTransaction();
+			
+			order= (Order) session.load(Order.class, id);
+
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+		return order;
 	}
 
 }

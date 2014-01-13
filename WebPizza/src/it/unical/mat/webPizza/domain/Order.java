@@ -1,6 +1,10 @@
 package it.unical.mat.webPizza.domain;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +15,7 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -36,13 +41,13 @@ import org.hibernate.annotations.Type;
     discriminatorType=DiscriminatorType.STRING
 )
 @DiscriminatorValue(value="A")
-public class Order {
+public class Order implements Comparable<Order>{
 	
 	//State of the order
-	public static String S_NOT_ASSIGNED="0";
-	public static String S_ASSIGNED="1";
-	public static String S_PREPARED="2";
-	public static String S_READY="3";
+	public static String S_NOT_ASSIGNED="Not assigned";
+	public static String S_ASSIGNED="Assigned";
+	public static String S_PREPARED="Prepared";
+	public static String S_READY="Ready";
 	
 	@Id
 	@GeneratedValue
@@ -67,7 +72,7 @@ public class Order {
 		this.date = date;
 	}
 
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(fetch=FetchType.EAGER, cascade = { CascadeType.ALL })
 	@JoinTable(name = "ORDER_PIZZA_QUANTITY", 
 	joinColumns = { @JoinColumn(name = "ORDER_ID") }, 
 	inverseJoinColumns = { @JoinColumn(name = "PIZZA_QUANTITY_ID")})
@@ -135,6 +140,20 @@ public class Order {
 	public void setPaid(boolean paid) {
 		this.paid = paid;
 	}
+	
+	public double getPrize(){
+		double total=0;
+		for(PizzaQuantity pq:pizzas)
+			total+=pq.getPizza().getPrize()*pq.getQuantity();
+		return total;
+	}
+	
+	public int getNumberPizza(){
+		int quantity=0;
+		for(PizzaQuantity pq:pizzas)
+			quantity+=pq.getQuantity();
+		return quantity;
+	}
 
 	@Override
 	public int hashCode() {
@@ -193,6 +212,29 @@ public class Order {
 		} else if (!status.equals(other.status))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(Order o) {
+	    DateFormat formatter;
+        Date date1 = null;
+        Date date2 = null;
+        formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        try {
+            date1 = (Date) formatter.parse(this.date);
+            date2 = (Date) formatter.parse(o.date);
+        } catch (ParseException e) {
+        	if(date1==null)
+        		return 1;
+        	return -1;
+        }
+        catch(NullPointerException e){
+        	if(date1==null)
+        		return 1;
+        	return -1;
+        }
+
+         return date2.compareTo(date1);
 	}
 
 

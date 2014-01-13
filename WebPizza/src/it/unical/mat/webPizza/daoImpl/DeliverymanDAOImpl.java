@@ -54,7 +54,6 @@ public class DeliverymanDAOImpl implements DeliverymanDAO {
 			transaction = session.beginTransaction();
 			
 			delivery= (Deliveryman) session.load(Deliveryman.class, id);
-			Hibernate.initialize(delivery);
 
 			transaction.commit();
 		} catch (HibernateException e) {

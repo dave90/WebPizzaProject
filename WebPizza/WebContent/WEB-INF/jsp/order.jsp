@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<!-- Title here -->
-		<title>My Account</title>
+		<title>Wish List - Olson Kart</title>
 		<!-- Description, Keywords and Author -->
 		<meta name="description" content="Your description">
 		<meta name="keywords" content="Your,Keywords">
@@ -18,7 +18,7 @@
 		<!-- Bootstrap CSS -->
 		<link href="resource/css/bootstrap.min.css" rel="stylesheet">
       <!-- Animate css -->
-      <link href="resource/account.jspcss/animate.min.css" rel="stylesheet">
+      <link href="resource/css/animate.min.css" rel="stylesheet">
       <!-- Dropdown menu -->
       <link href="resource/css/ddlevelsmenu-base.css" rel="stylesheet">
       <link href="resource/css/ddlevelsmenu-topbar.css" rel="stylesheet">
@@ -35,18 +35,19 @@
 	
 	<body>
 
-      <!-- Shopping cart Modal -->
-
+ 
+<!-- Shopping cart Modal -->
  		<jsp:include page="include/shoppingCart.jsp" />
+ 	  <!-- Shopping cart Modal -->	
            
-      <!-- Logo & Navigation starts -->
-       		<jsp:include page="include/header.jsp" />
-      <!-- Logo & Navigation ends -->
+      <!-- Logo & Navigation starts -->            
+ 		<jsp:include page="include/header.jsp" />
+ 	  <!-- Logo & Navigation end -->
      
       <!-- Page title -->
       <div class="page-title">
          <div class="container">
-            <h2><i class="icon-desktop color"></i> My Account </h2>
+            <h2><i class="icon-desktop color"></i> My Account <small>Subtext for header</small></h2>
             <hr />
          </div>
       </div>
@@ -69,56 +70,51 @@
                   </div>
                </div>
                <div class="col-md-9">
-                  <h3><i class="icon-user color"></i> &nbsp;My Account</h3>
-                  <!-- Your details -->
-                   <div class="address">
-                     
-                        <!-- Your name -->
-                       <table>
-                       <tr>
-                       <td style="padding: 10px;">Name</td> <td><strong>${client.name}</strong></td>
-                       </tr>
-                       <tr>
-                       <td style="padding: 10px;">Surname</td> <td><strong>${client.surname}</strong></td>
-                                         </tr>
-
-                       <!-- Phone number -->
-                       <tr>
-                        <td style="padding: 10px;">Phone</td><td>${client.phoneNumber} </td>
-                       </tr>
-                       <tr>
-                       <td style="padding: 10px;">Mail</td> <td><a href="mailto:#">${client.mail}</a></td>
-                       </tr>
-                   </table>
-                     
-                   </div>
-
-                   <hr />
-                                      <h4>My Recent Purchases</h4>
-
+                  <h3><i class="icon-user color"></i> &nbsp;Order Details</h3>
                   <table class="table table-striped tcart">
                     <thead>
                       <tr>
+                        <th>Id</th>
                         <th>Date</th>
-                        <th>ID</th>
-                        <th>Number of Pizza</th>
-                        <th>Price</th>
                         <th>Status</th>
+                        <th>Paid</th>
+                        <th>Pizzaiolo</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach items="${orders}" var="order" >
                       <tr>
-                        <td>${order.date}</td>
                         <td>${order.id}</td>
-                        <td>${order.numberPizza}</td>
-                        <td>&euro; ${order.prize}</td>
+                        <td>${order.date}</td>
                         <td>${order.status}</td>
-                      </tr>
-                      </c:forEach>
+                        <td>${order.paid}</td>
+                        <td>${order.pizzaiolo.username}</td>
+                      </tr>                                                                                                         
                     </tbody>
                   </table>
-                   
+              <h4>Pizza:</h4>
+              <table class="table table-striped">
+               <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody id="cartBody">
+              <c:forEach var="pizza" items="${order.pizzas}" >
+              <tr>
+              	<td>${pizza.pizza.name}</td>
+              	<td>${pizza.quantity}</td>
+              	<td>&euro; <c:out value="${pizza.pizza.prize * pizza.quantity}" /></td>
+              </tr>
+              </c:forEach>
+              <tr>
+              <th></th>
+              <th>Total</th>
+              <th>&euro; ${order.prize}</th>
+              </tr>
+              </tbody>
+            </table>
                </div>
             </div>
             
@@ -126,9 +122,9 @@
          </div>
       </div>
      
-
       
-      <!-- Footer starts -->
+
+	<!-- Footer starts -->
 		<jsp:include page="include/footer.jsp" />
       <!-- Footer ends -->
       
@@ -139,22 +135,22 @@
 		<!-- jQuery -->
 		<script src="resource/js/jquery.js"></script>
 		<!-- Bootstrap JS -->
-		<script src="resource/js/bootstrap.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 		<!-- Dropdown menu -->
-		<script src="resource/js/ddlevelsmenu.js"></script>      
+		<script src="js/ddlevelsmenu.js"></script>      
       <!-- CaroFredSel -->
-      <script src="resource/js/jquery.carouFredSel-6.2.1-packed.js"></script> 
+      <script src="js/jquery.carouFredSel-6.2.1-packed.js"></script> 
       <!-- Countdown -->
-      <script src="resource/js/jquery.countdown.min.js"></script>    
+      <script src="js/jquery.countdown.min.js"></script>    
       <!-- jQuery Navco -->
-      <script src="resource/js/jquery.navgoco.min.js"></script>
+      <script src="js/jquery.navgoco.min.js"></script>
       <!-- Filter for support page -->
-      <script src="resource/js/filter.js"></script>         
+      <script src="js/filter.js"></script>         
 		<!-- Respond JS for IE8 -->
-		<script src="resource/js/respond.min.js"></script>
+		<script src="js/respond.min.js"></script>
 		<!-- HTML5 Support for IE -->
-		<script src="resource/js/html5shiv.js"></script>
+		<script src="js/html5shiv.js"></script>
 		<!-- Custom JS -->
-		<script src="resource/js/custom.js"></script>
+		<script src="js/custom.js"></script>
 	</body>	
 </html>

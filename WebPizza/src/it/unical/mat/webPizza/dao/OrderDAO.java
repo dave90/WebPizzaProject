@@ -18,5 +18,6 @@ public interface OrderDAO {
 	public String getOrderStatus(Long id);
 	public List<Order> getNotChefAssignedOrder();
 	public List<Order> getAllOrderOfCLient(Long idCLient);
+	public Order getOrder(Long id);
 	
 }

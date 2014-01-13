@@ -1,5 +1,6 @@
 package it.unical.mat.webPizza.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.domain.PizzaChef;
 import it.unical.mat.webPizza.domain.PizzaIngredients;
 import it.unical.mat.webPizza.domain.PizzaQuantity;
+import it.unical.mat.webPizza.util.HibernateUtil;
 
 @Service
 public class OrderManager {
@@ -59,7 +61,27 @@ public class OrderManager {
 	}
 	
 	public List<Pizza> getAllPizza(){
-		return pizzaDAO.getAllPizzas();
+		List<Pizza> menuPizza=new ArrayList<Pizza>();
+		List<Pizza> listPizza = pizzaDAO.getAllPizzas();
+
+		for(Pizza p:listPizza){
+			if(p.getClient()==null)
+				menuPizza.add(p);
+		}
+		
+		return menuPizza;
+	}
+	
+	public List<Pizza> getAllClientPizza(){
+		List<Pizza> menuPizza=new ArrayList<Pizza>();
+		List<Pizza> listPizza = pizzaDAO.getAllPizzas();
+
+		for(Pizza p:listPizza){
+			if(p.getClient()!=null)
+				menuPizza.add(p);
+		}
+		
+		return menuPizza;
 	}
 	
 	public boolean insertPizza(String name,List<PizzaIngredients> ingredients,double discount){
@@ -106,7 +128,7 @@ public class OrderManager {
 		return false;
 	}
 	
-	public boolean updateDeliveryStatus(Long id,int deliveryStatus){
+	public boolean updateDeliveryStatus(Long id,String deliveryStatus){
 		if(onlineOrderDAO.updateDeliveryStatus(id, deliveryStatus)>0)
 			return true;
 		return false;
@@ -120,7 +142,7 @@ public class OrderManager {
 		return onlineOrderDAO.getNotDeliveryManAssignedOrder();
 	}
 	
-	public int getDeliveryStatusOrder(Long idOrder){
+	public String getDeliveryStatusOrder(Long idOrder){
 		return onlineOrderDAO.getOrderDeliveryStatus(idOrder);
 	}
 	
@@ -146,6 +168,16 @@ public class OrderManager {
 	
 	public boolean deletePizzaIngredients(Long id){
 		return ingredientsDAO.deleteIngredient(id)>0;
+	}
+	
+	public List<Order> getAllOrderFromCLient(Client client){
+		return orderDAO.getAllOrderOfCLient(client.getId());
+	}
+	
+	public Order getOrder(Long id){
+		Order order=orderDAO.getOrder(id);
+		HibernateUtil.getSessionFactory().openSession().update(order);
+		return order;
 	}
 
 }

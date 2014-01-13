@@ -1,6 +1,9 @@
 package it.unical.mat.webPizza.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import it.unical.mat.webPizza.domain.Client;
+import it.unical.mat.webPizza.domain.Order;
 import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.domain.PizzaQuantity;
 import it.unical.mat.webPizza.service.AccessManager;
@@ -88,7 +92,12 @@ public class AccountController {
 	
 	@RequestMapping(value = "/account", method = RequestMethod.GET)
 	public String clientAccount( Model model) {
-		if(model.containsAttribute("client")){			
+		if(model.containsAttribute("client")){	
+			List<Order> orders=orderManager.getAllOrderFromCLient(((Client) model.asMap().get("client")));
+			while(orders.size()>3)
+				orders.remove(orders.size()-1);
+
+			model.addAttribute("orders", orders);
 			return "account";
 		}
 		return "redirect:login.html";
@@ -106,21 +115,12 @@ public class AccountController {
 		return "redirect:login.html";
 	}
 	
-	@RequestMapping(value = "/wishlist", method = RequestMethod.GET)
-	public String clientWishlist( Model model) {
-		if(model.containsAttribute("client")){			
-			return "wishlist";
-		}
-		return "redirect:login.html";
+	@RequestMapping(value = "/viewcart", method = RequestMethod.GET)
+	public String clientViewcart( Model model) {
+
+		return "viewcart";
 	}
 	
-	@RequestMapping(value = "/orderhistory", method = RequestMethod.GET)
-	public String clientOrderhistory( Model model) {
-		if(model.containsAttribute("client")){			
-			return "orderhistory";
-		}
-		return "redirect:login.html";
-	}
 	
 	@RequestMapping(value = "/editprofile", method = RequestMethod.GET)
 	public String clientEditprofile( Model model) {
@@ -294,7 +294,7 @@ public class AccountController {
 						   @RequestParam(value="Surname") String surname,
 						   @RequestParam(value="Mail") String mail,
 						   @RequestParam(value="Phone") String phone,
-						   @RequestParam(value="Address") String address,
+						   @RequestParam(required=false, value="Address") String address,
 						   @RequestParam(required=false, value="Floor") String floor,
 						   @RequestParam(value="PaymentMethod") String paymentMethod,
 						   @RequestParam(required=false, value="Accept") Boolean accept
@@ -323,8 +323,7 @@ public class AccountController {
 			errorMessage="Mail is empty";
 		if(phone==null || phone.equals(""))
 			errorMessage="Phone is empty";
-		if(address==null || address.equals(""))
-			errorMessage="Address is empty";
+
 		if( floor !=null && floor.equals(""))
 			address+=" Floor "+floor;
 		
@@ -334,18 +333,22 @@ public class AccountController {
 		if(paymentMethod==null || !(paymentMethod.equals("Credit Card") || paymentMethod.equals("Cash on Delivery")))
 			errorMessage="Payment type is not correct";
 		
+		if(!errorMessage.equals("")){
+			model.addAttribute("errorMessage", errorMessage);
+			return "checkout";
+		}
+		
 		ArrayList<PizzaQuantity> pizza=new ArrayList<PizzaQuantity>();
-		for(Pizza a:cartPizzas.getPizzaList()){
+		for(Pizza a:cartPizzas.getPizzaQuantity().keySet()){
 			PizzaQuantity pq=new PizzaQuantity();
 			pq.setPizza(orderManager.getLazyPizza(a.getId()));
 			pq.setQuantity(cartPizzas.getPizzaQuantity().get(a));
+			pizza.add(pq);
 		}
-		
-		Long id=orderManager.insertOrder("",pizza, paymentMethod.equals("Credit Card"), client, address);
-		if(id==null)	
-			errorMessage="Order not accomplished, contact administrator";
-		
-		if(!errorMessage.equals("")){
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		Long id=orderManager.insertOrder(dateFormat.format(date),pizza, paymentMethod.equals("Credit Card"), client, address);
+		if(id==null){	
 			model.addAttribute("errorMessage", errorMessage);
 			return "checkout";
 		}
@@ -356,6 +359,60 @@ public class AccountController {
 		
 		return "confirmation";
 	}
+	
+	
+	@RequestMapping(value = "/orderhistory", method = RequestMethod.GET)
+	public String clientOrderhistory( Model model) {
+		if(model.containsAttribute("client")){		
+			List<Order> orders=orderManager.getAllOrderFromCLient(((Client) model.asMap().get("client")));
+			model.addAttribute("orders", orders);
+			return "orderhistory";
+		}
+		return "redirect:login.html";
+	}
+	
+	@RequestMapping(value = "/updateCart", method = RequestMethod.POST)
+	public @ResponseBody String updateQuantityCart(@RequestParam(value="idPizza") Long id,
+													@RequestParam(value="quantity") int quantity,
+													Model model,HttpSession session) {
+		ShoppingCart cartPizzas = null;
+		if(!model.containsAttribute("cart")){
+			return "No cart inizializated";
+		}
+		cartPizzas=(ShoppingCart) model.asMap().get("cart");
+
+		
+		return cartPizzas.updateQuantity(id,quantity)+"*"+cartPizzas.getTableBody()+"*"+ cartPizzas.getTotalprice();
+	}
+	
+	@RequestMapping(value = "/removeItemCart", method = RequestMethod.POST)
+	public @ResponseBody String updateQuantityCart(@RequestParam(value="idPizza") Long id,
+													Model model,HttpSession session) {
+		ShoppingCart cartPizzas = null;
+		if(!model.containsAttribute("cart")){
+			return "No cart inizializated";
+		}
+		cartPizzas=(ShoppingCart) model.asMap().get("cart");
+
+		cartPizzas.removePizza(id);
+		return cartPizzas.getTableBody()+"*"+ cartPizzas.getTotalprice();
+	}
+	
+	@RequestMapping(value = "/order", method = RequestMethod.GET)
+	public String order(@RequestParam(value="idOrder") Long id,
+													Model model) {
+		if(!model.containsAttribute("client")){
+			return "redirect:login.html";
+		}
+		
+		Order order=orderManager.getOrder(id);
+		if(order.getClient().getId()==((Client) model.asMap().get("client")).getId())
+			model.addAttribute("order", order);
+
+		return "order";
+	}
+	
+		
 	
 	
 }

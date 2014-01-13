@@ -19,10 +19,10 @@ public class OnlineOrder extends Order {
 	
 	
 	//State of the delivery
-	public static int D_NOT_DELIVERY=0;
-	public static int D_DELIVERED=1;
-	public static int D_SUSPENDED=2;
-	public static int D_ANNULLED=3;
+	public static String D_NOT_DELIVERY="Not delivered";
+	public static String D_DELIVERED="Delivered";
+	public static String D_SUSPENDED="Suspended";
+	public static String D_ANNULLED="Annulled";
 	
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinTable(name = "ORDER_DELIVERY", 
@@ -31,7 +31,7 @@ public class OnlineOrder extends Order {
 	private Deliveryman deliveryman;
 	
 	@Column(name="DELIVERY_STATUS")
-	private int deliveryStatus;
+	private String deliveryStatus;
 	
 	@Column(name="ADDRESS")
 	private String address;
@@ -45,11 +45,11 @@ public class OnlineOrder extends Order {
 		this.deliveryman = deliveryman;
 	}
 
-	public int getDeliveryStatus() {
+	public String getDeliveryStatus() {
 		return deliveryStatus;
 	}
 
-	public void setDeliveryStatus(int deliveryStatus) {
+	public void setDeliveryStatus(String deliveryStatus) {
 		this.deliveryStatus = deliveryStatus;
 	}
 
@@ -66,7 +66,8 @@ public class OnlineOrder extends Order {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + deliveryStatus;
+		result = prime * result
+				+ ((deliveryStatus == null) ? 0 : deliveryStatus.hashCode());
 		result = prime * result
 				+ ((deliveryman == null) ? 0 : deliveryman.hashCode());
 		return result;
@@ -86,7 +87,10 @@ public class OnlineOrder extends Order {
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
-		if (deliveryStatus != other.deliveryStatus)
+		if (deliveryStatus == null) {
+			if (other.deliveryStatus != null)
+				return false;
+		} else if (!deliveryStatus.equals(other.deliveryStatus))
 			return false;
 		if (deliveryman == null) {
 			if (other.deliveryman != null)

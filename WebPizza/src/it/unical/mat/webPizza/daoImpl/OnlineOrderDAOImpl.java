@@ -21,7 +21,7 @@ public class OnlineOrderDAOImpl implements OnlineOrderDAO{
 
 	@Override
 	public Long insertOrder(String date,String status, List<PizzaQuantity> pizzas, boolean paid,
-			Client client, int deliveryStatus, String address) {
+			Client client, String deliveryStatus, String address) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
 		Long id = null;
@@ -73,7 +73,7 @@ public class OnlineOrderDAOImpl implements OnlineOrderDAO{
 	}
 
 	@Override
-	public int updateDeliveryStatus(Long id, int deliveryStatus) {
+	public int updateDeliveryStatus(Long id, String deliveryStatus) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
 		int result = 0;
@@ -96,10 +96,10 @@ public class OnlineOrderDAOImpl implements OnlineOrderDAO{
 	}
 
 	@Override
-	public int getOrderDeliveryStatus(Long id) {
+	public String getOrderDeliveryStatus(Long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
-		int result = -1;
+		String result = "-1";
 		try {
 			transaction = session.beginTransaction();
 			

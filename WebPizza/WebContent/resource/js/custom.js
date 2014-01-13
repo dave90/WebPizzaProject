@@ -219,9 +219,11 @@ $(function() {
 			$(this).removeClass("deliveryActive").addClass("delivery");
 			$("#inputAddress").empty();
 			$("#deliveryType").empty();
+			$('#inputLocalization').empty();
 		} else{
 			$("#inputAddress").empty();
 			$("#deliveryType").empty();
+			$('#inputLocalization').empty();
 			$("#inputAddress").html("<label  class='col-md-2 control-label'>Address</label>" +
 					"<div class='col-md-4'>" +
 					"<input type='text' class='form-control' rows='1' placeholder='Address' name='Address'/>" +
@@ -229,6 +231,12 @@ $(function() {
 			$("#deliveryType").html("<div id='house' class='col-md-4 houseActive background control-label' onClick=''>	</div>"+
 									"<div id='apartment' class='col-md-4 apartment background control-label'></div>"+
 									"<div id='other' class='col-md-4 other background control-label'></div>");
+			$('#inputLocalization').html("<label for='inputAddress' class='col-md-2 control-label'>Localization</label>"+
+					"<div class='col-md-4'>"+
+					"<input class='btn btn-primary' id='startLocalization' type='button' value='Localize'/>"+
+						"<div id='localization' style='height: 0'>"+
+						"</div>"+
+					"</div> ");
 			bindClickDeliveryType();
 			$(this).removeClass("delivery").addClass("deliveryActive");
 		}
@@ -244,6 +252,7 @@ $(function() {
 		if ($(this).hasClass("carryoutActive")) {
 			$("#inputAddress").empty();
 			$("#deliveryType").empty();
+			$('#inputLocalization').empty();
 			$("#inputAddress").html("<label  class='col-md-2 control-label'>Address</label>" +
 					"<div class='col-md-4'>" +
 					"<input type='text' class='form-control' rows='1' placeholder='Address' name='Address' />" +
@@ -251,12 +260,19 @@ $(function() {
 			$("#deliveryType").html("<div id='house' class='col-md-4 houseActive background control-label'>	</div>"+
 					"<div id='apartment' class='col-md-4 apartment background control-label'></div>"+
 					"<div id='other' class='col-md-4 other background control-label'></div>");
+			$('#inputLocalization').html("<label for='inputAddress' class='col-md-2 control-label'>Localization</label>"+
+					"<div class='col-md-4'>"+
+					"<input class='btn btn-primary' id='startLocalization' type='button' value='Localize'/>"+
+						"<div id='localization' style='height: 0'>"+
+						"</div>"+
+					"</div> ");
 			bindClickDeliveryType();
 			$(this).removeClass("carryoutActive").addClass("carryout");
 		} else{
 			$(this).removeClass("carryout").addClass("carryoutActive");
 			$("#inputAddress").empty();
 			$("#deliveryType").empty();
+			$('#inputLocalization').empty();
 		}
 		if ($("#delivery").hasClass("deliveryActive")) {
 			$("#delivery").removeClass("deliveryActive").addClass("delivery");
@@ -404,6 +420,7 @@ function bindClickDeliveryType(){
 		}
 		
 	});
+	$('#startLocalization').click(function(){getLocation();});
 }
 
 /* Ecommerce sidebar */

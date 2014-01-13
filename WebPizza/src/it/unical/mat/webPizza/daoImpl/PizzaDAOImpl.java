@@ -83,8 +83,6 @@ public class PizzaDAOImpl implements PizzaDAO {
 			transaction = session.beginTransaction();
 			
 			result=session.createQuery("FROM Pizza").list();
-			for(Pizza p:result)
-				Hibernate.initialize(p.getIngredients());
 			
 			transaction.commit();
 		} catch (HibernateException e) {
@@ -106,7 +104,6 @@ public class PizzaDAOImpl implements PizzaDAO {
 			transaction = session.beginTransaction();
 			
 			pizza= (Pizza) session.load(Pizza.class, id);
-			Hibernate.initialize(pizza.getIngredients());
 			
 			transaction.commit();
 		} catch (HibernateException e) {

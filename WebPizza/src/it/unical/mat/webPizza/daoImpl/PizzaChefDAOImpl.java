@@ -53,7 +53,6 @@ public class PizzaChefDAOImpl implements PizzaChefDAO {
 			transaction = session.beginTransaction();
 			
 			chef= (PizzaChef) session.load(PizzaChef.class, id);
-			Hibernate.initialize(chef);
 
 			transaction.commit();
 		} catch (HibernateException e) {

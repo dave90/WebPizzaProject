@@ -52,16 +52,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index( Model model) {
-		List<Pizza> listPizza = orderManager.getAllPizza();
-		List<Pizza> userPizza=new ArrayList<Pizza>();
-		List<Pizza> menuPizza=new ArrayList<Pizza>();
-		
-		for(Pizza p:listPizza){
-			if(p.getClient()!=null)
-				userPizza.add(p);
-			else
-				menuPizza.add(p);
-		}
+		List<Pizza> menuPizza=orderManager.getAllPizza();
+		List<Pizza> userPizza=orderManager.getAllClientPizza();
 		
 		
 		Random r=new Random();

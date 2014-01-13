@@ -3,6 +3,7 @@ package it.unical.mat.webPizza.domain;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,7 +20,7 @@ public class PizzaQuantity {
 	@Column(name="ID")
 	private Long id;
 	
-	@ManyToOne(cascade = { CascadeType.ALL })
+	@ManyToOne(fetch=FetchType.EAGER,cascade = { CascadeType.ALL })
 	@JoinTable(name = "PIZZA_QUANTITY_PIZZA", 
 	joinColumns = { @JoinColumn(name = "PIZZA_QUANTITY_ID") }, 
 	inverseJoinColumns = { @JoinColumn(name = "PIZZA_ID")})

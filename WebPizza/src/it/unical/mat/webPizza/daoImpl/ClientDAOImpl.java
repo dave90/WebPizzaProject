@@ -57,7 +57,6 @@ public class ClientDAOImpl implements ClientDAO {
 			transaction = session.beginTransaction();
 			
 			client= (Client) session.load(Client.class, id);
-			Hibernate.initialize(client);
 
 			transaction.commit();
 		} catch (HibernateException e) {

@@ -12,10 +12,10 @@ import java.util.Set;
 
 public interface OnlineOrderDAO  {
 	
-	public Long insertOrder(String date,String status,List<PizzaQuantity> pizzas,boolean paid,Client client,int deliveryStatus,String address);
+	public Long insertOrder(String date,String status,List<PizzaQuantity> pizzas,boolean paid,Client client,String deliveryStatus,String address);
 	public int updateDelivery(Long id, Deliveryman deliveryman);
-	public int updateDeliveryStatus(Long id,int deliveryStatus);
-	public int getOrderDeliveryStatus(Long id);
+	public int updateDeliveryStatus(Long id,String deliveryStatus);
+	public String getOrderDeliveryStatus(Long id);
 	public List<OnlineOrder> getNotDeliveryManAssignedOrder();
 	public String getDeliveryManPositionByOrder(Long idOrder);
 	

@@ -1,8 +1,10 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
+
 <html>
 	<head>
 		<!-- Title here -->
-		<title>Edit Profile </title>
+		<title>Order History - Olson Kart</title>
 		<!-- Description, Keywords and Author -->
 		<meta name="description" content="Your description">
 		<meta name="keywords" content="Your,Keywords">
@@ -34,7 +36,7 @@
 	
 	<body>
 
-      <!-- Shopping cart Modal -->
+       <!-- Shopping cart Modal -->
  		<jsp:include page="include/shoppingCart.jsp" />
  	  <!-- Shopping cart Modal -->	
            
@@ -61,62 +63,39 @@
                   <div class="sidey">
                      <ul class="nav">
                          <li><a href="account.html">My Account</a></li>
-                         <li><a href="checkout.html">Chechout</a></li>
+                         <li><a href="checkout.html">Checkout</a></li>
                          <li><a href="orderhistory.html">Order History</a></li>                         
                          <li><a href="editprofile.html">Edit Profile</a></li>
                      </ul>
                   </div>
                </div>
                <div class="col-md-9">
-                  <h3><i class="icon-user color"></i> &nbsp;Edit Profile</h3>
+                  <h3><i class="icon-user color"></i> &nbsp;Order History</h3>
                   <!-- Your details -->
-                  <form class="form-horizontal" role="form" action="editProfile.html" method="post">
-                    <div class="form-group">
-                      <label for="inputName" class="col-md-2 control-label">Name</label>
-                      <div class="col-md-4">
-                        <input type="text" class="form-control" id="inputName" name="Name" placeholder="Name" value="${client.name}">
-                      </div>
-                    </div>       
-                    <div class="form-group">
-                      <label for="inputSurname" class="col-md-2 control-label">Surname</label>
-                      <div class="col-md-4">
-                        <input type="text" class="form-control" id="inputSurname" name="Surname" placeholder="Surname" value="${client.surname}">
-                      </div>
-                    </div>       
-                    <div class="form-group">
-                      <label for="inputEmail1" class="col-md-2 control-label">Email</label>
-                      <div class="col-md-4">
-                        <input type="email" class="form-control" id="inputEmail1" name="Mail" placeholder="Email" value="${client.mail}">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="inputPhone" class="col-md-2 control-label">Phone Number</label>
-                      <div class="col-md-4">
-                        <input type="text" class="form-control" id="inputPhone" name="Phone" placeholder="Phone" value="${client.phoneNumber}">
-                      </div>
-                    </div>
-                   <div class="form-group">
-                      <label for="inputUsername" class="col-md-2 control-label">Username</label>
-                      <div class="col-md-4">
-                        <input type="text" class="form-control" id="inputUsername" name="User" placeholder="Username" value="${client.username}">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="inputPassword" class="col-md-2 control-label">Password</label>
-                      <div class="col-md-4">
-                        <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="Password">
-                        <p id="notifyRegistration" style="color: red;"><strong>${notifyRegistration}</strong></p>
-                        
-                      </div>
-                    </div>                    
-                    <hr />
-                    <div class="form-group">
-                      <div class="col-md-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-danger">Save Changes</button>
-                        <button type="reset" class="btn btn-default">Reset</button>
-                      </div>
-                    </div>
-                  </form> 
+                  
+
+                  <table class="table table-striped tcart">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>ID</th>
+                        <th>Number of Pizza</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <c:forEach items="${orders}" var="order" >
+                      <tr>
+                        <td>${order.date}</td>
+                        <td><a href="order.html?idOrder=${order.id}">${order.id}</a></td>
+                        <td>${order.numberPizza}</td>
+                        <td>&euro; ${order.prize}</td>
+                        <td>${order.status}</td>
+                      </tr>
+                      </c:forEach>
+                    </tbody>
+                  </table>
                    
                </div>
             </div>
@@ -125,6 +104,7 @@
          </div>
       </div>
      
+      
       
       <!-- Footer starts -->
 		<jsp:include page="include/footer.jsp" />

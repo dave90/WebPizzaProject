@@ -62,18 +62,18 @@
              <div class="item active animated fadeInRight">
                <img src="resource/img/pizza/real-pizza2.jpg" alt="" class="img-responsive" />
                <div class="carousel-caption">
-                 <h2 class="animated fadeInLeftBig"><strong> Order your Pizza</strong></h2>
-                 <p class="animated fadeInRightBig">Choose between our pizza or <strong>build</strong> your own pizza.</p>
-                 <a href="#" class="animated fadeInLeftBig btn btn-info btn-lg">Choose now</a>
+                 <h2 class="animated fadeInLeftBig"><strong  style="color:#6AF985"> Order your Pizza</strong></h2>
+                 <p class="animated fadeInRightBig" style="color: white;">Choose between our pizza or <strong>build</strong> your own pizza.</p>
+                 <a href="pizzaList.html" class="animated fadeInLeftBig btn btn-info btn-lg">Choose now</a>
                </div>
              </div>
 
              <div class="item animated fadeInRight">
                <img src="resource/img/pizza/pizza-deliverymanr.jpg" alt="" class="img-responsive" />
                <div class="carousel-caption">
-                 <h2 class="animated fadeInLeftBig">Delivery Service</h2>
-                 <p class="animated fadeInRightBig"><strong>Track</strong> your pizza and pay on-line. </p>
-                 <a href="#" class="animated fadeInLeftBig btn btn-info btn-lg">Orde now</a>
+                 <h2 class="animated fadeInLeftBig"><strong style="color:#6AF985" >Delivery Service</strong></h2>
+                 <p class="animated fadeInRightBig" style="color:#41C85A"> Track your pizza and pay on-line. </p>
+                 <a href="pizzaList.html" class="animated fadeInLeftBig btn btn-info btn-lg">Orde now</a>
                </div>
              </div>
              
@@ -116,6 +116,7 @@
  					<div class="row">
 						<!-- Item #1 -->
 						<c:forEach items="${listPizza}" var="pizza">
+						<c:set var="count" value="${count + 1}" scope="page"/>
 							<div class="col-md-4 col-sm-8 col-xs-6">
 
 

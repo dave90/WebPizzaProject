@@ -53,6 +53,17 @@ public class PizzaController {
 		return "buildPizza";
 	}
 	
+	@RequestMapping(value = "/pizzaClientList", method = RequestMethod.GET)
+	public String pizzaClientList(Locale locale, Model model) {
+		
+		List<Pizza> listPizza = orderManager.getAllClientPizza();
+		
+		model.addAttribute("listPizza", listPizza);
+		model.addAttribute("clientPizzaIMG", 1);
+		
+		return "pizzas";
+	}
+	
 	
 	
 	
