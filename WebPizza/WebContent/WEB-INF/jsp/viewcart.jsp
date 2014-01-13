@@ -148,5 +148,6 @@
 		<!-- Custom JS -->
 		<script src="resource/js/custom.js"></script>
 		<script src="resource/js/cartUpdater.js" type="text/javascript"></script>
+		<script src="resource/js/cartManager.js" type="text/javascript"></script>
 	</body>	
 </html>

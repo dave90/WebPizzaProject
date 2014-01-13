@@ -93,7 +93,7 @@ public class ShoppingCart implements Serializable{
 		int count =0;
 		for(Pizza p:pizzaQuantity.keySet()){
 			//tableToAppend+="<tr>"+"<td>"+p.getName()+"</td>"+"<td>"+pizzaQuantity.get(p)+"</td>"+"<td>&euro;"+p.getPrize()*pizzaQuantity.get(p)+"</td>"+"</tr>";
-			tableToAppend+="<tr id='trCart"+ count+"'>"+"<td id='nameCart"+ count+"'>"+p.getName()+"</td>"+"<td id='quantityCart"+ count+"'>"+pizzaQuantity.get(p)+"</td>"+"<td id='priceCart"+ count+"' >"+p.getPrize()*pizzaQuantity.get(p)+" &euro; </td>"+"<td><img id='deleteCart"+count+"' src='resource/img/x.png' width='20' height='20'></td>"+"</tr>";
+			tableToAppend+="<tr id='trCart"+ count+"'>"+"<td id='nameCart"+ count+"'>"+p.getName()+"</td>"+"<td id='quantityCart"+ count+"'>"+pizzaQuantity.get(p)+"</td>"+"<td id='priceCart"+ count+"' >"+p.getPrize()*pizzaQuantity.get(p)+" &euro; </td>"+"<td><img id='deleteCart-"+p.getId()+"' src='resource/img/x.png' width='20' height='20' class='removeItem'></td>"+"</tr>";
 			count++;
 		}
 		tableToAppend+="<tr>"+"<th></th><th>Total</th>"+"<th id='totalPriceCart'>&euro;"+totalprice+"</th></tr>";

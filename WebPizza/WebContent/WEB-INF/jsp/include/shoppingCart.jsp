@@ -28,7 +28,7 @@
               	<td id="nameCart${count}">${pizza.key.name}</td>
               	<td id="quantityCart${count}">${pizza.value}</td>
               	<td id="priceCart${count}"><c:out value="${pizza.key.prize * pizza.value}" /></td>
-              	<td><img id="deleteCart${count}" src="resource/img/x.png" width="20" height="20"></td>
+              	<td><img id="deleteCart-${pizza.key.id}" src="resource/img/x.png" width="20" height="20" class="removeItem"></td>
               </tr>
               	<c:set var="count" value="${count + 1}" scope="page" />
               </c:forEach>

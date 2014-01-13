@@ -460,6 +460,30 @@ function bindClickDeliveryType(){
 	$('#startLocalization').click(function(){getLocation();});
 }
 
+$("#count1").hide();
+$('body').delegate('.removeItem','click',function(){
+	 var id=$(this).attr('id').split("-")[1];
+	    $.ajax({  
+		     type : "Post",   
+		     url : "removeItemCart.html",   
+		     data : "idPizza="  + id,
+		     success : function(response) {
+		    	 	$('#tr-'+id).remove();
+		    	 	var tmp = response.split("*");
+		    		 $('#cartBody').empty();
+		    		 $('#cartBody').append(tmp[0]);
+		    		 $('#shoppingCartPrice').empty();
+		    		 $('#shoppingCartPrice').append(tmp[1]);
+		    		 $('#totalPriceCart2').empty();
+		    		 $('#totalPriceCart2').html("&euro;" +tmp[2]);
+		     },  	
+		     error : function(e) {  
+		      alert('Error: ' + e);   
+		     }  
+		    }); 
+		
+});
+
 /* Ecommerce sidebar */
 
 $(document).ready(function() {

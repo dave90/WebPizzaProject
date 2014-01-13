@@ -61,32 +61,34 @@
 		
 		$("#count1").hide();
 		// forse da cambiare
-			var numButtons = 30;
-			for (var i = 0; i < numButtons; ++i) {
-				$("#cartBody").delegate( "#deleteCart" + i, "click", function(evt) {
-					var str = $(this).attr('id');
-					var res = str.split("deleteCart");
-					var currentName = $("#nameCart" + res[1]).text();
-					
-					$.ajax({  
-						type : "Post",   
-						url : "removeFromCartBuild.html",   
-						data : "name="+currentName,  
-						success : function(response) {
-							$('#trCart'+res[1]).remove();
-							$("#totalPriceCart").empty();
-							$("#totalPriceCart").append(response);
-							 $('#shoppingCartPrice').empty();
-				    		 $('#shoppingCartPrice').append("Items - "+response + "&euro;");
-						},  
-						error : function(e) {  
-							alert('Error: ' + e);   
-						}  
-					}); 
-					evt.preventDefault();
-				});
+//			var numButtons = 30;
+//			for (var i = 0; i < numButtons; ++i) {
+//				$("#cartBody").delegate( "#deleteCart" + i, "click", function(evt) {
+//					var str = $(this).attr('id');
+//					var res = str.split("deleteCart");
+//					var currentName = $("#nameCart" + res[1]).text();
+//					
+//					$.ajax({  
+//						type : "Post",   
+//						url : "removeFromCartBuild.html",   
+//						data : "name="+currentName,  
+//						success : function(response) {
+//							$('#trCart'+res[1]).remove();
+//							$("#totalPriceCart").empty();
+//							$("#totalPriceCart").append(response);
+//							 $('#shoppingCartPrice').empty();
+//				    		 $('#shoppingCartPrice').append("Items - "+response + "&euro;");
+//						},  
+//						error : function(e) {  
+//							alert('Error: ' + e);   
+//						}  
+//					}); 
+//					evt.preventDefault();
+//				});
+//
+//			}
+		
 
-			}
 			
 		
   });
