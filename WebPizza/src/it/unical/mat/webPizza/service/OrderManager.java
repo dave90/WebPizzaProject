@@ -47,7 +47,7 @@ public class OrderManager {
 	public List<PizzaIngredients> getAllIngredients(){
 		return ingredientsDAO.getAllIngredients();
 	}
-	public PizzaIngredients getIngredient(String name){
+	public PizzaIngredients getIngredient(Long name){
 		return ingredientsDAO.getIngredient(name);
 	}
 	

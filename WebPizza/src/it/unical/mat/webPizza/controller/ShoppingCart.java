@@ -58,11 +58,12 @@ public class ShoppingCart implements Serializable{
 		Pizza pizza=new Pizza();
 		pizza.setName(namePizza);
 		String[] parts = ingridients.split(",");
+		
 		for (int i = 0; i < parts.length; i++) {
-			PizzaIngredients tmp = new PizzaIngredients();
-			tmp.setName(parts[i].trim());
-			tmp.setCost(orderManager.getIngredient(tmp.getName()).getCost());
-			ingredientsPizza.add(tmp);			
+//			PizzaIngredients tmp = new PizzaIngredients();
+//			tmp.setName(parts[i].trim());
+//			tmp.setCost(orderManager.getIngredient(tmp.getName()).getCost());
+			ingredientsPizza.add(orderManager.getIngredient(Long.parseLong(parts[i])));			
 		}
 		pizza.setIngredients(ingredientsPizza);
 		for(Pizza p:pizzaQuantity.keySet()){

@@ -68,10 +68,9 @@ public class PizzaController {
 	
 	
 	@RequestMapping(value = "/getIngredient", method = RequestMethod.POST)
-	public @ResponseBody String increasetotal(@RequestParam(value="nameIngridients") String namePizza, Model model) {
+	public @ResponseBody String increasetotal(@RequestParam(value="idIngridients") Long idIngridients, Model model) {
 		
-		namePizza = namePizza.trim();
-		PizzaIngredients pizzaIngredient = orderManager.getIngredient(namePizza);
+		PizzaIngredients pizzaIngredient = orderManager.getIngredient(idIngridients);
 		
 		return Double.toString(pizzaIngredient.getCost());
 	}

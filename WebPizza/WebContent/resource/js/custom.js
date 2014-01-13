@@ -170,16 +170,15 @@ $(function() {
 	for (var i = 0; i < numButtons; ++i) {
 
 		$("#pizzaIngredients" + i).click(function(evt) {
-			var currentVal = $(this).text();
-			var str = $(this).attr('id');
-			var res = str.split("pizzaIngredients");
-				$("#ownPizzaIngredients"+res[1]).show();
+			var res = $(this).children().val();
+			var tmp2 =$(this).attr("id").split("pizzaIngredients")[1];
+				$("#ownPizzaIngredients"+tmp2).show();
 				$(this).hide();
 				
 				 $.ajax({  
 				     type : "Post",   
 				     url : "getIngredient.html",   
-				     data : "nameIngridients="  + currentVal,  
+				     data : "idIngridients="  + res,  
 				     success : function(response) {
 				    	 var tmp =  parseInt($("#totalCost").text());
 				    	 tmp += parseInt(response);
@@ -194,41 +193,38 @@ $(function() {
 		});
 		
 		$("#pizzaIngredients" + i).mouseover(function() {
-			$(this).append("<span class='glyphicon glyphicon-arrow-right' > </span>");
+			//$(this).append("<span class='glyphicon glyphicon-arrow-right' > </span>");
 				
 		});
 		
 		$("#pizzaIngredients" + i).mouseout(function() {
-			var currentVal = $(this).text();
-			$(this).empty();
-			$(this).append(currentVal);
+//			var currentVal = $(this).children();
+//			$(this).empty();
+//			$(this).append(currentVal);
 				
 		});
 		
 		$("#ownPizzaIngredients" + i).hide();
 		
 		$("#ownPizzaIngredients" + i).mouseover(function() {
-			$(this).append("<span class='glyphicon glyphicon-arrow-left' > </span>");
+//			$(this).append("<span class='glyphicon glyphicon-arrow-left' > </span>");
 				
 		});
 		$("#ownPizzaIngredients" + i).mouseout(function() {
-			var currentVal = $(this).text();
-			$(this).empty();
-			$(this).append(currentVal);
+//			var currentVal = $(this).text();
+//			$(this).empty();
+//			$(this).append(currentVal);
 		});
 		$("#ownPizzaIngredients" + i).click(function(evt) {
-			var currentVal = $(this).text();
-			var str = $(this).attr('id');
-			var res = str.split("ownPizzaIngredients");
-			$("#pizzaIngredients"+res[1]).show();
-			console.log("tmp ");
+			var res = $(this).children().val();
+			var tmp2 =$(this).attr("id").split("ownPizzaIngredients")[1];
+			$("#pizzaIngredients"+tmp2).show();
 			$.ajax({  
 				type : "Post",   
 				url : "getIngredient.html",   
-				data : "nameIngridients="  + currentVal,  
+				data : "idIngridients="  + res,   
 				success : function(response) {
 					var tmp =  parseInt($("#totalCost").text());
-					
 					tmp -= parseInt(response);
 					$("#totalCost").empty();
 					$("#totalCost").append(tmp);
