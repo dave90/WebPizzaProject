@@ -75,7 +75,7 @@
 					<div class="row">
 						<!-- Item #1 -->
 						<c:forEach items="${listPizza}" var="pizza">
-							<div class="col-md-5 col-sm-8 col-xs-6">
+							<div class="col-md-5 col-sm-8 col-xs-11">
 
 
 								<div class="item">

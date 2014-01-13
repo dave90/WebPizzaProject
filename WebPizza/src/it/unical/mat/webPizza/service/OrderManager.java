@@ -47,7 +47,7 @@ public class OrderManager {
 	public List<PizzaIngredients> getAllIngredients(){
 		return ingredientsDAO.getAllIngredients();
 	}
-	public PizzaIngredients getIngredient(String name){
+	public PizzaIngredients getIngredient(Long name){
 		return ingredientsDAO.getIngredient(name);
 	}
 	
@@ -93,10 +93,8 @@ public class OrderManager {
 		return false;
 	}
 	
-	public boolean insertPizza(String name,List<PizzaIngredients> ingredients,double discount,Client client){
-		if(pizzaDAO.insertPizza(name, ingredients, discount,client)>0)
-			return true;
-		return false;
+	public Long insertPizza(String name,List<PizzaIngredients> ingredients,double discount,Client client){
+		return pizzaDAO.insertPizza(name, ingredients, discount,client);
 	}
 	
 	public boolean deletePizza(Long id){

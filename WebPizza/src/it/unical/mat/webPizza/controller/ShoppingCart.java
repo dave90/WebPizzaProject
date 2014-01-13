@@ -1,5 +1,6 @@
 package it.unical.mat.webPizza.controller;
 
+import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.util.HibernateUtil;
 import it.unical.mat.webPizza.domain.PizzaIngredients;
@@ -24,7 +25,6 @@ public class ShoppingCart implements Serializable{
 	}
 
 	void deletePizza(String name){
-		System.out.println("name "+name);
 		for(Pizza p:pizzaQuantity.keySet()){
 			if(p.getName().equals(name)){
 				pizzaQuantity.remove(p);
@@ -53,16 +53,15 @@ public class ShoppingCart implements Serializable{
 		pizzaQuantity.put(pizza,quantity);
 		updateTotalprice();
 	}
-	void insertPizzaBuild(String namePizza,int quantity, String ingridients, OrderManager orderManager){
+	void insertPizzaBuild(String namePizza,int quantity, String ingridients, OrderManager orderManager, Client client){
 		ArrayList<PizzaIngredients> ingredientsPizza=new ArrayList<PizzaIngredients>();
 		Pizza pizza=new Pizza();
 		pizza.setName(namePizza);
+		pizza.setDiscount(0);
 		String[] parts = ingridients.split(",");
+		
 		for (int i = 0; i < parts.length; i++) {
-			PizzaIngredients tmp = new PizzaIngredients();
-			tmp.setName(parts[i].trim());
-			tmp.setCost(orderManager.getIngredient(tmp.getName()).getCost());
-			ingredientsPizza.add(tmp);			
+			ingredientsPizza.add(orderManager.getIngredient(Long.parseLong(parts[i])));			
 		}
 		pizza.setIngredients(ingredientsPizza);
 		for(Pizza p:pizzaQuantity.keySet()){
@@ -75,7 +74,8 @@ public class ShoppingCart implements Serializable{
 				return;
 			}
 		}
-		
+		Long id = orderManager.insertPizza(pizza.getName(), pizza.getIngredients(), pizza.getDiscount(),client);
+		pizza.setId(id);
 		pizzaQuantity.put(pizza,quantity);
 		updateTotalprice();
 	}

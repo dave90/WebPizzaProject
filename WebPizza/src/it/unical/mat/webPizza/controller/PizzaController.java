@@ -44,16 +44,7 @@ public class PizzaController {
 		
 		return "pizzas";
 	}
-	
-	@RequestMapping(value = "/buildPizza", method = RequestMethod.GET)
-	public String buildPizza(Locale locale, Model model) {
-		
-		List<PizzaIngredients> listPizza = orderManager.getAllIngredients();
-		model.addAttribute("listPizzaIngredients", listPizza);
-		
-		
-		return "buildPizza";
-	}
+
 	
 	@RequestMapping(value = "/pizzaClientList", method = RequestMethod.GET)
 	public String pizzaClientList(Locale locale, Model model) {
@@ -68,10 +59,9 @@ public class PizzaController {
 	
 	
 	@RequestMapping(value = "/getIngredient", method = RequestMethod.POST)
-	public @ResponseBody String increasetotal(@RequestParam(value="nameIngridients") String namePizza, Model model) {
+	public @ResponseBody String increasetotal(@RequestParam(value="idIngridients") Long idIngridients, Model model) {
 		
-		namePizza = namePizza.trim();
-		PizzaIngredients pizzaIngredient = orderManager.getIngredient(namePizza);
+		PizzaIngredients pizzaIngredient = orderManager.getIngredient(idIngridients);
 		
 		return Double.toString(pizzaIngredient.getCost());
 	}

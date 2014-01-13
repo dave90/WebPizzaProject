@@ -81,7 +81,7 @@
 								<c:forEach items="${listPizzaIngredients}"
 									var="pizzaIngredients">
 									<a id="pizzaIngredients${count}" href="#"
-										class="list-group-item"> ${pizzaIngredients.name} </a>
+										class="list-group-item"><input type="hidden" value="${pizzaIngredients.id}"> ${pizzaIngredients.name} </a>
 									<c:set var="count" value="${count + 1}" scope="page" />
 								</c:forEach>
 							</div>
@@ -94,7 +94,7 @@
 								<c:forEach items="${listPizzaIngredients}"
 									var="pizzaIngredients">
 									<a id="ownPizzaIngredients${count}" href="#"
-										class="list-group-item"> ${pizzaIngredients.name} </a>
+										class="list-group-item"><input type="hidden" value="${pizzaIngredients.id}"> ${pizzaIngredients.name} </a>
 									<c:set var="count" value="${count + 1}" scope="page" />
 								</c:forEach>
 							</div>
