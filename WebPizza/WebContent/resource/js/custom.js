@@ -146,6 +146,20 @@ $(function() {
 			}
 		});
 	}
+	
+	$("#addBuildPizza").click(function() {
+		var currentVal = parseInt($("#qtyBuildPizza").val());
+		if (!isNaN(currentVal)) {
+			$("#qtyBuildPizza").val(currentVal + 1);
+		}
+	});
+
+	$("#minusBuildPizza").click(function() {
+		var currentVal = parseInt($("#qtyBuildPizza").val());
+		if (!isNaN(currentVal) && currentVal > 0) {
+			$("#qtyBuildPizza").val(currentVal - 1);
+		}
+	});
 
 });
 
@@ -155,41 +169,28 @@ $(function() {
 	var numButtons = $(".count").attr('id');
 	for (var i = 0; i < numButtons; ++i) {
 
-		$("#pizzaIngredients" + i).click(function() {
+		$("#pizzaIngredients" + i).click(function(evt) {
 			var currentVal = $(this).text();
 			var str = $(this).attr('id');
 			var res = str.split("pizzaIngredients");
-				$("#ownPizzaIngrients").append("<a id='ownIngridients"+res[1]+"' class='list-group-item'> "+ currentVal+"</a>");
-				$( "#ownPizzaIngrientsDiv" ).delegate( "#ownIngridients"+res[1], "mouseover", function() {
-					$(this).empty();
-					$(this).append(currentVal);
-					$("#ownIngridients"+res[1]).append("<span class='glyphicon glyphicon-arrow-left' > </span>");
-					});
-				$( "#ownPizzaIngrientsDiv" ).delegate( "#ownIngridients"+res[1], "mouseout", function() {
-					var currentVal = $(this).text();
-					$("#ownIngridients"+res[1]).empty();
-					$("#ownIngridients"+res[1]).append(currentVal);
-				});
-				$( "#ownPizzaIngrientsDiv" ).delegate( "#ownIngridients"+res[1], "click", function() {
-					//$("#pizzaIngredientsDiv").append("<a id='pizzaIngredients"+res[1]+"' class='list-group-item'> "+ $(this).text()+"</a>");
-//					$( "#pizzaIngredientsDiv" ).delegate( "#pizzaIngredients"+res[1], "mouseover", function() {
-//						$(this).append("<span class='glyphicon glyphicon-arrow-right' > </span>");
-//						});
-//					$( "#pizzaIngredientsDiv" ).delegate( "#pizzaIngredients"+res[1], "mouseout", function() {
-//						var currentVal = $(this).text();
-//						$(this).empty();
-//						$(this).append(currentVal);
-//					});
-//					$( "#pizzaIngredientsDiv" ).delegate( "#pizzaIngredients"+res[1], "click", function() {
-//						$("#ownPizzaIngrients").append("<a id='ownIngridients"+res[1]+"' class='list-group-item'> "+ currentVal+"</a>");
-//						$(this).remove();
-//					});
-					$("#pizzaIngredients"+res[1]).show();
-					$("#ownIngridients"+res[1]).remove();
-					
-				});
+				$("#ownPizzaIngredients"+res[1]).show();
 				$(this).hide();
 				
+				 $.ajax({  
+				     type : "Post",   
+				     url : "getIngredient.html",   
+				     data : "nameIngridients="  + currentVal,  
+				     success : function(response) {
+				    	 var tmp =  parseInt($("#totalCost").text());
+				    	 tmp += parseInt(response);
+				    	 $("#totalCost").empty();
+				    	 $("#totalCost").append(tmp);
+				     },  
+				     error : function(e) {  
+				      alert('Error: ' + e);   
+				     }  
+				    });
+				 evt.preventDefault();
 		});
 		
 		$("#pizzaIngredients" + i).mouseover(function() {
@@ -204,8 +205,44 @@ $(function() {
 				
 		});
 		
+		$("#ownPizzaIngredients" + i).hide();
+		
+		$("#ownPizzaIngredients" + i).mouseover(function() {
+			$(this).append("<span class='glyphicon glyphicon-arrow-left' > </span>");
+				
+		});
+		$("#ownPizzaIngredients" + i).mouseout(function() {
+			var currentVal = $(this).text();
+			$(this).empty();
+			$(this).append(currentVal);
+		});
+		$("#ownPizzaIngredients" + i).click(function(evt) {
+			var currentVal = $(this).text();
+			var str = $(this).attr('id');
+			var res = str.split("ownPizzaIngredients");
+			$("#pizzaIngredients"+res[1]).show();
+			console.log("tmp ");
+			$.ajax({  
+				type : "Post",   
+				url : "getIngredient.html",   
+				data : "nameIngridients="  + currentVal,  
+				success : function(response) {
+					var tmp =  parseInt($("#totalCost").text());
+					
+					tmp -= parseInt(response);
+					$("#totalCost").empty();
+					$("#totalCost").append(tmp);
+				},  
+				error : function(e) {  
+					alert('Error: ' + e);   
+				}  
+			});
+			$(this).hide();
+			evt.preventDefault();
+		});
 	}
 	
+
 	
 
 });

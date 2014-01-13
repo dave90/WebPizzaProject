@@ -20,6 +20,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Handles requests for the application home page.
@@ -62,6 +64,16 @@ public class PizzaController {
 		model.addAttribute("clientPizzaIMG", 1);
 		
 		return "pizzas";
+	}
+	
+	
+	@RequestMapping(value = "/getIngredient", method = RequestMethod.POST)
+	public @ResponseBody String increasetotal(@RequestParam(value="nameIngridients") String namePizza, Model model) {
+		
+		namePizza = namePizza.trim();
+		PizzaIngredients pizzaIngredient = orderManager.getIngredient(namePizza);
+		
+		return Double.toString(pizzaIngredient.getCost());
 	}
 	
 	

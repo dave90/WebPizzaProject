@@ -47,6 +47,9 @@ public class OrderManager {
 	public List<PizzaIngredients> getAllIngredients(){
 		return ingredientsDAO.getAllIngredients();
 	}
+	public PizzaIngredients getIngredient(String name){
+		return ingredientsDAO.getIngredient(name);
+	}
 	
 	public boolean addIngredients(String name,double cost){
 		if(ingredientsDAO.insertIngredient(name, cost)>0)

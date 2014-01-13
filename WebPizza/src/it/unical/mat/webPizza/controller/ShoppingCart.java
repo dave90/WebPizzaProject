@@ -2,6 +2,8 @@ package it.unical.mat.webPizza.controller;
 
 import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.util.HibernateUtil;
+import it.unical.mat.webPizza.domain.PizzaIngredients;
+import it.unical.mat.webPizza.service.OrderManager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.Map;
 
 public class ShoppingCart implements Serializable{
 	Map<Pizza, Integer> pizzaQuantity= new HashMap<Pizza, Integer>();
-	private int totalprice;
+	private int totalprice=0;
 	
 	public Map<Pizza, Integer> getPizzaQuantity() {
 		return pizzaQuantity;
@@ -21,6 +23,17 @@ public class ShoppingCart implements Serializable{
 		this.pizzaQuantity = pizzaQuantity;
 	}
 
+	void deletePizza(String name){
+		System.out.println("name "+name);
+		for(Pizza p:pizzaQuantity.keySet()){
+			if(p.getName().equals(name)){
+				pizzaQuantity.remove(p);
+				updateTotalprice();
+				return;
+			}
+		}
+	}
+	
 	void insertPizza(Long idPizza,Pizza pizzaDB,int quantity){
 		HibernateUtil.getSessionFactory().openSession().update(pizzaDB);
 		Pizza pizza=null;
@@ -40,7 +53,33 @@ public class ShoppingCart implements Serializable{
 		pizzaQuantity.put(pizza,quantity);
 		updateTotalprice();
 	}
-	
+	void insertPizzaBuild(String namePizza,int quantity, String ingridients, OrderManager orderManager){
+		ArrayList<PizzaIngredients> ingredientsPizza=new ArrayList<PizzaIngredients>();
+		Pizza pizza=new Pizza();
+		pizza.setName(namePizza);
+		String[] parts = ingridients.split(",");
+		for (int i = 0; i < parts.length; i++) {
+			PizzaIngredients tmp = new PizzaIngredients();
+			tmp.setName(parts[i].trim());
+			tmp.setCost(orderManager.getIngredient(tmp.getName()).getCost());
+			ingredientsPizza.add(tmp);			
+		}
+		pizza.setIngredients(ingredientsPizza);
+		for(Pizza p:pizzaQuantity.keySet()){
+			if(p.getName().equals(namePizza)){
+				int qty=pizzaQuantity.get(p);
+				pizzaQuantity.remove(p);
+				pizzaQuantity.put(p, qty+=quantity);
+				pizza=p;
+				updateTotalprice();
+				return;
+			}
+		}
+		
+		pizzaQuantity.put(pizza,quantity);
+		updateTotalprice();
+	}
+
 	double updateTotalprice(){
 		totalprice=0;
 		for(Pizza p:pizzaQuantity.keySet()){
@@ -51,10 +90,14 @@ public class ShoppingCart implements Serializable{
 	
 	String getTableBody(){
 		String tableToAppend="";
+		int count =0;
 		for(Pizza p:pizzaQuantity.keySet()){
 			tableToAppend+="<tr>"+"<td>"+p.getName()+"</td>"+"<td>"+pizzaQuantity.get(p)+"</td>"+"<td>&euro;"+p.getPrize()*pizzaQuantity.get(p)+"</td>"+"</tr>";
+			tableToAppend+="<tr id='trCart"+ count+"'>"+"<td id='nameCart"+ count+"'>"+p.getName()+"</td>"+"<td id='quantityCart"+ count+"'>"+pizzaQuantity.get(p)+"</td>"+"<td id='priceCart"+ count+"' >"+p.getPrize()*pizzaQuantity.get(p)+" &euro; </td>"+"<td><img id='deleteCart"+count+"' src='resource/img/x.png' width='20' height='20'></td>"+"</tr>";
+			count++;
 		}
 		tableToAppend+="<tr>"+"<th></th><th>Total</th>"+"<th>&euro;"+totalprice+"</th></tr>";
+		tableToAppend+="<tr>"+"<th></th><th>Total</th>"+"<th id='totalPriceCart'>"+totalprice+"&euro;</th></tr>";
 		
 		// aggiungo questa parte per modificare in modo dinamico con jquery anche nell'header il carrello
 		tableToAppend+="*<i class='icon-shopping-cart'></i> Items - "+totalprice+"&euro;";

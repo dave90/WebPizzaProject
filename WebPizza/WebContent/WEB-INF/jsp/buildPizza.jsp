@@ -52,7 +52,7 @@
 	<div class="page-title">
 		<div class="container">
 			<h2>
-				<i class="icon-pizza"></i> Pizza List
+				<i class="icon-pizza"></i> Build your own Pizza
 			</h2>
 			<hr />
 		</div>
@@ -64,32 +64,14 @@
 		<div class="container">
 
 			<div class="row">
-				<div class="col-md-9 col-md-push-3">
+				<div class="col-md-9 col-md-push-1">
 					<div class="row">
-						<div class="col-md-4 col-md-push-3">
-							<div class="radio">
-								<label> <input type="radio" name="optionsRadios"
-									id="optionsRadios1" value="option1" checked> White pizza
-								</label>
-							</div>
-							<div class="radio">
-								<label> <input type="radio" name="optionsRadios"
-									id="optionsRadios2" value="option2"> pizza with tomato
-								</label>
-							</div>
-						</div>
-					</div>
-					<hr />
-					<div class="row">
-						<div class="col-md-8 col-md-push-3">
-							Click on the Ingridients "Our Ingridients" to add to your pizza
-						</div>
+						<div class="col-md-8 col-md-push-3">Click on the Ingridients
+							"Our Ingridients" to add to your pizza</div>
 					</div>
 					<div class="row">
-						<div class="col-md-8 col-md-push-3">
-							
-							Click on the Ingridients "Your Ingridients" to delete
-						</div>
+						<div class="col-md-8 col-md-push-3">Click on the Ingridients
+							"Your Pizza" to delete</div>
 					</div>
 					<hr />
 					<div class="row">
@@ -98,21 +80,61 @@
 							<div id="pizzaIngredientsDiv" class="list-group ">
 								<c:forEach items="${listPizzaIngredients}"
 									var="pizzaIngredients">
-									<a  id="pizzaIngredients${count}" href="#" class="list-group-item">
-										${pizzaIngredients.name} </a>
-									<c:set var="count" value="${count + 1}" scope="page"/>
+									<a id="pizzaIngredients${count}" href="#"
+										class="list-group-item"> ${pizzaIngredients.name} </a>
+									<c:set var="count" value="${count + 1}" scope="page" />
 								</c:forEach>
 							</div>
 						</div>
-						<div id="ownPizzaIngrientsDiv" class="col-md-4 col-md-push-4">
+						<c:set var="count" value="0" scope="page" />
+						<div class="col-md-4 col-md-push-4">
 							Your Pizza
-							<div id="ownPizzaIngrients" class="list-group table-bordered"></div>
+							<div id="ownPizzaIngredientsDiv"
+								class="list-group table-bordered">
+								<c:forEach items="${listPizzaIngredients}"
+									var="pizzaIngredients">
+									<a id="ownPizzaIngredients${count}" href="#"
+										class="list-group-item"> ${pizzaIngredients.name} </a>
+									<c:set var="count" value="${count + 1}" scope="page" />
+								</c:forEach>
+							</div>
 						</div>
 					</div>
 					<div id="${count}" class="count"></div>
+					<div class="row">
+						<div class="col-md-3 col-md-push-3 ">
+							<h1>Quantity</h1>
+						</div>
+						<div class="col-md-2 col-md-push-6 ">
+							<button class="incrdecr" id="addBuildPizza">+</button>
+							<input type="text" id="qtyBuildPizza" maxlength="2" size="1"
+								value="1">
+							<button class="incrdecr" id="minusBuildPizza">-</button>
+						</div>
+					</div>
+					<hr/>
+					<div class="row">
+						<div class="col-md-3 col-md-push-3 ">
+							<h1>Total</h1>
+						</div>
+						<div class="col-md-1 col-md-push-2 ">
+							<h1 id="totalCost">0</h1>
+						</div>
+						<div class="col-md-1 col-md-push-2">
+							<h1>&euro;</h1>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-9 col-md-push-2">
+							<div class="pull-right">
+								<a href="#" class="btn btn-danger btn-sm" id="addToCartBuild">Add
+									to Cart</a>
+							</div>
+						</div>
+					</div>
 				</div>
 
-				<div class="col-md-3 col-md-pull-8">
+				<div class="col-md-3 col-md-pull-9">
 					<div class="sidey">
 						<ul class="nav">
 							<li><a href="index.html"><i class="icon-home"></i>
