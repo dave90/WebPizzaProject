@@ -127,14 +127,15 @@ public class PizzaIngredientsDAOImpl implements PizzaIngredientsDAO {
 	}
 
 	@Override
-	public PizzaIngredients getIngredient(String name) {
+	public PizzaIngredients getIngredient(Long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
-		PizzaIngredients result = new PizzaIngredients() ;
+		PizzaIngredients result = new PizzaIngredients();
 		try {
 			transaction = session.beginTransaction();
 			
-			result= (PizzaIngredients) session.createQuery("FROM PizzaIngredients WHERE name=?").setString(0, name).uniqueResult();
+			System.out.println(id);
+			result= (PizzaIngredients) session.createQuery("FROM PizzaIngredients WHERE id=?").setLong(0, id).uniqueResult();
 			
 			transaction.commit();
 		} catch (HibernateException e) {
