@@ -289,6 +289,41 @@ public class AccountController {
 		return cartPizzas.getTableBody();
 	}
 	
+	@RequestMapping(value = "/addToCartBuild", method = RequestMethod.POST)
+	public @ResponseBody
+	String addToCartBuild(@RequestParam(value = "quantity") int quantity,
+			@RequestParam(value = "send") String ingridients, Model model,
+			HttpSession session) {
+		ShoppingCart cartPizzas;
+		if (!model.containsAttribute("cart")) {
+			cartPizzas = new ShoppingCart();
+			model.addAttribute("cart", cartPizzas);
+		} else {
+			cartPizzas = (ShoppingCart) model.asMap().get("cart");
+		}
+
+		cartPizzas.insertPizzaBuild("Build"
+				+ cartPizzas.getPizzaQuantity().size(), quantity, ingridients,
+				orderManager);
+
+		return cartPizzas.getTableBody();
+	}
+
+	@RequestMapping(value = "/removeFromCartBuild", method = RequestMethod.POST)
+	public @ResponseBody
+	String removeFromCartBuild(@RequestParam(value = "name") String name,
+			Model model, HttpSession session) {
+		ShoppingCart cartPizzas = null;
+		if(!model.containsAttribute("cart")){
+			return "No cart inizializated";
+		}
+		cartPizzas=(ShoppingCart) model.asMap().get("cart");
+		
+		cartPizzas.deletePizza(name);
+		System.out.println(cartPizzas.getPizzaQuantity().size());
+		return Integer.toString(cartPizzas.getTotalprice());
+	}
+	
 	@RequestMapping(value = "/checkOut", method = RequestMethod.POST)
 	public String checkOut(@RequestParam(value="Name") String name,
 						   @RequestParam(value="Surname") String surname,
