@@ -47,7 +47,7 @@ public class OrderManager {
 	public List<PizzaIngredients> getAllIngredients(){
 		return ingredientsDAO.getAllIngredients();
 	}
-	public PizzaIngredients getIngredient(String name){
+	public PizzaIngredients getIngredient(Long name){
 		return ingredientsDAO.getIngredient(name);
 	}
 	
@@ -181,6 +181,10 @@ public class OrderManager {
 		Order order=orderDAO.getOrder(id);
 		HibernateUtil.getSessionFactory().openSession().update(order);
 		return order;
+	}
+	
+	public List<OnlineOrder> getDeliverymanOrder(Long id){
+		return onlineOrderDAO.getdeliveryManOrder(id);
 	}
 
 }

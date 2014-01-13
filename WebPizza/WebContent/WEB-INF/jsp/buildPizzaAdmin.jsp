@@ -52,7 +52,7 @@
 	<div class="page-title">
 		<div class="container">
 			<h2>
-				<i class="icon-pizza"></i> Build your own Pizza
+				<i class="icon-pizza"></i> Build your Pizza
 			</h2>
 			<hr />
 		</div>
@@ -72,6 +72,9 @@
 					<div class="row">
 						<div class="col-md-8 col-md-push-3">Click on the Ingridients
 							"Your Pizza" to delete</div>
+					</div>
+	    			<div class="row">
+						<div class="col-md-8 col-md-push-3"><input id="NamePizza"  class="form-control" placeholder="Name of the Pizza"/></div>
 					</div>
 					<hr />
 					<div class="row">
@@ -100,19 +103,15 @@
 							</div>
 						</div>
 					</div>
-					<div id="${count}" class="count"></div>
-					<div class="row">
-						<div class="col-md-3 col-md-push-3 ">
-							<h1>Quantity</h1>
-						</div>
-						<div class="col-md-2 col-md-push-6 ">
-							<button class="incrdecr" id="addBuildPizza">+</button>
-							<input type="text" id="qtyBuildPizza" maxlength="2" size="1"
-								value="1">
-							<button class="incrdecr" id="minusBuildPizza">-</button>
-						</div>
-					</div>
 					<hr/>
+					<div id="${count}" class="count"></div>
+                    <div class="form-group row">
+                      <label for="inputDiscount" class="col-md-2 control-label">Discount</label>
+                      <div class="col-md-4">
+                        <input type="text" class="form-control" id="inputDiscount" name="Discount" placeholder="Discount" />
+                      </div>
+                    </div>   			
+                    <hr/>
 					<div class="row">
 						<div class="col-md-3 col-md-push-3 ">
 							<h1>Total</h1>
@@ -127,28 +126,12 @@
 					<div class="row">
 						<div class="col-md-9 col-md-push-2">
 							<div class="pull-right">
-								<a href="#" class="btn btn-danger btn-sm" id="addToCartBuild">Add
-									to Cart</a>
+								<a href="#" class="btn btn-danger btn-sm" id="addAdminPizza">Add Pizza</a>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="col-md-3 col-md-pull-9">
-					<div class="sidey">
-						<ul class="nav">
-							<li><a href="index.html"><i class="icon-home"></i>
-									&nbsp;Home</a>
-							<li><a href="#"><i class="icon-mobile-phone"></i>
-									&nbsp;Our menu</a></li>
-							<li><a href="buildPizza.html"><i class="icon-lightbulb"></i>
-									&nbsp;Build your pizza</a></li>
-							<li><a href="#"><i class="icon-briefcase"></i>
-									&nbsp;Created by you</a></li>
-						</ul>
-					</div>
-
-				</div>
 
 
 			</div>
@@ -197,6 +180,7 @@
 	<script src="resource/js/custom.js"></script>
 
 	<script src="resource/js/cartManager.js"></script>
+	<script src="resource/js/admin.js" type="text/javascript"></script>
 
 
 </body>

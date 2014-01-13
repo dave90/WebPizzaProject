@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -151,6 +152,29 @@ public class OnlineOrderDAOImpl implements OnlineOrderDAO{
 			if(order.getDeliveryman()!=null )
 				if(order.getDeliveryman().getLatitude()!=null && order.getDeliveryman().getLongitude()!=null)
 					result=order.getDeliveryman().getLatitude()+";"+order.getDeliveryman().getLongitude();
+			
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<OnlineOrder> getdeliveryManOrder(Long id) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		List<OnlineOrder> result = new ArrayList<OnlineOrder>();
+		try {
+			transaction = session.beginTransaction();
+			
+			Query query=session.createQuery("FROM OnlineOrder WHERE deliveryman.id=:id");
+			query.setParameter("id", id);
+			result=query.list();
 			
 			transaction.commit();
 		} catch (HibernateException e) {
