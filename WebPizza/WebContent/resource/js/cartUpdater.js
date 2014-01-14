@@ -14,11 +14,10 @@
 			    	 	$("#price-"+id).html("&euro;"+tmp[0]);
 			    		 $('#cartBody').empty();
 			    		 $('#cartBody').append(tmp[1]);
-			    		 $('#shoppingCartPrice').empty();
-			    		 $('#shoppingCartPrice').append(tmp[2]);
-			    		 
-			    		 $('#totalPriceCart2').empty();
-			    		 $('#totalPriceCart2').html("&euro;" +tmp[3]);
+			    		 $('#shoppingCart').empty();
+			    		 $('#shoppingCart').append(tmp[2]);
+			    		 $('#totalPriceCart').empty();
+			    		 $('#totalPriceCart').html("&euro;" +tmp[3]);
 			     },  	
 			     error : function(e) {  
 			      alert('Error: ' + e);   
