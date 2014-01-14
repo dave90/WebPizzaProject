@@ -92,7 +92,7 @@ public class OrderManager {
 			return true;
 		return false;
 	}
-	
+
 	public Long insertPizza(String name,List<PizzaIngredients> ingredients,double discount,Client client){
 		return pizzaDAO.insertPizza(name, ingredients, discount,client);
 	}
