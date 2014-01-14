@@ -184,7 +184,7 @@ public class OrderManager {
 	}
 	
 	public List<OnlineOrder> getDeliverymanOrder(Long id){
-		return onlineOrderDAO.getdeliveryManOrder(id);
+		return  onlineOrderDAO.getdeliveryManOrder(id);
 	}
 
 }
