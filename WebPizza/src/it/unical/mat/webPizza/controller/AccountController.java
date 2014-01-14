@@ -7,12 +7,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
 import it.unical.mat.webPizza.domain.Client;
 import it.unical.mat.webPizza.domain.Order;
 import it.unical.mat.webPizza.domain.Pizza;
+import it.unical.mat.webPizza.domain.PizzaIngredients;
 import it.unical.mat.webPizza.domain.PizzaQuantity;
 import it.unical.mat.webPizza.service.AccessManager;
 import it.unical.mat.webPizza.service.OrderManager;
@@ -294,10 +296,13 @@ public class AccountController {
 		} else {
 			cartPizzas = (ShoppingCart) model.asMap().get("cart");
 		}
-
+		
+		if(!model.containsAttribute("client"))
+			return "redirect:account.html";
+		
 		cartPizzas.insertPizzaBuild("Build"
 				+ cartPizzas.getPizzaQuantity().size(), quantity, ingridients,
-				orderManager);
+				orderManager,(Client)model.asMap().get("client"));
 
 		return cartPizzas.getTableBody();
 	}
@@ -313,7 +318,6 @@ public class AccountController {
 		cartPizzas=(ShoppingCart) model.asMap().get("cart");
 		
 		cartPizzas.deletePizza(name);
-		System.out.println(cartPizzas.getPizzaQuantity().size());
 		return Integer.toString(cartPizzas.getTotalprice());
 	}
 	
@@ -438,6 +442,17 @@ public class AccountController {
 			model.addAttribute("order", order);
 
 		return "order";
+	}
+	
+	@RequestMapping(value = "/buildPizza", method = RequestMethod.GET)
+	public String buildPizza(Locale locale, Model model) {
+		if(!model.containsAttribute("client"))
+			return "redirect:account.html";
+		List<PizzaIngredients> listPizza = orderManager.getAllIngredients();
+		model.addAttribute("listPizzaIngredients", listPizza);
+		
+		
+		return "buildPizza";
 	}
 	
 		
