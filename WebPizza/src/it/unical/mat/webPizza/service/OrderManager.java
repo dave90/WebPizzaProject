@@ -93,8 +93,10 @@ public class OrderManager {
 		return false;
 	}
 	
-	public Long insertPizza(String name,List<PizzaIngredients> ingredients,double discount,Client client){
-		return pizzaDAO.insertPizza(name, ingredients, discount,client);
+	public boolean insertPizza(String name,List<PizzaIngredients> ingredients,double discount,Client client){
+		if(pizzaDAO.insertPizza(name, ingredients, discount,client)>0)
+			return true;
+		return false;
 	}
 	
 	public boolean deletePizza(Long id){
@@ -179,10 +181,6 @@ public class OrderManager {
 		Order order=orderDAO.getOrder(id);
 		HibernateUtil.getSessionFactory().openSession().update(order);
 		return order;
-	}
-	
-	public List<OnlineOrder> getDeliverymanOrder(Long id){
-		return  onlineOrderDAO.getdeliveryManOrder(id);
 	}
 
 }
