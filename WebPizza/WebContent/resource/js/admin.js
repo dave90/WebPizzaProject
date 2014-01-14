@@ -6,7 +6,30 @@
 			});
 			
 			
-			
+			$("#addAdminPizza").click(function() {
+				var numButtons = $(".count").attr('id');
+//				var str = $(this).attr('id');
+//				var res = str.split("-")[1];
+				var send="";
+				for (var i = 0; i < numButtons; ++i){
+					if($('#ownPizzaIngredients'+i ).is(":visible"))
+					send+= $('#ownPizzaIngredients'+i).children().val()+",";
+				}
+				var currentVal = parseInt($("#inputDiscount").val());
+				var name=$("#NamePizza").val();
+			    $.ajax({  
+				     type : "Post",   
+				     url : "addAdminPizza.html",   
+				     data : "Discount="+currentVal+"&send="+send+"&Name="+name,  
+				     success : function(response) { 
+				    	 if(response != "OK")
+				    		 alert(response);
+				     },  
+				     error : function(e) {  
+				      alert('Error: ' + e);   
+				     }  
+				    }); 
+			});
 
 	 
   });

@@ -63,13 +63,6 @@ public class AccountController {
 	}
 	
 	
-	@RequestMapping(value = "/deliverymanLogin", method = RequestMethod.GET)
-	public String deliverymanLogIn( Model model) {
-		model.addAttribute("img", "resource/img/clients/deliveryman.JPG");
-		model.addAttribute("actionUrl","deliverymanLogIn.html");
-		
-		return "login";
-	}
 	
 	@RequestMapping(value = "/logIn", method = RequestMethod.POST)
 	public String clientLogInValidation(@RequestParam(value="User") String usr,

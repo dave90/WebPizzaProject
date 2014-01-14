@@ -1,7 +1,14 @@
 package it.unical.mat.webPizza.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import it.unical.mat.webPizza.domain.Administrator;
 import it.unical.mat.webPizza.domain.Client;
+import it.unical.mat.webPizza.domain.Order;
+import it.unical.mat.webPizza.domain.Pizza;
 import it.unical.mat.webPizza.domain.PizzaIngredients;
 import it.unical.mat.webPizza.service.AccessManager;
 import it.unical.mat.webPizza.service.OrderManager;
@@ -146,5 +153,45 @@ public class AdminController {
 		
 		return "ING update";
 	}
+	
+	@RequestMapping(value = "/buildPizzaAdmin", method = RequestMethod.GET)
+	public String order(Model model) {
+		if(!model.containsAttribute("admin"))
+			return "redirect:accountAdmin.html";
+		
+		List<PizzaIngredients> listPizza = orderManager.getAllIngredients();
+		model.addAttribute("listPizzaIngredients", listPizza);
+		
+
+		return "buildPizzaAdmin";
+	}
+	
+	@RequestMapping(value = "/addAdminPizza", method = RequestMethod.POST)
+	public @ResponseBody
+	String addToCartBuildAdmin(@RequestParam(value = "Discount") String discountString,@RequestParam(value = "Name") String name,
+			@RequestParam(value = "send") String ingridients, Model model) {
+
+		double discount=0;
+		
+		if(name==null)
+			return "Insert name pizza";
+		if(discountString!=null)
+			try{
+				discount=Double.parseDouble(discountString);
+			}catch (Exception e) {
+			}
+		if(ingridients==null || ingridients.equals(""))
+			return "select ingredients";
+		
+		ArrayList<PizzaIngredients> ingredientsPizza=new ArrayList<PizzaIngredients>();
+		String[] parts = ingridients.split(",");
+		
+		for (int i = 0; i < parts.length; i++) {
+			ingredientsPizza.add(orderManager.getIngredient(Long.parseLong(parts[i])));			
+		}
+		orderManager.insertPizza(name, ingredientsPizza, discount);
+		return "OK";
+	}
+
 
 }

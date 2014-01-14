@@ -17,6 +17,7 @@ public interface OnlineOrderDAO  {
 	public int updateDeliveryStatus(Long id,String deliveryStatus);
 	public String getOrderDeliveryStatus(Long id);
 	public List<OnlineOrder> getNotDeliveryManAssignedOrder();
+	public List<OnlineOrder> getdeliveryManOrder(Long id);
 	public String getDeliveryManPositionByOrder(Long idOrder);
 	
 }

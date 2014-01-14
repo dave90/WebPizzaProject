@@ -61,10 +61,8 @@
                <div class="col-md-3">
                   <div class="sidey">
                      <ul class="nav">
-                         <li><a href="account.html">My Account</a></li>
-                         <li><a href="#" id="ingredients">Ingredients</a></li>
-                         <li><a href="buildPizzaAdmin.html">Pizza</a></li>                         
-                         <li><a href="adminEditprofile.html">Edit Profile</a></li>
+                         <li><a href="accountDeliveryman.html">My Account</a></li>
+                         <li><a href="deliverymanTour.html" id="ingredients">Starts</a></li>
                      </ul>
                   </div>
                </div>
@@ -76,13 +74,59 @@
                        <!-- Your name -->
                        <table>
                        <tr>
-                       <td style="padding: 10px;">Name</td> <td><strong>${admin.name}</strong></td> 
+                       <td style="padding: 10px;">Name</td> <td><strong>${delivery.name}</strong></td> 
                        </tr>
                        <tr>
-                       <td style="padding: 10px;">Surname</td> <td><strong>${admin.surname}</strong></td>
+                       <td style="padding: 10px;">Surname</td> <td><strong>${delivery.surname}</strong></td>
 					   </tr>
 
 					  </table>
+					<c:forEach items="${orders}" var="order">  
+					<table class="table table-striped tcart">
+	              <h4>Order ${order.id}:</h4>
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Delivery Status</th>
+                        <th>Address</th>
+                        <th>Paid</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>${order.date}</td>
+                        <td>${order.deliveryStatus}</td>
+                        <td>${order.address}</td>
+                        <td>${order.paid}</td>
+                      </tr>                                                                                                         
+                    </tbody>
+                  </table>
+              <table class="table table-striped">
+               <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+              <tbody id="cartBody">
+              <c:forEach var="pizza" items="${order.pizzas}" >
+              <tr>
+              	<td>${pizza.pizza.name}</td>
+              	<td>${pizza.quantity}</td>
+              </tr>
+              </c:forEach>
+              <tr>
+              <th></th>
+              <th>Total</th>
+              <th>&euro; ${order.prize}</th>
+              </tr>
+              </tbody>
+            </table>
+            <hr/>
+            </c:forEach>
+					  
+					  
+					  
                      
                    </div>
 
@@ -126,8 +170,8 @@
 		<script src="resource/js/html5shiv.js"></script>
 		<!-- Custom JS -->
 		<script src="resource/js/custom.js"></script>
+
 		
-		<script src="resource/js/admin.js"></script>
 		
 	</body>	
 </html>
