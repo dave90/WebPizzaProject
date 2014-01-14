@@ -37,6 +37,7 @@ public class ChefController {
 	private AccessManager accessManager;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ChefController.class);
+
 	
 	@RequestMapping(value = "/logInChef", method = RequestMethod.POST)
 	public String clientLogInValidation(@RequestParam(value="User") String usr,
@@ -65,5 +66,5 @@ public class ChefController {
 	
 	
 	
-	
+
 }
